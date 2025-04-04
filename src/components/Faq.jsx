@@ -32,7 +32,8 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
+    <div className=" bg-[#F2EBFD]">
+          <div className=" max-full md:max-w-[75rem] mx-auto px-4 py-12">
       <h2 className="text-3xl font-bold text-center mb-4">Frequently Asked Questions (FAQs)</h2>
       <p className="text-center text-gray-600 mb-8">
         Browse through the most frequently asked questions & answers.
@@ -44,19 +45,19 @@ export default function FAQSection() {
         <input
           type="text"
           placeholder="Search"
-          className="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
+          className="w-full pl-12 pr-4 py-2 border bg-[#FFFFFF] border-gray-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
         />
       </div>
 
       {/* Accordion */}
-      <div className="space-y-4">
+      <div className="space-y-4 ">
         {faqs.map((faq, index) => (
-          <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
+          <div key={index} className="border bg-[#FFFFFF] border-gray-200 rounded-2xl overflow-hidden">
             <button
               onClick={() => toggleAccordion(index)}
               className="w-full flex justify-between items-center p-4 text-left focus:outline-none"
             >
-              <span className="font-medium text-[#333]">{faq.question}</span>
+              <span className="font-medium text-[#1B1B1B]">{faq.question}</span>
               <FaChevronDown
                 className={`transition-transform duration-300 ${
                   openIndex === index ? "rotate-180" : ""
@@ -64,11 +65,13 @@ export default function FAQSection() {
               />
             </button>
             {openIndex === index && (
-              <div className="px-4 pb-4 text-gray-600">{faq.answer}</div>
+              <div className="px-4 pb-4 text-[#515151]">{faq.answer}</div>
             )}
           </div>
         ))}
       </div>
     </div>
+    </div>
+  
   );
 }

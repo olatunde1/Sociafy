@@ -14,7 +14,7 @@ const Hero = () => {
                     <p className="text-gray-500 text-[20px] mb-6 md:leading-8 leading-8">
                     Get access to aged and high-engagement accounts on Instagram, Facebook, TikTok, and more.
                     </p>
-                    <button className= "md:mt-12 mt-4 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white  px-16 py-3 rounded-lg shadow-md hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] transition">
+                    <button className= "md:mt-12 mt-4 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white  px-16 py-3 rounded-lg shadow-md hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] transform transition-transform duration-300 hover:scale-105">
                         Browse Accounts
                     </button>
                 </div>

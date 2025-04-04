@@ -1,5 +1,9 @@
 import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import SociafyLogo from '../../assets/images/logo.png'; // replace with your actual logo path
+import Telegram from '../../assets/images/telegram-icon.png'
+import Whatsapp from '../../assets/images/whatssap-icon.png'
+
+
 
 export default function Footer() {
   return (
@@ -19,10 +23,10 @@ export default function Footer() {
         {/* Right - Icons */}
         <div className="flex space-x-4 text-[#7B36E7] text-xl">
           <a href="#" aria-label="Telegram" className="hover:text-purple-700 transition">
-            <FaTelegramPlane />
+            <img src={Telegram} alt="" />
           </a>
           <a href="#" aria-label="WhatsApp" className="hover:text-purple-700 transition">
-            <FaWhatsapp />
+          <img src={Whatsapp} alt="" />
           </a>
         </div>
         

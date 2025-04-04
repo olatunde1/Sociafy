@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Logo from '../../assets/images/logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div className="container mx-auto mt-9 mb-9">
+        <div className="w-full md:w-[1200px] mx-auto mt-9 mb-9">
             <header className="flex justify-between items-center p-2 text-gray-800 relative">
                 <div className="logo">
                     <img src={Logo} alt="Logo" className="logo-image w-full" />
@@ -27,10 +28,14 @@ const Header = () => {
                 </nav>
                 
                 {/* Login Button */}
+             
                 <div className="hidden md:block">
-                    <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-6 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
-                        Login
-                    </button>
+                    <Link to="/sign-up">
+                        <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-16 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+                            Login
+                        </button>
+                    </Link>
+                    
                 </div>
             </header>
         </div>

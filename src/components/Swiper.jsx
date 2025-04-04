@@ -26,7 +26,7 @@ export default function CardSwiper() {
         {/* Slide 1 */}
         <SwiperSlide>
 
-            <div className="relative w-fit mx-auto mt-12">
+            <div className="relative w-fit mx-auto mt-12 ">
             {/* Comment Bubble */}
                 <div className="bg-white p-6 rounded-3xl shadow-md text-center flex flex-col relative z-10">
                     <h3 className="text-xl font-bold text-[#622BB9] mb-3">Incredible Experience.</h3>

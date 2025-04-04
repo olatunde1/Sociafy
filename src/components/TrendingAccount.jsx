@@ -46,7 +46,7 @@ const ProductTable = () => {
               <span className="bg-[#E5E5EA] py-1.5 font-semibold rounded-3xl px-2.5 ">{product.quantity} pcs</span>
               </td>
               <td className="p-3 flex justify-center items-center text-center">
-                    <button className="flex bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 gap-5 rounded font-bold hover:bg-[#F2EBFD]">
+                    <button className="flex bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 gap-5 rounded font-bold hover:bg-[#F2EBFD] transform transition-transform duration-300 hover:scale-105">
                         <img src={IconBuy} alt="" /> Buy
                     </button>
                 </td>
@@ -55,7 +55,7 @@ const ProductTable = () => {
         </tbody>
       </table>
      <div className="text-center">
-        <button className="mx-auto md:mt-12 mt-4 md:mb-20 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-32 py-3 rounded-lg shadow-md hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] transition">
+        <button className="mx-auto md:mt-12 mt-4 md:mb-20 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-32 py-3 rounded-lg shadow-md hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] transform transition-transform duration-300 hover:scale-105">
              View More
         </button>
      </div>
