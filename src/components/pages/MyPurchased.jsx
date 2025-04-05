@@ -2,11 +2,13 @@ import { useState } from "react";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../../assets/images/logo.png";
 import Castine from '../../assets/images/castine.png';
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 
 export default function MyPurchased() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const navigate = useNavigate();
+
 
   const user = {
     name: "Castine",
@@ -15,7 +17,12 @@ export default function MyPurchased() {
     image: Castine,
   };
 
-
+  const handleSignOut = () => {
+    // Clear session logic here
+    localStorage.clear();
+    sessionStorage.clear();
+    navigate("/");
+  };
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard" },
@@ -25,7 +32,7 @@ export default function MyPurchased() {
     { name: "Rules", path: "/rules" },
     { name: "Support", path: "/support" },
     { name: "My Profile", path: "/profile" },
-    { name: "Sign Out", path: "/sign-out" },
+    { name: "Sign Out", path: "/",  action: handleSignOut },
   ];
 
   const orders = Array.from({ length: 24 }, (_, i) => ({
@@ -113,7 +120,7 @@ export default function MyPurchased() {
                 {orders.map((order, index) => (
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="px-4 py-2 border-b border-[#EDF2F7]">{order.product}</td>
-                    <td className="px-4 py-2 border-b border-[#EDF2F7]">{order.amount}</td>
+                    <td className="px-4 py-2 border-b border-[#EDF2F7]">{order.amount.toLocaleString()}</td>
                     <td className="p-3 text-[#515151]">
               <span className="bg-[#E5E5EA] py-1.5 font-semibold rounded-3xl px-2.5 ">{order.quantity} pcs</span>
               </td>

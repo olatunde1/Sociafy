@@ -26,7 +26,7 @@ export default function Profile() {
     { name: "Rules", path: "/rules" },
     { name: "Support", path: "/support" },
     { name: "My Profile", path: "/profile" },
-    { name: "Sign Out", path: "/sign-out" },
+    { name: "Sign Out", path: "/" },
   ];
 
 
