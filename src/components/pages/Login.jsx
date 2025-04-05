@@ -12,7 +12,10 @@ export default function LoginPage() {
         {/* Left Content */}
         <div className="w-full md:w-1/2 p-8 flex flex-col justify-center bg-white">
           {/* Logo */}
-          <img src={Logo} alt="Logo" className="h-10 w-[8.75rem] mb-8" />
+          <Link to="/">
+           <img src={Logo} alt="Logo" className="h-10 w-[8.75rem] mb-8" />
+          </Link>
+          
 
           {/* Title */}
           <h1 className="text-3xl font-bold mb-4">Login</h1>

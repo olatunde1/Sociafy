@@ -7,6 +7,7 @@ import WalletPage from './components/pages/WalletPage'
 import Profile from './components/pages/Profile'
 import ResetPassword from './components/pages/ResetPassword'
 import Rules from './components/pages/Rules'
+import MyPurchased from './components/pages/MyPurchased'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/profile' element={<Profile />}/>
         <Route path='/reset-password' element={<ResetPassword />}/>
         <Route path='/rules' element={<Rules />}/>
+        <Route path='/my-purchased' element={<MyPurchased />}/>
         
         
       </Routes>

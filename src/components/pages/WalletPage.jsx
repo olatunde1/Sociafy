@@ -127,7 +127,10 @@ const renderPageNumbers = () => {
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
       <div>
-        <img src={Logo} alt="Logo" className="h-10 w-auto mb-18" />
+       <Link to="/">
+          <img src={Logo} alt="Logo" className="h-10 w-auto mb-18" />
+      </Link>
+  
         <nav className="space-y-4">
           {menuItems.map((item) => (
             <Link 
