@@ -5,6 +5,8 @@ import SignUp from './components/pages/SignUp'
 import LoginPage from './components/pages/Login'
 import WalletPage from './components/pages/WalletPage'
 import Profile from './components/pages/Profile'
+import ResetPassword from './components/pages/ResetPassword'
+import Rules from './components/pages/Rules'
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/wallet' element={<WalletPage />}/>
         <Route path='/profile' element={<Profile />}/>
+        <Route path='/reset-password' element={<ResetPassword />}/>
+        <Route path='/rules' element={<Rules />}/>
         
         
       </Routes>
