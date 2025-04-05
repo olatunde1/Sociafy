@@ -4,6 +4,7 @@ import Logo from "../../assets/images/logo.png";
 import Castine from '../../assets/images/castine.png'
 import WalletIcon from '../../assets/images/wallet-logo.png'
 import FundWallet from '../../assets/images/fund-wallet.png'
+import { Link } from "react-router-dom";
 
 export default function WalletPage() {
 
@@ -34,14 +35,14 @@ const renderPageNumbers = () => {
   };
 
   const menuItems = [
-    "Dashboard",
-    "Accounts",
-    "My Purchased",
-    "Wallet",
-    "Rules",
-    "Support",
-    "My Profile",
-    "Sign Out",
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Accounts", path: "/accounts" },
+    { name: "My Purchased", path: "/my-purchased" },
+    { name: "Wallet", path: "/wallet" },
+    { name: "Rules", path: "/rules" },
+    { name: "Support", path: "/support" },
+    { name: "My Profile", path: "/profile" },
+    { name: "Sign Out", path: "/sign-out" },
   ];
 
   const topUpHistory = [
@@ -125,21 +126,21 @@ const renderPageNumbers = () => {
 
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
-        <div>
-          <img src={Logo} alt="Logo" className="h-10 w-auto mb-18" />
-          <nav className="space-y-4">
-            {menuItems.map((item) => (
-              <a
-                key={item}
-                href="#"
-                className={`block text-gray-700 hover:text-purple-700 font-medium ${item === "My Profile" ? "mt-[375px]" : ""}`}
-                >
-                {item}
-              </a>
-            ))}
-          </nav>
-        </div>
-      </aside>
+      <div>
+        <img src={Logo} alt="Logo" className="h-10 w-auto mb-18" />
+        <nav className="space-y-4">
+          {menuItems.map((item) => (
+            <Link 
+              key={item.name}
+              to={item.path}
+              className={`block text-gray-700 hover:text-purple-700 font-medium ${item.name === "My Profile" ? "mt-[375px]" : ""}`}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </aside>
 
       {/* Main Content */}
       <main className="flex-1 p-8">

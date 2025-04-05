@@ -85,10 +85,44 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Wallet Balance & Fund Wallet Cards */}
-        
+        {/* user profile */}
+        <div className="flex gap-8 space-y-8">
+          {/* First Div: Flex layout for profile */}
+          <div className="flex items-center justify-center bg-white p-6 rounded-lg shadow w-full md:w-[35.75rem] h-full md:h-[31.25rem]">
+                <div className="grid place-items-center gap-6">
+                    <img
+                    src={user.image}
+                    alt="User"
+                    className="w-20 h-20 rounded-full object-cover"
+                    />
+                    <div className="text-center">
+                    <h3 className="text-lg font-semibold">{user.name}</h3>
+                    <p className="text-sm text-gray-600">Email: {user.email}</p>
+                    <p className="text-sm text-gray-500 mt-1">Joined: 13-03-2025</p>
+                    </div>
+                </div>
+            </div>
 
+            <div className="grid">
+                    
+                {/* Second Div: Grid for total spent */}
+                <div className="items-center text-center justify-center grid bg-white p-6 rounded-lg shadow w-full md:w-[35.75rem] h-full md:h-[14.375rem]">
+                    <span className="text-sm text-gray-500">Total Spent</span>
+                    <span className="text-2xl font-bold text-gray-800">NGN 34,900</span>
+                </div>
 
+                {/* Third Div: Grid for total purchased */}
+                <div className="items-center text-center justify-center grid bg-white p-6 rounded-lg shadow md:w-[35.75rem] h-full md:h-[14.375rem]">
+                    <span className="text-sm text-gray-500">Total Purchased</span>
+                    <span className="text-2xl font-bold text-gray-800">31</span>
+                </div>
+  
+            </div>
+          {/* Update Password Button */}
+        </div>
+        <div>
+            <button className="px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-purple-800">Update Password</button>
+          </div>
 
       </main>
     </div>
