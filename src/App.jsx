@@ -8,12 +8,17 @@ import Profile from './components/pages/Profile'
 import ResetPassword from './components/pages/ResetPassword'
 import Rules from './components/pages/Rules'
 import MyPurchased from './components/pages/MyPurchased'
+import ScrollToTop from "./components/ScrollToTop";
+import UserDashboard from './components/pages/UserDashboard'
+import MyPurchaseComponent from './components/MyPurchase/MyPurchaseComponent'
+
 
 
 function App() {
 
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path='/' element={<Home />} />
         {/* Add more routes here as needed */}
@@ -24,6 +29,7 @@ function App() {
         <Route path='/reset-password' element={<ResetPassword />}/>
         <Route path='/rules' element={<Rules />}/>
         <Route path='/my-purchased' element={<MyPurchased />}/>
+        <Route path='/dashboard' element={<MyPurchaseComponent />}/>
         
         
       </Routes>

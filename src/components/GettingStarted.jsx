@@ -60,25 +60,26 @@ const steps = [
 
 export default function GetStarted() {
   return (<>
-   <div className="max-w-4xl mx-auto text-center py-12 mt-20">
-    <h2 className="text-3xl font-bold mb-8">
-      Get Started in <span className="text-[#7B36E7]">4 Easy Steps</span>
-    </h2>
+  <div className="mx-auto text-center py-12 mt-20">
+  <h2 className="text-3xl font-bold mb-8">
+    Get Started in <span className="text-[#7B36E7]">4 Easy Steps</span>
+  </h2>
 
-    {/* Responsive Grid Layout */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full max-w-[1200px] gap-16 ">
-      {steps.map((step, index) => (
-        <div key={index} className="flex flex-col items-center p-4 shadow-lg rounded-lg bg-white max-w-[250px] w-full">
-          <img src={step.image} alt={step.title} height="50px" width="50px" className="mb-4" />
-          <h3 className="text-lg font-semibold">{step.title}</h3>
-          <p className="text-gray-600 text-sm mt-2">{step.description}</p>
-        </div>
-      ))}
-    </div>
+  {/* Centered Responsive Grid Layout */}
+  <div className="flex justify-center flex-wrap gap-8 ">
+    {steps.map((step, index) => (
+      <div key={index} className="flex flex-col items-center p-4 shadow-lg rounded-lg bg-white max-w-[255px] cursor-pointer w-full transform transition-transform duration-300 hover:scale-105">
+        <img src={step.image} alt={step.title} height="50px" width="50px" className="mb-4" />
+        <h3 className="text-lg font-semibold">{step.title}</h3>
+        <p className="text-gray-600 text-sm mt-2">{step.description}</p>
+      </div>
+    ))}
   </div>
+</div>
+
 
     
-    <div className="container mx-auto px-4 w-full max-w-[1199px] why-choose-sociafy">
+    <div className="container mx-auto px-4 w-full max-w-[1199px] why-choose-sociafy mt-20">
         <h1 className="text-center font-extrabold font-custom text-3xl md:text-4xl">
             Why Choose <span className="text-[#7B36E7]">Sociafy</span>
         </h1>

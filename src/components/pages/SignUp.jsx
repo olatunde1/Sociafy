@@ -90,18 +90,18 @@ export default function SignUp() {
           
           </form>
 
-          {/* Divider */}
+          {/* Divider
           <div className="flex items-center my-10">
             <hr className="flex-grow border-gray-300" />
             <span className="mx-4 text-gray-500">or</span>
             <hr className="flex-grow border-gray-300" />
           </div>
 
-          {/* Google Login Button */}
+          Google Login Button
           <button className="w-full flex items-center justify-center gap-2 border border-gray-300 px-6 py-3 rounded-lg text-sm font-bold transform transition-transform duration-300 hover:scale-105">
           <img src={GoogleLogo} alt="Google Logo" className="w-10 h-10 mr-3" />
             Sign Up Using Google
-          </button>
+          </button> */}
 
           {/* Create Account */}
           <p className="text-sm text-gray-600 mt-4 text-center ">
