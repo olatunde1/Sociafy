@@ -11,6 +11,8 @@ import MyPurchased from './components/pages/MyPurchased'
 import ScrollToTop from "./components/ScrollToTop";
 import UserDashboard from './components/pages/UserDashboard'
 import MyPurchaseComponent from './components/MyPurchase/MyPurchaseComponent'
+import Support from './components/pages/Support'
+import Account from './components/pages/Account'
 
 
 
@@ -30,6 +32,8 @@ function App() {
         <Route path='/rules' element={<Rules />}/>
         <Route path='/my-purchased' element={<MyPurchased />}/>
         <Route path='/dashboard' element={<MyPurchaseComponent />}/>
+        <Route path='/support' element={<Support />}/>
+        <Route path='/accounts' element={<Account />}/>
         
         
       </Routes>

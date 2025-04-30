@@ -174,9 +174,9 @@ const renderPageNumbers = () => {
         </div>
 
         {/* Wallet Balance & Fund Wallet Cards */}
-        <div className="flex grid-cols-1 md:grid-cols-2 gap-6  mb-10">
+        <div className="flex grid-cols-1 md:grid-cols-2 gap-6 mb-10">
           {/* Wallet Balance Card */}
-          <div className="bg-white rounded-lg shadow  w-full md:w-[365px]">
+          <div className="bg-white rounded-lg shadow w-full md:w-[365px]">
             <img src={WalletIcon} alt="" className=" px-5 pt-3" />
             <h3 className="text-lg font-semibold text-[#7B36E7] mb-4 py-3 px-5">
               Wallet Balance
