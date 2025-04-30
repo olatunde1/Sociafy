@@ -149,8 +149,11 @@ const AccountPlatforms = () => {
                   </span>
                 </div>
               </div>
-                <div className="p-6">
-                <div className="mb-8 bg-white p-4 rounded-lg shadow-sm">
+
+              {/* AVAILABLE ACCOUNTS  */}
+
+                <div className="p-6 mt-10">
+                <div className=" bg-white p-[35px] rounded-lg shadow-sm">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <h3 className="text-lg font-semibold text-gray-800 whitespace-nowrap">
                     Available Accounts
@@ -160,7 +163,7 @@ const AccountPlatforms = () => {
                     <input
                       type="text"
                       placeholder="Search accounts..."
-                      className="border border-gray-300 p-2 rounded-md w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="border border-gray-300 p-2 rounded-md w-full focus:ring-2 focus:ring-[#7B36E7] focus:border-transparent"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                     />
@@ -168,7 +171,7 @@ const AccountPlatforms = () => {
                   
                   <div className="w-full md:w-auto">
                     <select
-                      className="border border-gray-300 p-2 rounded-md w-full focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="border border-gray-300 p-2 rounded-md w-full focus:ring-2 focus:ring-[#7B36E7] focus:border-transparent"
                       value={selectedPlatform}
                       onChange={(e) => setSelectedPlatform(e.target.value)}
                     >
@@ -186,36 +189,66 @@ const AccountPlatforms = () => {
       {platforms
         .filter((platform) => !selectedPlatform || platform.name === selectedPlatform)
         .map((platform) => (
-          <div key={platform.name} className="mb-10">
-            <div className="flex justify-between items-center mb-4">
+          <div key={platform.name} className="">
+            <div className="flex justify-between items-center py-[17px] px-5 text-white  bg-[#371868]">
               <h3 className="flex items-center gap-2 text-xl font-semibold">
-                {platform.icon} {platform.name}
+                {platform.name}
               </h3>
-              <button className="text-purple-700 font-medium">View More</button>
+              <button className="text-[#371868] px-3 py-2 rounded-sm font-semibold bg-white font-medium">View More</button>
             </div>
-            <table className="min-w-full bg-white border border-gray-200 rounded-xl overflow-hidden">
-              <thead className="bg-gray-100 text-left">
-                <tr>
-                  <th className="p-4 border-b">Product</th>
-                  <th className="p-4 border-b">Amount</th>
-                  <th className="p-4 border-b">Quantity</th>
-                  <th className="p-4 border-b">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {platform.products
-                  .filter((product) => product.product.toLowerCase().includes(search.toLowerCase()))
-                  .map((product, idx) => (
-                    <tr key={idx} className="hover:bg-gray-50">
-                      <td className="p-4 border-b">{product.product}</td>
-                      <td className="p-4 border-b">{product.amount}</td>
-                      <td className="p-4 border-b">{product.quantity} pcs</td>
-                      <td className="p-4 border-b">
-                        <button className="bg-purple-600 text-white px-4 py-2 rounded">Buy</button>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
+            <table className="min-w-full bg-white border border-gray-200  overflow-hidden">
+            <thead className="bg-[#FAFAFB]">
+              <tr>
+                <th className="px-6 py-[21px] text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Product
+                </th>
+                <th className="px-6 py-[21px] text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Amount
+                </th>
+                <th className="px-6 py-[21px] text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Quantity
+                </th>
+                <th className="px-6 py-[21px] text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b border-gray-200">
+                  Action
+                </th>
+              </tr>
+            </thead>
+                <tbody className="divide-y divide-gray-200">
+    {platform.products
+      .filter((product) => 
+        product.product.toLowerCase().includes(search.toLowerCase())
+      )
+      .map((product, idx) => (
+        <tr 
+          key={idx} 
+          className="hover:bg-gray-50 transition-colors duration-150"
+        >
+          <td className="px-6 py-4 whitespace-nowrap">
+            <div className="flex items-center space-x-3">
+              {platform.icon}
+              <span className="font-medium text-gray-900">
+                {product.product}
+              </span>
+            </div>
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-gray-700">
+            {product.amount}
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap text-gray-700">
+            <span className="px-2 py-1 bg-[#E5E5EA] rounded-full text-sm">
+              {product.quantity} pcs
+            </span>
+          </td>
+          <td className="px-6 py-4 whitespace-nowrap">
+            <button 
+              className="bg-[#F2EBFD] hover:bg-purple-700 hover:text-white text-[#7B36E7] px-4 py-2 rounded-md font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7B36E7] focus:ring-offset-1"
+            >
+              Buy Now
+            </button>
+          </td>
+        </tr>
+      ))}
+                </tbody>
             </table>
           </div>
         ))}
