@@ -57,7 +57,7 @@ const UserDashBoard = () => {
               </div>
       
       {/* ───────────── Cards Section ───────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 mt-10">
         {/* Card 1 - Wallet Balance */}
             {/* Card 1 - Wallet Balance */}
             <div className="bg-white rounded-2xl shadow-md  flex flex-col w-full">

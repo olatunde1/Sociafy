@@ -162,7 +162,7 @@ const AccountPlatforms = () => {
                   <div className="flex-1 w-full md:w-auto">
                     <input
                       type="text"
-                      placeholder="Search accounts..."
+                      placeholder="Shop by Categories..."
                       className="border border-gray-300 p-2 rounded-md w-full focus:ring-2 focus:ring-[#7B36E7] focus:border-transparent"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
@@ -194,7 +194,11 @@ const AccountPlatforms = () => {
               <h3 className="flex items-center gap-2 text-xl font-semibold">
                 {platform.name}
               </h3>
-              <button className="text-[#371868] px-3 py-2 rounded-sm font-semibold bg-white font-medium">View More</button>
+             <Link to={`/accounts/platform/${platform.name}`}>
+                <button className="text-[#371868] px-3 py-2 rounded-sm font-semibold bg-white">
+                  View More
+                </button>
+              </Link>
             </div>
             <table className="min-w-full bg-white border border-gray-200  overflow-hidden">
             <thead className="bg-[#FAFAFB]">
@@ -240,11 +244,11 @@ const AccountPlatforms = () => {
             </span>
           </td>
           <td className="px-6 py-4 whitespace-nowrap">
-            <button 
-              className="bg-[#F2EBFD] hover:bg-purple-700 hover:text-white text-[#7B36E7] px-4 py-2 rounded-md font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#7B36E7] focus:ring-offset-1"
-            >
-              Buy Now
-            </button>
+            <Link to={`/accounts/buy/${platform.name}/${encodeURIComponent(product.product)}`}>
+                <button className="bg-[#F2EBFD] hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white font-bold text-[#7B36E7] px-4 py-2 rounded-lg shadow-sm transition-colors">
+                    Buy Now
+                </button>
+            </Link>
           </td>
         </tr>
       ))}

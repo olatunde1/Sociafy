@@ -13,6 +13,9 @@ import UserDashboard from './components/pages/UserDashboard'
 import MyPurchaseComponent from './components/MyPurchase/MyPurchaseComponent'
 import Support from './components/pages/Support'
 import Account from './components/pages/Account'
+import PlatformViewMorePage from './components/pages/PlatformViewMorePage'
+import BuyAccountPage from './components/pages/BuyAccountPage'
+import LogPurchasedSuccessful from './components/pages/LogPurchasedSuccessful'
 
 
 
@@ -34,6 +37,11 @@ function App() {
         <Route path='/dashboard' element={<MyPurchaseComponent />}/>
         <Route path='/support' element={<Support />}/>
         <Route path='/accounts' element={<Account />}/>
+        <Route path="/accounts/platform/:platformName" element={<PlatformViewMorePage />} />
+        <Route path="/accounts/buy/:platformName/:productName" element={<BuyAccountPage />} />
+        <Route path="/log-purchased-successful" element={<LogPurchasedSuccessful />} />
+
+
         
         
       </Routes>
