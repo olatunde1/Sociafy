@@ -59,7 +59,7 @@ export default function LoginPage() {
             </div>
 
             {/* Login Button */}
-            <Link to="/wallet">
+            <Link to="/dashboard">
                 <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-8 py-3 rounded-lg font-semibold hover:bg-purple-700 transform transition-transform duration-300 hover:scale-105"
@@ -70,25 +70,15 @@ export default function LoginPage() {
        
           </form>
 
-          {/* Divider
-          <div className="flex items-center my-10">
-            <hr className="flex-grow border-gray-300" />
-            <span className="mx-4 text-gray-500">or</span>
-            <hr className="flex-grow border-gray-300" />
-          </div> */}
-
-          {/* Google Login Button
-          <button className="w-full flex items-center justify-center gap-2 border border-gray-300 px-6 py-3 rounded-lg text-sm font-bold hover:bg-gray-100 transform transition-transform duration-300 hover:scale-105">
-          <img src={GoogleLogo} alt="Google Logo" className="w-10 h-10 mr-3" />
-            Login Using Google
-          </button> */}
-
           {/* Create Account */}
           <p className="text-sm text-gray-600 mt-4 text-center">
             Don’t have an account? {" "}
-            <a href="#" className="text-[#7B36E7] text-sm font-medium hover:underline">
-              Create Account
-            </a>
+            <Link to="/sign-up">
+              <a href="#" className="text-[#7B36E7] text-sm font-medium hover:underline">
+                Create Account
+              </a>
+            </Link>
+           
           </p>
         </div>
 

@@ -85,37 +85,47 @@ export default function GetStarted() {
         </h1>
 
         {/* Responsive Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto mt-15">
             
             {/* Secure Transactions Card */}
-            <div className="max-w-[373px] w-full bg-[#EBE1FB] px-10 pt-10 rounded-4xl text-center md:text-left">
-                <h1 className="font-semibold text-2xl font-Urbanist mb-4">Secure Transactions</h1>
-                <p className="font-medium leading-6 text-[#515151]">
-                    We use encrypted payment gateways to ensure all transactions are safe and fraud-proof.
-                </p>
-                <img src={Secure} alt="Secure Transactions" className="max-w-full mx-auto md:mx-0 mt-4" />
+            <div className="max-w-[373px] w-full bg-[#EBE1FB] px-10 pt-10 rounded-4xl text-left flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+            <div>
+              <h1 className="font-semibold text-2xl font-Urbanist mb-4">Secure Transactions</h1>
+              <p className="font-medium leading-6 text-[#515151]">
+                We use encrypted payment gateways to ensure all transactions are safe and fraud-proof.
+              </p>
             </div>
+            <img src={Secure} alt="Secure Transactions" className="max-w-full self-end mt-4" />
+          </div>
+
 
             {/* Verified Accounts Card */}
-            <div className="max-w-[373px] w-full px-10 pt-10 rounded-4xl bg-[#DDEFFB] text-center md:text-left">
-            <h1 className="font-semibold text-2xl font-Urbanist mb-4">Verified Accounts</h1>
-            <p className="font-medium leading-6 text-[#515151]">
-                Every account listed is pre-checked to ensure authenticity and legitimacy before being sold.
-            </p>
-            <img src={Verified} alt="Verified Accounts" className="max-w-full mx-auto md:mx-0 mt-4" />
+            <div className="max-w-[373px] w-full bg-[#DDEFFB] px-10 pt-10 rounded-4xl text-left flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+            <div>
+              <h1 className="font-semibold text-2xl font-Urbanist mb-4">Verified Accounts</h1>
+              <p className="font-medium leading-6 text-[#515151]">
+              Every account listed is pre-checked to ensure authenticity and legitimacy before being sold.
+              </p>
             </div>
+            <img src={Verified} alt="Secure Transactions" className="max-w-full self-end mt-4 mb-4" />
+          </div>
+
+
 
             {/* Instant Delivery Card */}
-            <div className="max-w-[373px] w-full px-10 pt-10 rounded-4xl bg-[#DDF1E2] text-center md:text-left">
-            <h1 className="font-semibold text-2xl font-Urbanist mb-4">Instant Delivery</h1>
-            <p className="font-medium leading-6 text-[#515151]">
-                Get your account details immediately after a successful purchase – no delays, no hassle.
-            </p>
-            <img src={Instant} alt="Instant Delivery" className="max-w-full mx-auto md:mx-0 mt-4" />
+            <div className="max-w-[373px] w-full bg-[#DDF1E2] px-10 pt-10 rounded-4xl text-left flex flex-col justify-between transform transition-transform duration-300 hover:scale-105">
+            <div>
+              <h1 className="font-semibold text-2xl font-Urbanist mb-4">Instant Delivery</h1>
+              <p className="font-medium leading-6 text-[#515151]">
+              Get your account details immediately after a successful purchase – no delays, no hassle.
+              </p>
             </div>
+            <img src={Instant} alt="Secure Transactions" className="max-w-full self-end mt-4" />
+          </div>
+
 
   </div>
-</div>
+    </div>
 
 
   </>

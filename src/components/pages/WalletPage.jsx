@@ -185,16 +185,15 @@ const renderPageNumbers = () => {
           </div>
 
           {/* Fund Wallet Card */}
-          <div className="bg-[#EBE1FB] rounded-lg shadow flex flex-col items-start text-center  w-full md:w-[180px] ">
+          <Link to="/fund-wallet-successful">
+          <div className="bg-[#EBE1FB] rounded-2xl shadow flex flex-col items-start text-center  w-full md:w-[180px] ">
             <img src={FundWallet} alt="fund-wallet" className="mx-12 mt-6 mb-3.5" />
             <h3 className="text-lg font-semibold text-gray-700 px-10 ">
               Fund Wallet
             </h3>
-            {/* <button className="mt-2 flex items-center gap-2 bg-[#7B36E7] text-white px-5 py-3 rounded hover:bg-purple-700 transition">
-              <FaWallet className="text-white text-lg" />
-              <span>Fund Wallet</span>
-            </button> */}
           </div>
+          </Link>
+          
         </div>
 
 

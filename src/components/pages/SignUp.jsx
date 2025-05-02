@@ -106,9 +106,11 @@ export default function SignUp() {
           {/* Create Account */}
           <p className="text-sm text-gray-600 mt-4 text-center ">
           Do you already have an account? {" "}
+           <Link to="/login">
             <a href="#" className="text-[#7B36E7] text-sm font-medium hover:underline">
-              login
-            </a>
+                login
+              </a>
+           </Link>
           </p>
         </div>
 

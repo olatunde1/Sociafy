@@ -17,6 +17,7 @@ import PlatformViewMorePage from './components/pages/PlatformViewMorePage'
 import BuyAccountPage from './components/pages/BuyAccountPage'
 import LogPurchasedSuccessful from './components/pages/LogPurchasedSuccessful'
 import LogDetails from './components/pages/LogDetails'
+import FundWalletSuccessful from './components/pages/FundWalletSuccessful'
 
 
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/login' element={<LoginPage />}/>
         <Route path='/wallet' element={<WalletPage />}/>
+        <Route path="/fund-wallet-successful" element={<FundWalletSuccessful />} />
         <Route path='/profile' element={<Profile />}/>
         <Route path='/reset-password' element={<ResetPassword />}/>
         <Route path='/rules' element={<Rules />}/>
