@@ -141,7 +141,7 @@ const UserDashBoard = () => {
             </div>
             <h4 className="text-gray-600 text-sm">Total Deposit</h4>
           </div>
-          <p className="text-2xl font-bold">$12,000</p>
+          <p className="text-2xl font-bold">₦12,000</p>
         </div> */}
       </div>
 
@@ -169,21 +169,21 @@ const UserDashBoard = () => {
               {/* Example Rows */}
               <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7]  items-center">
                 <div>TRF7894903</div>
-                <div>$250</div>
+                <div>₦250</div>
                 <div>2025-04-27</div>
                 <div><span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-600">Success</span></div>
               </div>
 
               <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7] items-center">
                 <div>TRF7894903</div>
-                <div>$450</div>
+                <div>₦450</div>
                 <div>2025-04-25</div>
                 <div><span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-600">Pending</span></div>
               </div>
 
               <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7] items-center">
                 <div>TRF7894903</div>
-                <div>$300</div>
+                <div>₦300</div>
                 <div>2025-04-24</div>
                 <div><span className="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600">Failed</span></div>
               </div>
@@ -214,7 +214,7 @@ const UserDashBoard = () => {
                 <div className="flex items-center gap-2">
                   <FaInstagram className="text-pink-500" /> Instagram
                 </div>
-                <div>$299</div>
+                <div>₦299</div>
                 <div>2025-04-20</div>
               </div>
 
@@ -222,7 +222,7 @@ const UserDashBoard = () => {
                 <div className="flex items-center gap-2">
                   <FaFacebook className="text-blue-600" /> Facebook
                 </div>
-                <div>$150</div>
+                <div>₦150</div>
                 <div>2025-04-18</div>
               </div>
 
@@ -230,7 +230,7 @@ const UserDashBoard = () => {
                 <div className="flex items-center gap-2">
                   <FaTwitter className="text-blue-400" /> Twitter
                 </div>
-                <div>$120</div>
+                <div>₦120</div>
                 <div>2025-04-16</div>
               </div>
             </div>

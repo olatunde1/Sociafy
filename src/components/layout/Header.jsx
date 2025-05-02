@@ -21,9 +21,9 @@ const Header = () => {
                 {/* Navigation Menu */}
                 <nav className={`absolute top-full left-0 w-full bg-white md:static md:w-auto md:bg-transparent md:flex md:space-x-4 transition-all duration-300 ${isOpen ? 'block' : 'hidden'}`}>
                     <ul className="flex flex-col md:flex-row md:space-x-4 text-center">
-                        <li><a href="#home" className="block py-2 px-4 text-gray-800 hover:text-gray-400 font-Urbanist">Home</a></li>
-                        <li><a href="#about" className="block py-2 px-4 text-gray-800 hover:text-gray-400">About</a></li>
-                        <li><a href="#contact" className="block py-2 px-4 text-gray-800 hover:text-gray-400">Contact</a></li>
+                        <li><a href="#home" className="block py-2 px-4 text-gray-800 hover:text-gray-400 font-Urbanist">Features</a></li>
+                        <li><a href="#about" className="block py-2 px-4 text-gray-800 hover:text-gray-400">How it Works</a></li>
+                        <li><a href="#contact" className="block py-2 px-4 text-gray-800 hover:text-gray-400">Contact Us</a></li>
                     </ul>
                 </nav>
                 

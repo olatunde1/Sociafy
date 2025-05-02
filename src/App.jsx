@@ -16,6 +16,7 @@ import Account from './components/pages/Account'
 import PlatformViewMorePage from './components/pages/PlatformViewMorePage'
 import BuyAccountPage from './components/pages/BuyAccountPage'
 import LogPurchasedSuccessful from './components/pages/LogPurchasedSuccessful'
+import LogDetails from './components/pages/LogDetails'
 
 
 
@@ -40,7 +41,7 @@ function App() {
         <Route path="/accounts/platform/:platformName" element={<PlatformViewMorePage />} />
         <Route path="/accounts/buy/:platformName/:productName" element={<BuyAccountPage />} />
         <Route path="/log-purchased-successful" element={<LogPurchasedSuccessful />} />
-
+        <Route path="/log-details" element={<LogDetails />} />
 
         
         

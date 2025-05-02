@@ -35,10 +35,23 @@ export default function MyPurchased() {
     { name: "Sign Out", path: "/",  action: handleSignOut },
   ];
 
+  // Function to generate random dates
+  const generateRandomDate = () => {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[Math.floor(Math.random() * 12)];
+    const day = Math.floor(Math.random() * 28) + 1;
+    const year = 2025;
+    const hour = Math.floor(Math.random() * 12) + 1;
+    const minute = Math.floor(Math.random() * 60);
+    const ampm = Math.random() > 0.5 ? 'am' : 'pm';
+    
+    return `${month} ${day}, ${year}\n${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}${ampm}`;
+  };
+
   const orders = Array.from({ length: 24 }, (_, i) => ({
     product: "USA 🇺🇸 Standard IG",
     amount: `₦${(Math.floor(Math.random() * 5) + 1) * 5000}`,
-    quantity: Math.floor(Math.random() * 200) + 1,
+    time: generateRandomDate(),
     action: "View Info",
   }));
 
@@ -108,24 +121,41 @@ export default function MyPurchased() {
           </h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm text-left">
-              <thead className="bg-gray-100 text-gray-700 uppercase">
+              <thead className="bg-gray-100 text-[#EDF2F7] uppercase">
                 <tr>
-                  <th className="px-4 py-2">Product</th>
-                  <th className="px-4 py-2">Amount</th>
-                  <th className="px-4 py-2">Quantity</th>
-                  <th className="px-4 py-2">Action</th>
+                  <th className="px-4 py-2 text-[#949494]">Product</th>
+                  <th className="px-4 py-2 text-[#949494]">Amount</th>
+                  <th className="px-4 py-2 text-[#949494]">Date</th>
+                  <th className="px-4 py-2 text-[#949494]">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {orders.map((order, index) => (
                   <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 border-b border-[#EDF2F7]">{order.product}</td>
+                    <td className="px-4 py-2 border-b border-[#EDF2F7] w-[570px]">{order.product}</td>
                     <td className="px-4 py-2 border-b border-[#EDF2F7]">{order.amount.toLocaleString()}</td>
-                    <td className="p-3 text-[#515151]">
-              <span className="bg-[#E5E5EA] py-1.5 font-semibold rounded-3xl px-2.5 ">{order.quantity} pcs</span>
-              </td>
+                    <td className="p-3 ">
+                      <span className=" py-1.5 font-medium rounded-3xl text-[#425466] whitespace-pre-line">{order.time}</span>
+                    </td>
                     <td className="px-4 py-2 border-b border-[#EDF2F7]">
-                      <button className="text-[#292E35]  font-semibold leading-3 px-5 py-3 hover:underline rounded-[8px] bg-[#F4F4F6]">{order.action}</button>
+                    <button
+                          onClick={() => navigate("/log-details", {
+                            state: {
+                              product: order.product,
+                              username: "@Caatiin_Sociafy25",
+                              password: "axkLC8wyoA4M",
+                              email: "samplemail@sociafy.com",
+                              emailPassword: "Eb7qvG0fESQ",
+                              dateCreated: "08-06-2004",
+                              description: "5-8yrs with posts | 1000 followers",
+                              price: order.amount
+                            }
+                          })}
+                          className="text-[#292E35] font-semibold leading-3 px-5 py-3 hover:underline rounded-[8px] bg-[#F4F4F6] hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white"
+                        >
+                          {order.action}
+                      </button>
+
                     </td>
                   </tr>
                 ))}
