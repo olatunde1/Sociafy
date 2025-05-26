@@ -18,6 +18,8 @@ import BuyAccountPage from './components/pages/BuyAccountPage'
 import LogPurchasedSuccessful from './components/pages/LogPurchasedSuccessful'
 import LogDetails from './components/pages/LogDetails'
 import FundWalletSuccessful from './components/pages/FundWalletSuccessful'
+import AdminLogin from './components/dashboard/AdminLogin'
+import AdminDashBoard from './components/dashboard/AdminDashboard'
 
 
 
@@ -26,6 +28,7 @@ function App() {
   return (
     <BrowserRouter>
     <ScrollToTop />
+
       <Routes>
         <Route path='/' element={<Home />} />
         {/* Add more routes here as needed */}
@@ -45,7 +48,13 @@ function App() {
         <Route path="/log-purchased-successful" element={<LogPurchasedSuccessful />} />
         <Route path="/log-details" element={<LogDetails />} />
 
-        
+
+
+
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashBoard />} />
+
+
         
       </Routes>
     </BrowserRouter>

@@ -9,9 +9,11 @@ const Header = () => {
     return (
         <div className="w-full md:w-[1200px] mx-auto mt-9 mb-9">
             <header className="flex justify-between items-center p-2 text-gray-800 relative">
-                <div className="logo">
-                    <img src={Logo} alt="Logo" className="logo-image w-full" />
-                </div>
+                <Link to="/">
+                    <div className="logo">
+                         <img src={Logo} alt="Logo" className="logo-image w-full" />
+                    </div>
+                </Link>
                 
                 {/* Mobile Toggle Button */}
                 <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-2xl focus:outline-none">
@@ -30,7 +32,7 @@ const Header = () => {
                 {/* Login Button */}
              
                 <div className="hidden md:block">
-                    <Link to="/sign-up">
+                    <Link to="/login">
                         <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-16 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
                             Login
                         </button>
