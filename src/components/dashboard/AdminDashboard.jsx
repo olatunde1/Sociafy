@@ -1,11 +1,5 @@
 import React from "react";
 import {
-  FaWallet,
-  FaShoppingCart,
-  FaMoneyBillWave,
-  FaInstagram,
-  FaFacebook,
-  FaTwitter,
   FaUserCircle,
   FaBox,
 } from "react-icons/fa";
@@ -20,6 +14,7 @@ const AdminDashBoard = () => {
     name: "Castine",
     email: "castiin@sociafy.com",
     balance: "NGN 179,000",
+    add: "Add New Log",
     image: Castine,
   };
 
@@ -41,7 +36,7 @@ const AdminDashBoard = () => {
   ];
 
   return (
-    <div className="p-6 space-y-10 font-custom">
+    <div className=" font-custom">
       {/* ───────────── User Info & Balance ───────────── */}
       <div className="flex items-center justify-between gap-4 mb-8">
         {/* User Info */}
@@ -63,9 +58,9 @@ const AdminDashBoard = () => {
 
         {/* Wallet Balance Summary */}
         <div className="px-4 py-2">
-          <span className="text-gray-600 font-medium mr-2">Balance:</span>
-          <span className="rounded-lg px-4 py-2 font-medium bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white">
-            {user.balance}
+          {/* <span className="text-gray-600 font-medium mr-2">Balance:</span> */}
+          <span className="rounded-lg px-8 py-4 font-medium bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white">
+            {user.add}
           </span>
         </div>
       </div>
@@ -73,7 +68,7 @@ const AdminDashBoard = () => {
       {/* ───────────── Cards Section ───────────── */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 mt-10">
         {/* Card 1 - Wallet Balance */}
-        <div className="bg-white rounded-2xl shadow-md flex flex-col w-full">
+        <div className="bg-white rounded-2xl shadow-md border flex flex-col w-full">
           {/* Icon and Title */}
           <div className="flex flex-col mb-6">
             <div className="p-4 rounded-full text-white mb-2">
@@ -98,7 +93,7 @@ const AdminDashBoard = () => {
         </div>
 
         {/* Card 2 - Total Orders */}
-        <div className="relative bg-white rounded-2xl shadow-md flex flex-col w-full overflow-hidden">
+        <div className="relative bg-white rounded-2xl shadow-md border flex flex-col w-full overflow-hidden">
           {/* Icon and Title */}
           <div className="flex flex-col mb-6">
             <div className="p-4 rounded-full text-white mb-2">
@@ -127,7 +122,7 @@ const AdminDashBoard = () => {
         </div>
 
         {/* Card 3 - Total Deposit */}
-        <div className="relative bg-white rounded-2xl shadow-md flex flex-col w-full overflow-hidden">
+        <div className="relative bg-white rounded-2xl border shadow-md flex flex-col w-full overflow-hidden">
           {/* Icon and Title */}
           <div className="flex flex-col mb-6">
             <div className="p-4 rounded-full text-white mb-2">

@@ -1,6 +1,7 @@
-import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate,Navigate, Outlet } from "react-router-dom";
 import { useAuthStore } from "@/store/authStore";
 import { useEffect } from "react";
+
 
 export const AdminProtectedRoute = () => {
   const { accessToken } = useAuthStore();
@@ -19,3 +20,11 @@ export const AdminProtectedRoute = () => {
 };
 
 
+
+const AdminDashboardProtectedRoute = () => {
+  const isAuth = localStorage.getItem("admin-auth");
+
+  return isAuth ? <Outlet /> : <Navigate to="/admin-dashboard" />;
+};
+
+export default AdminDashboardProtectedRoute;
