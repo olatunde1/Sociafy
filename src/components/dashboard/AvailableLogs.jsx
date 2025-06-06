@@ -9,6 +9,7 @@ import SnapchatAdmin from "../../assets/images/admin-snapchat.png";
 import TwitterAdmin from "../../assets/images/admin-twitter.png";
 import PIA_VPNAdmin from "../../assets/images/admin-pia.png";
 import Google_VoiceAdmin from "../../assets/images/admin-google-voice.png";
+import BackgroundImage from "../../assets/images/background-image.png";
 
 const logCategories = [
   { name: "Facebook", image: FacebookAdmin, count: 2134 },
@@ -30,7 +31,7 @@ const AvailableLogs = () => {
   };
 
   return (
-    <div className="p-6 font-custom">
+    <div className="font-custom">
       {/* ───────────── User Info & Balance ───────────── */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
         {/* User Info */}
@@ -58,13 +59,15 @@ const AvailableLogs = () => {
         </div>
       </div>
 
-      <h2 className="text-[20px] font-bold mb-6">All Available Logs</h2>
+      <div className="bg-white py-6 mb-8">
+        <h2 className="text-[20px] font-bold mb-6">All Available Logs</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {logCategories.map((log, index) => (
           <div
+          style={{ backgroundImage: `url(${BackgroundImage})` }}
             key={index}
-            className="bg-white shadow-md rounded-xl p-5 flex flex-col justify-between relative hover:shadow-lg transition-all"
+            className="bg-white border shadow-md rounded-xl p-5 flex flex-col justify-between relative hover:shadow-lg transition-all"
           >
             {/* 3 dots at top right */}
             <div className="absolute top-4 right-4 text-gray-500 cursor-pointer">
@@ -92,11 +95,13 @@ const AvailableLogs = () => {
         ))}
 
         {/* Add New Category Card */}
-        <div className="bg-white shadow-md rounded-xl p-6 flex flex-col items-center justify-center text-center hover:shadow-lg transition-all cursor-pointer">
-          <div className="text-[#351A60] text-3xl mb-2">+</div>
+        <div className="bg-white border shadow-md rounded-xl p-6 flex flex-col items-center justify-center text-center hover:shadow-lg transition-all cursor-pointer">
+          <div className="text-[#351A60] text-3xl mb-2 bg-[#F2F2F7] w-[60px] h-[60px] rounded-full flex items-center justify-center">+</div>
           <p className="text-[#351A60] font-semibold">Add New Category</p>
         </div>
       </div>
+      </div>
+      
     </div>
   );
 };
