@@ -34,9 +34,9 @@ const AvailableLogs = () => {
 
   const [activeMenu, setActiveMenu] = useState(null);
   const [logToDelete, setLogToDelete] = useState(null);
+  const [showAddLog, setShowAddLog] = useState(false);
   const menuRef = useRef();
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -48,90 +48,106 @@ const AvailableLogs = () => {
   }, []);
 
   return (
-    <div className="font-custom">
-      {/* Header Section */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-        <div className="flex items-center gap-4">
-          {user.image ? (
-            <img
-              src={user.image}
-              alt="User"
-              className="w-14 h-14 rounded-full object-cover"
-            />
-          ) : (
-            <FaUserCircle className="text-gray-400 w-14 h-14" />
-          )}
-          <div>
-            <h2 className="text-xl font-bold">Welcome, {user.name}</h2>
-            <p className="text-sm text-gray-500">{user.email}</p>
+    <div className="relative">
+      {/* Main Content with blur when overlay is open */}
+      <div
+        className={`font-custom transition-all duration-300 ${
+          showAddLog || logToDelete ? "blur-sm pointer-events-none select-none" : ""
+        }`}
+      >
+        {/* Header Section */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+          <div className="flex items-center gap-4">
+            {user.image ? (
+              <img
+                src={user.image}
+                alt="User"
+                className="w-14 h-14 rounded-full object-cover"
+              />
+            ) : (
+              <FaUserCircle className="text-gray-400 w-14 h-14" />
+            )}
+            <div>
+              <h2 className="text-xl font-bold">Welcome, {user.name}</h2>
+              <p className="text-sm text-gray-500">{user.email}</p>
+            </div>
           </div>
+
+          <button
+            onClick={() => setShowAddLog(true)}
+            className="rounded-lg px-6 py-3 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium hover:opacity-90 transition-all"
+          >
+            {user.add}
+          </button>
         </div>
 
-        <button className="rounded-lg px-6 py-3 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium hover:opacity-90 transition-all">
-          {user.add}
-        </button>
-      </div>
+        {/* Logs Grid */}
+        <div className="bg-white py-6 mb-8">
+          <h2 className="text-[20px] font-bold mb-6">All Available Logs</h2>
 
-      {/* Logs Grid */}
-      <div className="bg-white py-6 mb-8">
-        <h2 className="text-[20px] font-bold mb-6">All Available Logs</h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {logCategories.map((log, index) => (
-            <div
-              key={index}
-              className="bg-white border shadow-md rounded-xl p-5 relative flex flex-col justify-between hover:shadow-lg transition-all"
-              style={{ backgroundImage: `url(${BackgroundImage})` }}
-            >
-              {/* Three Dots Dropdown Trigger */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {logCategories.map((log, index) => (
               <div
-                className="absolute top-4 right-4 text-gray-600 cursor-pointer"
-                onClick={() => setActiveMenu(activeMenu === index ? null : index)}
+                key={index}
+                className="bg-white border shadow-md rounded-xl p-5 relative flex flex-col justify-between hover:shadow-lg transition-all"
+                style={{ backgroundImage: `url(${BackgroundImage})` }}
               >
-                <BsThreeDots size={20} />
-              </div>
-
-              {/* Dropdown Menu */}
-              {activeMenu === index && (
                 <div
-                  ref={menuRef}
-                  className="absolute top-10 right-4 bg-white border shadow-lg rounded-md w-32 z-10"
+                  className="absolute top-4 right-4 text-gray-600 cursor-pointer"
+                  onClick={() =>
+                    setActiveMenu(activeMenu === index ? null : index)
+                  }
                 >
-                  <button className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100">
-                    Edit
-                  </button>
-                  <button
-                    className="w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-red-50"
-                    onClick={() => setLogToDelete(log)}
+                  <BsThreeDots size={20} />
+                </div>
+
+                {activeMenu === index && (
+                  <div
+                    ref={menuRef}
+                    className="absolute top-10 right-4 bg-white border shadow-lg rounded-md w-32 z-10"
                   >
-                    Remove
+                    <button className="w-full px-4 py-2 text-sm text-left hover:bg-gray-100">
+                      Edit
+                    </button>
+                    <button
+                      className="w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-red-50"
+                      onClick={() => setLogToDelete(log)}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                )}
+
+                <img
+                  src={log.image}
+                  alt={log.name}
+                  className="w-[184px] h-[56px] object-contain mb-6"
+                />
+
+                <div className="flex items-center justify-between mt-auto">
+                  <div>
+                    <p className="text-sm text-gray-500">Total Logs:</p>
+                    <p className="text-xl font-bold text-[#351A60]">
+                      {log.count}
+                    </p>
+                  </div>
+                  <button className="hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white text-black shadow-md px-4 py-2 rounded-lg hover:opacity-90 transition-all text-sm">
+                    View Logs
                   </button>
                 </div>
-              )}
-
-              {/* Log Image */}
-              <img
-                src={log.image}
-                alt={log.name}
-                className="w-[184px] h-[56px] object-contain mb-6"
-              />
-
-              <div className="flex items-center justify-between mt-auto">
-                <div>
-                  <p className="text-sm text-gray-500">Total Logs:</p>
-                  <p className="text-xl font-bold text-[#351A60]">{log.count}</p>
-                </div>
-                <button className="hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white text-black shadow-md px-4 py-2 rounded-lg hover:opacity-90 transition-all text-sm">
-                  View Logs
-                </button>
               </div>
-            </div>
-          ))}
+            ))}
 
-          {/* Add New Category */}
-          <div className="bg-white border shadow-md rounded-xl p-6 flex flex-col items-center justify-center text-center hover:shadow-lg transition-all cursor-pointer">
-            <div className="text-[#351A60] text-3xl mb-2 bg-[#F2F2F7] w-[60px] h-[60px] rounded-full flex items-center justify-center">+</div>
-            <p className="text-[#351A60] font-semibold">Add New Category</p>
+            {/* Add New Category */}
+            <div
+              onClick={() => setShowAddLog(true)}
+              className="bg-white border shadow-md rounded-xl p-6 flex flex-col items-center justify-center text-center hover:shadow-lg transition-all cursor-pointer"
+            >
+              <div className="text-[#351A60] text-3xl mb-2 bg-[#F2F2F7] w-[60px] h-[60px] rounded-full flex items-center justify-center">
+                +
+              </div>
+              <p className="text-[#351A60] font-semibold">Add New Category</p>
+            </div>
           </div>
         </div>
       </div>
@@ -139,8 +155,8 @@ const AvailableLogs = () => {
       {/* Delete Confirmation Modal */}
       {logToDelete && (
         <Dialog as={Fragment} open={!!logToDelete} onClose={() => setLogToDelete(null)}>
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-            <Dialog.Panel className="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg">
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <Dialog.Panel className="bg-white rounded-lg p-6 w-full max-w-sm shadow-lg z-50">
               <Dialog.Title className="text-lg font-bold text-gray-800">
                 Delete "{logToDelete.name}"?
               </Dialog.Title>
@@ -157,7 +173,6 @@ const AvailableLogs = () => {
                 </button>
                 <button
                   onClick={() => {
-                    // TODO: handle actual delete logic
                     console.log("Deleting", logToDelete);
                     setLogToDelete(null);
                   }}
@@ -170,6 +185,70 @@ const AvailableLogs = () => {
           </div>
         </Dialog>
       )}
+
+      {/* Slide-in Add New Log Panel */}
+      <div
+        className={`fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
+          showAddLog ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center px-6 py-4 border-b">
+          <h3 className="text-sm text-gray-500">
+            Go Back / <span className="text-[#351A60] font-semibold">Add New Log</span>
+          </h3>
+          <button
+            onClick={() => setShowAddLog(false)}
+            className="text-gray-600 hover:text-gray-900 text-2xl font-bold"
+            aria-label="Close"
+          >
+            &times; <span className="text-[16px] font-semibold">Close</span>
+          </button>
+        </div>
+        <div className="p-6 space-y-6">
+          <div>
+            <h2 className="text-xl font-semibold text-[#351A60] mb-1">Add New Category</h2>
+            <p className="text-sm text-gray-500">Fill in the details below to add a new category.</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name of Category</label>
+            <input
+              type="text"
+              placeholder="Enter the category name here"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Sub-Categories</label>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Enter sub-category"
+                className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
+              />
+              <button className="px-4 py-2 border-2 border-[#7B36E7] text-[#7B36E7] font-bold text-sm rounded-md hover:bg-[#4c1f8a] hover:text-white transition-all">
+                Add Sub
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇺🇸 USA Standard FB</div>
+            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇩🇪 Germany Standard FB</div>
+            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇮🇳 India Standard FB</div>
+          </div>
+
+          <div className="pt-4 flex justify-end">
+            <button
+              type="button"
+              className="px-6 py-3 rounded-md bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium"
+            >
+              Add Category
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
