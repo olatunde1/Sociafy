@@ -60,10 +60,13 @@ function App() {
         <Route path="/log-details" element={<LogDetails />} />
           {/* Public route: Admin Login */}
 
+<<<<<<< HEAD
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
         <Route path="/admin/logs" element={<AvailableLogsComponent />} />
 
+=======
+>>>>>>> 55d040d775fcbe41bffa1e42ba2cf9d6539d01f2
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />
         </Route>
