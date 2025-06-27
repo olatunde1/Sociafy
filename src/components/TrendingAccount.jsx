@@ -1,64 +1,112 @@
 import React from "react";
-import IconBuy from '../assets/images/bag.png'
-import Instagram from '../assets/images/instagram.png'
+import IconBuy from "../assets/images/bag.png";
+import Instagram from "../assets/images/instagram.png";
 
 const products = [
-  { name: "USA 🇺🇸 Standard IG", title: "5-8yrs with posts | 1000 followers",  icon: Instagram, price: 30000, quantity: 231 },
-  { name: "Handbag Facebook", platform: " ", icon: Instagram, price: 30000, quantity: 231 },
-  { name: "Smartwatch Twitter/X", platform: " ", icon: "🐦", price: 30000, quantity: 231 },
-  { name: "Sunglasses Instagram", platform: " ", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Hoodie Facebook", platform: " ", icon: "📘", price: 30000, quantity: 231 },
-  { name: "Earrings Instagram", platform: " ", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Phone Case Twitter/X ", platform: " ", icon: "🐦", price: 30000, quantity: 231 },
-  { name: "Perfume Facebook", platform: " ", icon: "📘", price: 30000, quantity: 231 },
-  { name: "Laptop Bag Instagram", platform: " ", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Bracelet Twitter/X", platform: " ", icon: "🐦", price: 30000, quantity: 231 }
+  { name: "USA 🇺🇸 Standard IG", title: "5-8yrs with posts | 1000 followers", icon: "", price: 30000, quantity: 231 },
+  { name: "Handbag Facebook", icon: "", price: 30000, quantity: 231 },
+  { name: "Smartwatch Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
+  { name: "Sunglasses Instagram", icon: "📸", price: 30000, quantity: 231 },
+  { name: "Hoodie Facebook", icon: "📘", price: 30000, quantity: 231 },
+  { name: "Earrings Instagram", icon: "📸", price: 30000, quantity: 231 },
+  { name: "Phone Case Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
+  { name: "Perfume Facebook", icon: "📘", price: 30000, quantity: 231 },
+  { name: "Laptop Bag Instagram", icon: "📸", price: 30000, quantity: 231 },
+  { name: "Bracelet Twitter/X", icon: "🐦", price: 30000, quantity: 231 }
 ];
 
 const ProductTable = () => {
   return (
-    <div className="container mx-auto px-4 w-full max-w-[1200px] p-6 bg-white  rounded-lg mt-20">
-        <h1  className="text-center font-extrabold text-3xl md:text-4xl mb-4"> Trending <span className="text-[#7B36E7]" >Accounts</span></h1>
-        <p className="text-center mb-16 text-[20px] leading-8">See our high-demand and top-selling accounts</p>
-        
-      <table className="w-full">
-        <thead>
-          <tr className="bg-[#FAFAFB] text-left border-b border-[#EDF2F7]">
-            <th className="p-3 text-[#949494] font-medium">Product</th>
-            <th className="p-3 text-[#949494] font-medium">Amount (₦)</th>
-            <th className="p-3 text-[#949494] font-medium">Quantity</th>
-            <th className="p-3 text-[#949494] font-medium">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((product, index) => (
-            <tr key={index} className=" border-b border-[#EDF2F7] justify-center items-center">
-              <td className="p-3 flex">
-                    <img src={product.icon} alt="" height="32 px" width="32px" />
-                    <span className="grid grid-cols-1 gap-1">
-                        <span className="font-semibold">{product.name}</span>
-                        <span className="text-gray-600">{product.title}</span>
-                    </span>
-                </td>
+    <div className="container mx-auto px-4 w-full max-w-[1200px] py-8 bg-white rounded-lg mt-20">
+      <h1 className="text-center font-extrabold text-3xl md:text-4xl mb-4">
+        Trending <span className="text-[#7B36E7]">Accounts</span>
+      </h1>
+      <p className="text-center mb-10 text-lg leading-8">
+        See our high-demand and top-selling accounts
+      </p>
 
-              <td className="p-3 text-[#515151] font-medium ">₦{product.price.toLocaleString()}</td>
-              <td className="p-3 text-[#515151]">
-              <span className="bg-[#E5E5EA] py-1.5 font-semibold rounded-3xl px-2.5 ">{product.quantity} pcs</span>
-              </td>
-              <td className="p-3 flex justify-center items-center text-center">
-                    <button className="flex bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 gap-5 rounded font-bold hover:bg-[#F2EBFD] transform transition-transform duration-300 hover:scale-105">
-                        <img src={IconBuy} alt="" /> Buy
-                    </button>
-                </td>
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto">
+        <table className="w-full">
+          <thead>
+            <tr className="bg-[#FAFAFB] text-left border-b border-[#EDF2F7]">
+              <th className="p-3 text-[#949494] font-medium">Product</th>
+              <th className="p-3 text-[#949494] font-medium">Amount (₦)</th>
+              <th className="p-3 text-[#949494] font-medium">Quantity</th>
+              <th className="p-3 text-[#949494] font-medium">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-     <div className="text-center">
-        <button className="mx-auto md:mt-12 mt-4 md:mb-20 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-32 py-3 rounded-lg shadow-md hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] transform transition-transform duration-300 hover:scale-105">
-             View More
+          </thead>
+          <tbody>
+            {products.map((product, index) => (
+              <tr key={index} className="border-b border-[#EDF2F7]">
+                <td className="p-3 flex gap-3 items-center">
+                  {typeof product.icon === "string" ? (
+                    <span className="text-2xl">{product.icon}</span>
+                  ) : (
+                    <img src={product.icon} alt="" className="w-8 h-8" />
+                  )}
+                  <div>
+                    <div className="font-semibold">{product.name}</div>
+                    {product.title && (
+                      <div className="text-gray-600 text-sm">{product.title}</div>
+                    )}
+                  </div>
+                </td>
+                <td className="p-3 text-[#515151] font-medium">₦{product.price.toLocaleString()}</td>
+                <td className="p-3 text-[#515151]">
+                  <span className="bg-[#E5E5EA] py-1.5 px-3 rounded-3xl font-semibold">
+                    {product.quantity} pcs
+                  </span>
+                </td>
+                <td className="p-3">
+                  <button className="flex items-center gap-2 bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 rounded font-bold hover:scale-105 transition">
+                    <img src={IconBuy} alt="Buy" className="w-5 h-5" />
+                    Buy
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Mobile Cards */}
+      <div className="md:hidden space-y-6">
+        {products.map((product, index) => (
+          <div key={index} className="border border-[#EDF2F7] rounded-lg p-4 shadow-sm">
+            <div className="flex items-center gap-4 mb-2">
+              {typeof product.icon === "string" ? (
+                <span className="text-3xl">{product.icon}</span>
+              ) : (
+                <img src={product.icon} alt="" className="w-10 h-10" />
+              )}
+              <div>
+                <div className="font-semibold text-lg">{product.name}</div>
+                {product.title && <div className="text-sm text-gray-600">{product.title}</div>}
+              </div>
+            </div>
+            <div className="text-sm text-[#515151] mb-2">
+              <strong>Amount:</strong> ₦{product.price.toLocaleString()}
+            </div>
+            <div className="text-sm text-[#515151] mb-4">
+              <strong>Quantity:</strong>{" "}
+              <span className="bg-[#E5E5EA] py-1 px-3 rounded-3xl font-semibold">
+                {product.quantity} pcs
+              </span>
+            </div>
+            <button className="w-full flex justify-center items-center gap-2 bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 rounded font-bold hover:scale-105 transition">
+              <img src={IconBuy} alt="Buy" className="w-5 h-5" />
+              Buy
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
+          View More
         </button>
-     </div>
+      </div>
     </div>
   );
 };

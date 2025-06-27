@@ -13,7 +13,7 @@ const totalPages = 3; // Adjust this based on how many pages you have
 
 const onPageChange = (page) => {
   if (page > 0 && page <= totalPages) {
-    setCurrentPage(page);
+    setCurrentPage(page); 
     // Optional: implement filtering for currentPage here
   }
 };

@@ -18,7 +18,11 @@ import BuyAccountPage from "./components/pages/BuyAccountPage";
 import LogPurchasedSuccessful from "./components/pages/LogPurchasedSuccessful";
 import LogDetails from "./components/pages/LogDetails";
 import FundWalletSuccessful from "./components/pages/FundWalletSuccessful";
-import { AdminProtectedRoute } from "./utils/ProtectedRoute";
+import AdminDashboardProtectedRoute, { AdminProtectedRoute } from "./utils/ProtectedRoute";
+import AdminLogin from "./components/dashboard/AdminLogin";
+import AdminDashBoard from "./components/dashboard/AdminDashboard";
+import AdminDashboardComponent from "./components/AdminAccountComponent/AdminDashboardComponent";
+import AvailableLogsComponent from "./components/AdminAccountComponent/AvailableLogsComponent";
 
 function App() {
   return (
@@ -54,7 +58,15 @@ function App() {
           element={<LogPurchasedSuccessful />}
         />
         <Route path="/log-details" element={<LogDetails />} />
+          {/* Public route: Admin Login */}
 
+<<<<<<< HEAD
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
+        <Route path="/admin/logs" element={<AvailableLogsComponent />} />
+
+=======
+>>>>>>> 55d040d775fcbe41bffa1e42ba2cf9d6539d01f2
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />
         </Route>

@@ -134,15 +134,7 @@ const UserDashBoard = () => {
 
         </div>
 
-        {/* <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col items-center">
-          <div className="flex flex-col items-center mb-4">
-            <div className="bg-green-500 p-4 rounded-full text-white mb-2">
-              <FaMoneyBillWave size={32} />
-            </div>
-            <h4 className="text-gray-600 text-sm">Total Deposit</h4>
-          </div>
-          <p className="text-2xl font-bold">₦12,000</p>
-        </div> */}
+      
       </div>
 
       {/* ───────────── Tables Section ───────────── */}
