@@ -23,6 +23,9 @@ import AdminLogin from "./components/dashboard/AdminLogin";
 import AdminDashBoard from "./components/dashboard/AdminDashboard";
 import AdminDashboardComponent from "./components/AdminAccountComponent/AdminDashboardComponent";
 import AvailableLogsComponent from "./components/AdminAccountComponent/AvailableLogsComponent";
+import LogDetailsPage from "./components/dashboard/LogDetailsPage";
+import LogDetailsPageComponent from "./components/AdminAccountComponent/LogDetailsPageComponent";
+import AddNewLogComponent from "./components/AdminAccountComponent/AddNewLogComponent";
 
 function App() {
   return (
@@ -60,13 +63,12 @@ function App() {
         <Route path="/log-details" element={<LogDetails />} />
           {/* Public route: Admin Login */}
 
-<<<<<<< HEAD
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
         <Route path="/admin/logs" element={<AvailableLogsComponent />} />
+        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
+        <Route path="/admin/add-logs" element={<AddNewLogComponent />} />
 
-=======
->>>>>>> 55d040d775fcbe41bffa1e42ba2cf9d6539d01f2
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />
         </Route>

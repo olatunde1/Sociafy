@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import { Dialog } from "@headlessui/react";
 import { BsThreeDots } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
@@ -23,7 +24,12 @@ const logCategories = [
   { name: "Google Voice", image: Google_VoiceAdmin, count: 2134 },
 ];
 
+
 const AvailableLogs = () => {
+
+  
+const navigate = useNavigate();
+
   const user = {
     name: "Castine",
     email: "castiin@sociafy.com",
@@ -131,7 +137,12 @@ const AvailableLogs = () => {
                       {log.count}
                     </p>
                   </div>
-                  <button className="hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white text-black shadow-md px-4 py-2 rounded-lg hover:opacity-90 transition-all text-sm">
+                  <button
+                    onClick={() => navigate(`/logs/${log.name.toLowerCase().replace(/\s+/g, '-')}`, {
+                      state: { log },
+                    })}
+                    className="hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white text-black shadow-md px-4 py-2 rounded-lg hover:opacity-90 transition-all text-sm"
+                  >
                     View Logs
                   </button>
                 </div>
