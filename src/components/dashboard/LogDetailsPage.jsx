@@ -137,7 +137,7 @@ const LogDetailsPage = () => {
                         onClick={() => {
                           setOpenAlert(true);
                         }}
-                        className="px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded"
+                        className="px-3 py-2 text-left text-red-600 hover:bg-red-600 hover:text-white rounded"
                       >
                         Remove
                       </button>
