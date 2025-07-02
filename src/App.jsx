@@ -23,6 +23,8 @@ import AdminLogin from "./components/dashboard/AdminLogin";
 import AdminDashBoard from "./components/dashboard/AdminDashboard";
 import AdminDashboardComponent from "./components/AdminAccountComponent/AdminDashboardComponent";
 import AvailableLogsComponent from "./components/AdminAccountComponent/AvailableLogsComponent";
+import LogDetailsPage from "./components/dashboard/LogDetailsPage";
+import LogDetailsPageComponent from "./components/AdminAccountComponent/LogDetailsPageComponent";
 
 function App() {
   return (
@@ -63,6 +65,8 @@ function App() {
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
         <Route path="/admin/logs" element={<AvailableLogsComponent />} />
+        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
+        
 
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />
