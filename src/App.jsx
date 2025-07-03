@@ -29,6 +29,7 @@ import AvailableLogsComponent from "./components/AdminAccountComponent/Available
 import LogDetailsPage from "./components/dashboard/LogDetailsPage";
 import LogDetailsPageComponent from "./components/AdminAccountComponent/LogDetailsPageComponent";
 import AddNewLogComponent from "./components/AdminAccountComponent/AddNewLogComponent";
+import AllLogsViewComponent from "./components/AdminAccountComponent/AllLogsViewComponent";
 
 function App() {
   return (
@@ -66,14 +67,39 @@ function App() {
         <Route path="/log-details" element={<LogDetails />} />
         {/* Public route: Admin Login */}
 
+
         <Route path="/admin/login" element={<AdminLogin />} />
+
+        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
+        <Route path="/logs/all" element={<AllLogsViewComponent />} />
+
+        <Route path="/admin" element={<SuperAdminProtectedRoute />}>
+          <Route index element={<AdminDashboardComponent />} />
+          <Route path="dashboard" element={<AdminDashboardComponent />} />
+          <Route path="logs" element={<AvailableLogsComponent />} />
+          <Route path="logs/:category" element={<LogDetailsPageComponent />} />
+          <Route path="add-logs" element={<AddNewLogComponent />} />
+        </Route>
+
+
+
+
+
+
+        {/* <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
+        <Route path="/admin/logs" element={<AvailableLogsComponent />} />
+        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
+        <Route path="/admin/add-logs" element={<AddNewLogComponent />} />
+        <Route path="/logs/all" element={<AllLogsViewComponent />} />
+
 
         <Route path="/admin" element={<SuperAdminProtectedRoute />}>
           <Route index path="dashboard" element={<AdminDashboardComponent />} />
           <Route path="logs" element={<AvailableLogsComponent />} />
           <Route path="logs/:category" element={<LogDetailsPageComponent />} />
           <Route path="add-logs" element={<AddNewLogComponent />} />
-        </Route>
+        </Route> */}
 
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />

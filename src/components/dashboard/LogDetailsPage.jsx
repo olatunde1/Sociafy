@@ -92,7 +92,18 @@ const LogDetailsPage = () => {
             <h2 className="font-semibold text-lg">
               {sampleProducts[0].title} ({log?.count || 231})
             </h2>
-            <Button variant="ghost" className="text-[#7B36E7] bg-white px-4 py-2">
+           <Button
+              variant="ghost"
+              className="text-[#7B36E7] bg-white px-4 py-2"
+              onClick={() =>
+                navigate("/logs/all", {
+                  state: {
+                    title: sampleProducts[0].title,  
+                    logs: sampleProducts,         
+                  },
+                })
+              }
+            >
               View More
             </Button>
           </div>
@@ -152,7 +163,7 @@ const LogDetailsPage = () => {
 
       {/* Alert Confirmation */}
      <AlertDialog open={openAlert} onOpenChange={setOpenAlert}>
-  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogTrigger></AlertDialogTrigger>
 
   <AlertDialogContent className="sm:max-w-[446px] flex flex-col justify-center items-center text-center">
     <AlertDialogHeader className="w-full">

@@ -215,50 +215,120 @@ const navigate = useNavigate();
             &times; <span className="text-[16px] font-semibold">Close</span>
           </button>
         </div>
-        <div className="p-6 space-y-6">
-          <div>
-            <h2 className="text-xl font-semibold text-[#351A60] mb-1">Add New Category</h2>
-            <p className="text-sm text-gray-500">Fill in the details below to add a new category.</p>
-          </div>
+      <div className="p-6 space-y-6">
+  <div>
+    <h2 className="text-xl font-semibold text-[#351A60] mb-1">Add New Category</h2>
+    <p className="text-sm text-gray-500">Fill in the details below to add a new category.</p>
+  </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name of Category</label>
-            <input
-              type="text"
-              placeholder="Enter the category name here"
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
-            />
-          </div>
+  {/* Upload Section */}
+  <div className="border-dashed border-2 border-[#949494] bg-white p-6 rounded-lg text-center">
+    <label
+      htmlFor="fileUpload"
+      className="cursor-pointer block text-[#515151] hover:text-[#351A60]"
+    >
+     <div className="flex flex-col items-center justify-center gap-4">
+  {/* Logo */}
+  <img
+    src="/logo.png" // Replace with your local logo path or import if needed
+    alt="App Logo"
+    className="w-16 h-16 object-contain"
+  />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Sub-Categories</label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Enter sub-category"
-                className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
-              />
-              <button className="px-4 py-2 border-2 border-[#7B36E7] text-[#7B36E7] font-bold text-sm rounded-md hover:bg-[#4c1f8a] hover:text-white transition-all">
-                Add Sub
-              </button>
-            </div>
-          </div>
+  {/* Icons with Stroke */}
+  <div className="flex items-center justify-center gap-6">
+    {/* Edit Icon */}
+    <button
+      type="button"
+      className="text-[#351A60] hover:text-[#622BB9] transition"
+      title="Edit"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-6 h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536M9 11l6 6M3 21h6l12-12a2.828 2.828 0 00-4-4L5 17v4z" />
+      </svg>
+    </button>
 
-          <div className="space-y-2">
-            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇺🇸 USA Standard FB</div>
-            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇩🇪 Germany Standard FB</div>
-            <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇮🇳 India Standard FB</div>
-          </div>
+    {/* Divider */}
+    <div className="w-px h-6 bg-gray-300" />
 
-          <div className="pt-4 flex justify-end">
-            <button
-              type="button"
-              className="px-6 py-3 rounded-md bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium"
-            >
-              Add Category
-            </button>
-          </div>
-        </div>
+    {/* Delete Icon */}
+    <button
+      type="button"
+      className="text-red-600 hover:text-red-800 transition"
+      title="Delete"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-6 h-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+      <input
+        id="fileUpload"
+        type="file"
+        accept=".xlsx"
+        className="hidden"
+        onChange={(e) => console.log("Selected file:", e.target.files[0])}
+      />
+    </label>
+  </div>
+
+  {/* Name of Category */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">Name of Category</label>
+    <input
+      type="text"
+      placeholder="Enter the category name here"
+      className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
+    />
+  </div>
+
+  {/* Sub-Categories */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">Sub-Categories</label>
+    <div className="flex gap-2">
+      <input
+        type="text"
+        placeholder="Enter sub-category"
+        className="flex-1 border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-[#622BB9] focus:border-[#622BB9]"
+      />
+      <button className="px-4 py-2 border-2 border-[#7B36E7] text-[#7B36E7] font-bold text-sm rounded-md hover:bg-[#4c1f8a] hover:text-white transition-all">
+        Add Sub
+      </button>
+    </div>
+  </div>
+
+  {/* Preview Sub-Categories */}
+  <div className="space-y-2">
+    <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇺🇸 USA Standard FB</div>
+    <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇩🇪 Germany Standard FB</div>
+    <div className="bg-[#F5F5F5] px-4 py-2 rounded-md text-sm">🇮🇳 India Standard FB</div>
+  </div>
+
+  {/* Submit Button */}
+  <div className="pt-4 flex justify-end">
+    <button
+      type="button"
+      className="px-6 py-3 rounded-md bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium"
+    >
+      Add Category
+    </button>
+  </div>
+</div>
+
       </div>
     </div>
   );
