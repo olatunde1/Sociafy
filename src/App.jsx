@@ -72,7 +72,7 @@ function App() {
           <Route index path="dashboard" element={<AdminDashboardComponent />} />
           <Route path="logs" element={<AvailableLogsComponent />} />
           <Route path="logs/:category" element={<LogDetailsPageComponent />} />
-          <Route path="/add-logs" element={<AddNewLogComponent />} />
+          <Route path="add-logs" element={<AddNewLogComponent />} />
         </Route>
 
         <Route path="/" element={<AdminProtectedRoute />}>
