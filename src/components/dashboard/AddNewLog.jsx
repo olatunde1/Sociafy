@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/select";
 import { X } from "lucide-react";
 import upload from "../../assets/images/upload.png";
-import useSingleFileUpload from "@/hooks/api/mutation/logs/UploadFile";
+import useSingleFileUpload from "@/hooks/api/mutation/newLogs/UploadFile";
 import { toast } from "sonner";
 
 const AddNewLog = () => {
