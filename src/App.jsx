@@ -18,7 +18,10 @@ import BuyAccountPage from "./components/pages/BuyAccountPage";
 import LogPurchasedSuccessful from "./components/pages/LogPurchasedSuccessful";
 import LogDetails from "./components/pages/LogDetails";
 import FundWalletSuccessful from "./components/pages/FundWalletSuccessful";
-import AdminDashboardProtectedRoute, { AdminProtectedRoute } from "./utils/ProtectedRoute";
+import AdminDashboardProtectedRoute, {
+  AdminProtectedRoute,
+  SuperAdminProtectedRoute,
+} from "./utils/ProtectedRoute";
 import AdminLogin from "./components/dashboard/AdminLogin";
 import AdminDashBoard from "./components/dashboard/AdminDashboard";
 import AdminDashboardComponent from "./components/AdminAccountComponent/AdminDashboardComponent";
@@ -62,15 +65,16 @@ function App() {
           element={<LogPurchasedSuccessful />}
         />
         <Route path="/log-details" element={<LogDetails />} />
-          {/* Public route: Admin Login */}
+        {/* Public route: Admin Login */}
 
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
-        <Route path="/admin/logs" element={<AvailableLogsComponent />} />
-        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
-        <Route path="/admin/add-logs" element={<AddNewLogComponent />} />
-        <Route path="/logs/all" element={<AllLogsViewComponent />} />
 
+        <Route path="/admin" element={<SuperAdminProtectedRoute />}>
+          <Route index path="dashboard" element={<AdminDashboardComponent />} />
+          <Route path="logs" element={<AvailableLogsComponent />} />
+          <Route path="logs/:category" element={<LogDetailsPageComponent />} />
+          <Route path="add-logs" element={<AddNewLogComponent />} />
+        </Route>
 
         <Route path="/" element={<AdminProtectedRoute />}>
           <Route index path="/dashboard" element={<MyPurchaseComponent />} />
