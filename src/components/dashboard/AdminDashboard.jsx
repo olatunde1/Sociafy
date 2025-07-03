@@ -21,22 +21,22 @@ const AdminDashBoard = () => {
     image: Castine,
   };
 
-  const menuItems = [
-    { name: "Overview", path: "/admin-dashboard" },
-    {
-      name: "Social Logs",
-      iconSrc: FaBox,
-      submenu: [
-        { name: "All Logs", path: "/admin/logs" },
-        { name: "Add New Logs", path: "/admin/add-logs" },
-      ],
-    },
-    { name: "Orders", path: "/admin/orders" },
-    { name: "User Management", path: "/admin/users" },
-    { name: "Wallet Management", path: "/admin/wallet" },
-    { name: "Report & Analytics", path: "/admin/reports" },
-    { name: "Log Out", path: "/" },
-  ];
+  // const menuItems = [
+  //   { name: "Overview", path: "/admin-dashboard" },
+  //   {
+  //     name: "Social Logs",
+  //     iconSrc: FaBox,
+  //     submenu: [
+  //       { name: "All Logs", path: "/admin/logs" },
+  //       { name: "Add New Logs", path: "/admin/add-logs" },
+  //     ],
+  //   },
+  //   { name: "Orders", path: "/admin/orders" },
+  //   { name: "User Management", path: "/admin/users" },
+  //   { name: "Wallet Management", path: "/admin/wallet" },
+  //   { name: "Report & Analytics", path: "/admin/reports" },
+  //   { name: "Log Out", path: "/" },
+  // ];
 
 
  const recentPurchases = [

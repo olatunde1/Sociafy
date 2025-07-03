@@ -5,6 +5,7 @@ import { FaBox } from "react-icons/fa6";
 import AdminLogo from "../../assets/images/logo.png"; // Adjust the path as necessary
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
+// import Navbar from "../Header/Navbar";
 
 const AdminAccountSidebar = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const AdminAccountSidebar = () => {
   };
 
   const menuItems = [
-    { name: "Overview", path: "/admin-dashboard" },
+    { name: "Overview", path: "/admin" },
     {
       name: "Social Logs",
       iconSrc: FaBox,
@@ -49,7 +50,8 @@ const AdminAccountSidebar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <aside className="w-64 bg-[#fffff] text-[#515151] h-screen p-6 space-y-6 shadow-md">
+   <>
+     <aside className="w-64 bg-[#fffff] text-[#515151] h-screen p-6 space-y-6 shadow-md">
       <h2 className="text-2xl font-bold mb-4">
         <img src={AdminLogo} alt="Admin Panel Logo" />
       </h2>
@@ -101,6 +103,8 @@ const AdminAccountSidebar = () => {
         ))}
       </ul>
     </aside>
+    {/* <Navbar onAddLog={() => setShowAddLog(true)} /> */}
+   </>
   );
 };
 
