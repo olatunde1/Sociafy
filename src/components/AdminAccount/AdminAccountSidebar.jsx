@@ -28,7 +28,7 @@ const AdminAccountSidebar = () => {
       ],
     },
     { name: "Orders", path: "/admin/orders" },
-    { name: "User Management", path: "/admin/users" },
+    { name: "User Management", path: "/admin/users-admin" },
     { name: "Wallet Management", path: "/admin/wallet" },
     { name: "Report & Analytics", path: "/admin/reports" },
     { name: "Log Out", path: "/" },

@@ -30,6 +30,8 @@ import LogDetailsPage from "./components/dashboard/LogDetailsPage";
 import LogDetailsPageComponent from "./components/AdminAccountComponent/LogDetailsPageComponent";
 import AddNewLogComponent from "./components/AdminAccountComponent/AddNewLogComponent";
 import AllLogsViewComponent from "./components/AdminAccountComponent/AllLogsViewComponent";
+import AdminOrdersComponent from "./components/AdminAccountComponent/adminOrdersComponent";
+import UserManagementComponent from "./components/AdminAccountComponent/UserManagementComponent";
 
 function App() {
   return (
@@ -79,6 +81,9 @@ function App() {
           <Route path="logs" element={<AvailableLogsComponent />} />
           <Route path="logs/:category" element={<LogDetailsPageComponent />} />
           <Route path="add-logs" element={<AddNewLogComponent />} />
+          <Route path="orders" element={<AdminOrdersComponent />} />
+          <Route path="users-admin" element={<UserManagementComponent />} />
+
         </Route>
 
 
