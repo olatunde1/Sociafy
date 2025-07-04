@@ -6,7 +6,6 @@ import { FaUserCircle } from "react-icons/fa";
 import Edit from '../../assets/images/edit.png'
 import Trash from '../../assets/images/trash.png'
 
-import Castine from "../../assets/images/castine.png";
 import FacebookAdmin from "../../assets/images/admin-facebook.png";
 import InstagramAdmin from "../../assets/images/admin-instagram.png";
 import TikTokAdmin from "../../assets/images/admin-tiktok.png";
@@ -15,6 +14,7 @@ import TwitterAdmin from "../../assets/images/admin-twitter.png";
 import PIA_VPNAdmin from "../../assets/images/admin-pia.png";
 import Google_VoiceAdmin from "../../assets/images/admin-google-voice.png";
 import BackgroundImage from "../../assets/images/background-image.png";
+import Navbar from "../Header/Navbar";
 
 const logCategories = [
   { name: "Facebook", image: FacebookAdmin, count: 2134 },
@@ -26,16 +26,9 @@ const logCategories = [
   { name: "Google Voice", image: Google_VoiceAdmin, count: 2134 },
 ];
 
-const AvailableLogs = () => {
+const AvailableLogs = (dashBoardUser) => {
   const navigate = useNavigate();
 
-  const user = {
-    name: "Castine",
-    email: "castiin@sociafy.com",
-    balance: "NGN 179,000",
-    add: "Add New Log",
-    image: Castine,
-  };
 
   const [activeMenu, setActiveMenu] = useState(null);
   const [logToDelete, setLogToDelete] = useState(null);
@@ -66,26 +59,7 @@ const AvailableLogs = () => {
       {/* Main Content */}
       <div className={`${showAddLog || logToDelete ? "blur-sm pointer-events-none select-none" : ""}`}>
         {/* Header */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-4">
-            {user.image ? (
-              <img src={user.image} alt="User" className="w-14 h-14 rounded-full object-cover" />
-            ) : (
-              <FaUserCircle className="text-gray-400 w-14 h-14" />
-            )}
-            <div>
-              <h2 className="text-xl font-bold">Welcome, {user.name}</h2>
-              <p className="text-sm text-gray-500">{user.email}</p>
-            </div>
-          </div>
-
-          <button
-            onClick={() => setShowAddLog(true)}
-            className="rounded-lg px-6 py-3 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white font-medium hover:opacity-90 transition-all"
-          >
-            {user.add}
-          </button>
-        </div>
+          <Navbar user={dashBoardUser} />
 
         {/* Logs */}
         <div className="bg-white py-6 mb-8">
