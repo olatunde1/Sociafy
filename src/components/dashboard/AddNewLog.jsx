@@ -12,6 +12,7 @@ import { X } from "lucide-react";
 import upload from "../../assets/images/upload.png";
 import useSingleFileUpload from "@/hooks/api/mutation/newLogs/UploadFile";
 import { toast } from "sonner";
+import useGetCategory from "@/hooks/api/queries/super-admin/category/GetCategory";
 
 const AddNewLog = () => {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ const AddNewLog = () => {
   const [category, setCategory] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  const { mutate, isLoading } = useSingleFileUpload();
+  const { data, isPending } = useGetCategory();
+  const { mutate, isPending: isLoading } = useSingleFileUpload();
 
   const handleFileChange = (e) => {
     const selected = e.target.files?.[0];
@@ -38,7 +40,7 @@ const AddNewLog = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("category", category); // if backend expects this
+    formData.append("categoryName", category); // if backend expects this
 
     setUploading(true);
 
@@ -135,18 +137,29 @@ const AddNewLog = () => {
             <label className="block mb-4 text-sm font-medium text-gray-700">
               Category
             </label>
-            <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="w-full sm:w-[640px] py-[22.5px] bg-white">
-                <SelectValue placeholder="Select category" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="usa-standard">USA 🇺🇸 Standard FB</SelectItem>
+            {isPending ? (
+              <p className="text-sm text-gray-500 mb-4">
+                Loading categories...
+              </p>
+            ) : (
+              <Select value={category} onValueChange={setCategory}>
+                <SelectTrigger className="w-full sm:w-[640px] py-[22.5px] bg-white">
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {data?.data?.result?.map((cat) => (
+                    <SelectItem key={cat._id} value={cat.name}>
+                      {cat?.name}
+                    </SelectItem>
+                  ))}
+                  {/* <SelectItem value="usa-standard">USA 🇺🇸 Standard FB</SelectItem>
                 <SelectItem value="uk-standard">UK 🇬🇧 Standard FB</SelectItem>
                 <SelectItem value="nigeria-premium">
                   Nigeria 🇳🇬 Premium
-                </SelectItem>
-              </SelectContent>
-            </Select>
+                </SelectItem> */}
+                </SelectContent>
+              </Select>
+            )}
           </div>
 
           {file && (
