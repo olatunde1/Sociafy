@@ -61,11 +61,13 @@ const AddNewLog = () => {
           setCategory("");
           setProgress(0);
           setUploading(false);
+          navigate(-1);
         },
         onError: (error) => {
-          toast.error("Upload Failed!");
+          toast.error(error?.response?.data?.message || "Upload Failed!");
           console.error(error);
           setUploading(false);
+          navigate(-1);
         },
       }
     );

@@ -9,7 +9,7 @@ const AddCategory = ({ formData }) => {
   });
 };
 const EditCategory = ({ formData, id }) => {
-  return axiosInstance.post(`/admin/edit/category/${id}`, formData, {
+  return axiosInstance.put(`/admin/edit/category/${id}`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
     },
