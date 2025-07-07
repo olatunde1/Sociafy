@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaBars, FaTimes } from "react-icons/fa";
 import { FaBox } from "react-icons/fa6";
-import AdminLogo from "../../assets/images/logo.png"; // Adjust the path as necessary
+import AdminLogo from "../../assets/images/logo.png";
 import { useAuthStore } from "@/store/authStore";
 import { toast } from "sonner";
-// import Navbar from "../Header/Navbar";
 
 const AdminAccountSidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [openMenus, setOpenMenus] = useState({});
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const { logout } = useAuthStore();
 
   const toggleMenu = (name) => {
     setOpenMenus((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -34,8 +34,6 @@ const AdminAccountSidebar = () => {
     { name: "Log Out", path: "/" },
   ];
 
-  const { logout } = useAuthStore();
-
   const handleNavigate = (item) => {
     if (item.name === "Log Out") {
       localStorage.removeItem("admin-auth");
@@ -44,67 +42,86 @@ const AdminAccountSidebar = () => {
       navigate("/admin/login");
     } else {
       navigate(item.path);
+      setMobileSidebarOpen(false);
     }
   };
 
   const isActive = (path) => location.pathname === path;
 
   return (
-   <>
-     <aside className="w-64 bg-[#fffff] text-[#515151] h-screen p-6 space-y-6 shadow-md">
-      <h2 className="text-2xl font-bold mb-4">
-        <img src={AdminLogo} alt="Admin Panel Logo" />
-      </h2>
-      <ul className="space-y-2">
-        {menuItems.map((item, index) => (
-          <li key={index}>
-            {!item.submenu ? (
-              <button
-                onClick={() => handleNavigate(item)}
-                className={`w-full text-left px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold ${
-                  isActive(item.path) ? "text-[#7B36E7] font-bold" : ""
-                }`}
-              >
-                {item.name}
-              </button>
-            ) : (
-              <div>
+    <>
+      {/* Mobile Toggle Button (Top Left) */}
+      <button 
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white shadow-md"
+        onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+      >
+        {mobileSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+      </button>
+
+      {/* Sidebar */}
+      <aside className={`${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 w-64 bg-white text-[#515151] h-screen p-6 space-y-6 shadow-md transition-transform duration-300 ease-in-out z-40`}>
+        {/* Logo - Hidden on mobile, visible on desktop */}
+        <h2 className="text-2xl font-bold mb-4 hidden lg:block">
+          <img src={AdminLogo} alt="Admin Panel Logo" />
+        </h2>
+        
+        <ul className="space-y-2">
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              {!item.submenu ? (
                 <button
-                  onClick={() => toggleMenu(item.name)}
-                  className="w-full flex justify-between items-center px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold"
+                  onClick={() => handleNavigate(item)}
+                  className={`w-full text-left px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold ${
+                    isActive(item.path) ? "text-[#7B36E7] font-bold" : ""
+                  }`}
                 >
-                  <span className="flex items-center gap-2">
-                    {item.iconSrc && <item.iconSrc />}
-                    {item.name}
-                  </span>
-                  {openMenus[item.name] ? <FaChevronUp /> : <FaChevronDown />}
+                  {item.name}
                 </button>
-                {openMenus[item.name] && (
-                  <ul className="pl-6 mt-1 space-y-1">
-                    {item.submenu.map((sub, subIdx) => (
-                      <li key={subIdx}>
-                        <button
-                          onClick={() => handleNavigate(sub)}
-                          className={`w-full text-left px-2 py-1 text-sm rounded hover:text-[#7B36E7] hover:font-bold ${
-                            isActive(sub.path)
-                              ? "hover:text-[#7B36E7] hover:font-bold"
-                              : ""
-                          }`}
-                        >
-                          {sub.name}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    </aside>
-    {/* <Navbar onAddLog={() => setShowAddLog(true)} /> */}
-   </>
+              ) : (
+                <div>
+                  <button
+                    onClick={() => toggleMenu(item.name)}
+                    className="w-full flex justify-between items-center px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold"
+                  >
+                    <span className="flex items-center gap-2">
+                      {item.iconSrc && <item.iconSrc />}
+                      {item.name}
+                    </span>
+                    {openMenus[item.name] ? <FaChevronUp /> : <FaChevronDown />}
+                  </button>
+                  {openMenus[item.name] && (
+                    <ul className="pl-6 mt-1 space-y-1">
+                      {item.submenu.map((sub, subIdx) => (
+                        <li key={subIdx}>
+                          <button
+                            onClick={() => handleNavigate(sub)}
+                            className={`w-full text-left px-2 py-1 text-sm rounded hover:text-[#7B36E7] hover:font-bold ${
+                              isActive(sub.path)
+                                ? "text-[#7B36E7] font-bold"
+                                : ""
+                            }`}
+                          >
+                            {sub.name}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      {/* Overlay for mobile (click to close sidebar) */}
+      {mobileSidebarOpen && (
+        <div 
+          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+    </>
   );
 };
 

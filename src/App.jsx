@@ -32,6 +32,8 @@ import AddNewLogComponent from "./components/AdminAccountComponent/AddNewLogComp
 import AllLogsViewComponent from "./components/AdminAccountComponent/AllLogsViewComponent";
 import AdminOrdersComponent from "./components/AdminAccountComponent/adminOrdersComponent";
 import UserManagementComponent from "./components/AdminAccountComponent/UserManagementComponent";
+import AdminWalletManagementPage from "./components/dashboard/AdminWalletManagementPage";
+import UserInfoPage from "./components/dashboard/UserInfoPage";
 
 function App() {
   return (
@@ -83,6 +85,8 @@ function App() {
           <Route path="add-logs" element={<AddNewLogComponent />} />
           <Route path="orders" element={<AdminOrdersComponent />} />
           <Route path="users-admin" element={<UserManagementComponent />} />
+          <Route path="wallet" element={<AdminWalletManagementPage />} />
+          <Route path="user-info" element={<UserInfoPage />} />
 
         </Route>
 
