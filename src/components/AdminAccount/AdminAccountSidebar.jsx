@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { FaChevronDown, FaChevronUp, FaBars, FaTimes } from "react-icons/fa";
 import { FaBox } from "react-icons/fa6";
 import AdminLogo from "../../assets/images/logo.png";
@@ -62,7 +62,9 @@ const AdminAccountSidebar = () => {
       <aside className={`${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 w-64 bg-white text-[#515151] h-screen p-6 space-y-6 shadow-md transition-transform duration-300 ease-in-out z-40`}>
         {/* Logo - Hidden on mobile, visible on desktop */}
         <h2 className="text-2xl font-bold mb-4 hidden lg:block">
-          <img src={AdminLogo} alt="Admin Panel Logo" />
+          <Link to="/admin">
+            <img src={AdminLogo} alt="Admin Panel Logo" />
+          </Link>
         </h2>
         
         <ul className="space-y-2">
