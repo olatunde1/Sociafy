@@ -33,8 +33,6 @@ const fundingTrendData = [
   { month: "Dec", funding: 75, spending: 48 },
 ];
 
-const walletFundings = [/* paste the fundings array you already have here */];
-
 const AdminWalletManagementPage = ({ data = RecentWalletFunding }) => {
   const maxValue = Math.max(
     ...fundingTrendData.map(item => Math.max(item.funding, item.spending))

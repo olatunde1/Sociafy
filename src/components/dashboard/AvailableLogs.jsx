@@ -107,26 +107,6 @@ const AvailableLogs = (dashBoardUser) => {
     } else {
       mutate({ formData }, { onSuccess, onError });
     }
-
-    // mutate(
-    //   { formData },
-    //   {
-    //     onSuccess: () => {
-    //       toast.success(
-    //         `Category ${currentEditCategory ? "updated" : "added"}!`
-    //       );
-    //       setCategoryName("");
-    //       setSubCategories([]);
-    //       setFile(null);
-    //       setImagePreview(null);
-    //       setShowAddLog(false);
-    //       setCurrentEditCategory(null);
-    //     },
-    //     onError: () => {
-    //       toast.error("Something went wrong.");
-    //     },
-    //   }
-    // );
   };
 
   const getSubCategoryCount = (subs) => {

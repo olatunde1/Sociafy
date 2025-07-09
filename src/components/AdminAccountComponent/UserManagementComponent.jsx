@@ -170,7 +170,7 @@ const UserManagementComponent = () => {
                                 onClick={() => navigate("/admin/user-info", { state: { user } })}
                                 className="px-3 py-2 text-left hover:bg-gray-100 rounded"
                               >
-                                Modify
+                                View
                               </button>
                               <button
                                 onClick={() => console.log("Suspend clicked")}

@@ -146,8 +146,6 @@ const AdminLogin = () => {
           >
             {isPending ? "loading..." : "Login"}
           </button>
-
-          {/* <Link to="/" className="text-sm text-blue-500 text-center mt-2">← Back to home</Link> */}
         </form>
       </div>
     </div>
