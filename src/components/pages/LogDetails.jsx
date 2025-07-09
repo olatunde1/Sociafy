@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 export default function LogDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
+  //  const log = state?.log;
 
   if (!state) return <div className="p-8">No data available.</div>;
 

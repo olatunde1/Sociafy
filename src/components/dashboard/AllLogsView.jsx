@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "../Header/Navbar";
+import LogDetails from "../pages/LogDetails";
 
 const AllLogsView = () => {
   const navigate = useNavigate();
@@ -53,13 +54,14 @@ const AllLogsView = () => {
           <p className="hidden sm:block font-medium">{log.amount}</p>
           <div className="flex justify-end sm:justify-start">
             <Button
-              variant="outline"
-              size="sm"
-              className="text-xs sm:text-sm px-3 py-1 font-medium text-[#351A60] border-[#351A60] hover:bg-[#351A60] hover:text-white"
-              onClick={() => alert(`${log.age} | ${log.friends}`)}
-            >
-              View Info
-            </Button>
+                variant="outline"
+                size="sm"
+                className="text-xs sm:text-sm px-3 py-1 font-medium text-[#351A60] border-[#351A60] hover:bg-[#351A60] hover:text-white"
+                onClick={() => navigate("/admin/log-details", { state: { log } })}
+              >
+                View Info
+              </Button>
+
           </div>
         </div>
       ))}
