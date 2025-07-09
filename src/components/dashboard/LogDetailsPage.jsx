@@ -18,14 +18,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import Navbar from "../Header/Navbar";
-
-const sampleProducts = [
-  { title: "USA 🇺🇸 Standard FB", age: "Less than 1 year", friends: "500+", amount: "₦30,000" },
-  { title: "USA 🇺🇸 Standard FB", age: "8 years", friends: "100+", amount: "₦24,000" },
-  { title: "USA 🇺🇸 Standard FB", age: "2 years", friends: "1,000+", amount: "₦16,000" },
-  { title: "USA 🇺🇸 Standard FB", age: "1 year", friends: "------", amount: "₦25,000" },
-  { title: "USA 🇺🇸 Standard FB", age: "8 years", friends: "1,500+", amount: "₦19,000" },
-];
+import getAdminLogs from "@/hooks/api/queries/super-admin/adminLogs/getAdminLogs";
+import Loader from "../Loader";
 
 const LogDetailsPage = () => {
   const [openAlert, setOpenAlert] = useState(false);
@@ -33,17 +27,29 @@ const LogDetailsPage = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const log = state?.log;
+  const { data, isPending } = getAdminLogs({ category });
+  const logs = data?.data?.result || [];
+
   const readableCategory = category.replace(/-/g, " ");
+
+  // Group logs by subcategory
+  const groupedLogs = logs.reduce((acc, log) => {
+    const key = log.subcategory || "others";
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(log);
+    return acc;
+  }, {});
+
+  console.log(groupedLogs, "groupedLogs");
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 xl:px-12 font-custom">
       {/* Header */}
       <Navbar />
-      
-      {/* Breadcrumb Navigation */}
+
+      {/* Breadcrumb */}
       <div className="flex items-center mb-4 sm:mb-6">
-        <button 
+        <button
           onClick={() => navigate(-1)}
           className="text-sm text-gray-500 hover:text-[#351A60] flex items-center"
         >
@@ -55,88 +61,94 @@ const LogDetailsPage = () => {
         </span>
       </div>
 
-      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-        {log?.name || readableCategory}
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 capitalize">
+        {state?.log?.name || readableCategory}
       </h1>
 
-      {/* Log Sections */}
-      {[1, 2, 3].map((_, idx) => (
-        <div key={idx} className="mb-8 sm:mb-10">
-          {/* Section Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-[#2B1351] text-white p-3 sm:p-4 rounded-t-md">
-            <h2 className="font-semibold text-base sm:text-lg mb-2 sm:mb-0">
-              {sampleProducts[0].title} ({log?.count || 231})
-            </h2>
-            <Button
-              variant="ghost"
-              className="text-[#7B36E7] bg-white px-3 py-1 sm:px-4 sm:py-2 text-sm sm:text-base"
-              onClick={() =>
-                navigate("/logs/all", {
-                  state: {
-                    title: sampleProducts[0].title,  
-                    logs: sampleProducts,         
-                  },
-                })
-              }
-            >
-              View More
-            </Button>
-          </div>
-
-          {/* Table Headers - Mobile shows only essential columns */}
-          <div className="hidden sm:grid sm:grid-cols-5 gap-4 bg-[#EDF2F7] font-semibold text-sm text-gray-500 py-3 px-4 border-b">
-            <p>Product</p>
-            <p>Age</p>
-            <p>Friends</p>
-            <p>Amount</p>
-            <p>Action</p>
-          </div>
-
-          {/* Product List */}
-          {sampleProducts.map((product, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-4 items-center text-sm py-3 px-2 sm:px-4 border-b"
-            >
-              <p className="font-medium truncate">{product.title}</p>
-              <p className="text-center sm:text-left">{product.age}</p>
-              <p className="hidden sm:block">{product.friends}</p>
-              <p className="hidden sm:block font-medium">{product.amount}</p>
-              <div className="flex justify-end sm:justify-start">
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <button className="text-lg font-extrabold text-black hover:text-black focus:outline-none">
-                      <span className="sr-only">Actions</span>...
-                    </button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    side="bottom"
-                    align="end"
-                    className="w-[150px] p-2 bg-white shadow-lg rounded-md z-50"
-                  >
-                    <div className="flex flex-col gap-1 text-sm">
-                      <button
-                        onClick={() => console.log("Modify")}
-                        className="px-3 py-2 text-left hover:bg-gray-100 rounded"
-                      >
-                        Modify
-                      </button>
-                      <button
-                        onClick={() => setOpenAlert(true)}
-                        className="px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                  </PopoverContent>
-                </Popover>
-              </div>
+      {/* Loop over each subcategory */}
+      {isPending ? (
+        <Loader />
+      ) : logs.length === 0 ? (
+        <div className="text-center text-gray-500 py-12">No data available</div>
+      ) : (
+        Object.entries(groupedLogs).map(([subcat, products], idx) => (
+          <div key={idx} className="mb-8 sm:mb-10">
+            {/* Section Header */}
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-[#2B1351] text-white p-3 sm:p-4 rounded-t-md">
+              <h2 className="font-semibold text-base sm:text-lg mb-2 sm:mb-0 capitalize">
+                {readableCategory} {subcat} ({products.length})
+              </h2>
+              <Button
+                variant="ghost"
+                className="text-[#7B36E7] bg-white px-3 py-1 sm:px-4 sm:py-2 text-sm sm:text-base"
+                onClick={() =>
+                  navigate("/logs/all", {
+                    state: {
+                      title: `${readableCategory} ${subcat}`,
+                      logs: products,
+                    },
+                  })
+                }
+              >
+                View More
+              </Button>
             </div>
-          ))}
-        </div>
-      ))}
 
-      {/* Alert Confirmation Dialog */}
+            {/* Table Headers */}
+            <div className="hidden sm:grid sm:grid-cols-5 gap-4 bg-[#EDF2F7] font-semibold text-sm text-gray-500 py-3 px-4 border-b">
+              <p>Product</p>
+              <p>Price</p>
+              <p>2 FA</p>
+              <p>UserName</p>
+              <p>Action</p>
+            </div>
+
+            {/* Product Rows */}
+            {products.map((product, i) => (
+              <div
+                key={product._id || i}
+                className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-4 items-center text-sm py-3 px-2 sm:px-4 border-b"
+              >
+                <p className="font-medium truncate">{product.name}</p>
+                <p className="font-medium">₦{product.price.toLocaleString()}</p>
+                <p className="font-medium truncate">{product.twoFa}</p>
+                <p className="font-medium truncate">{product.username}</p>
+                <div className="flex justify-end sm:justify-start">
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <button className="text-lg font-extrabold text-black hover:text-black focus:outline-none">
+                        ...
+                      </button>
+                    </PopoverTrigger>
+                    <PopoverContent
+                      side="bottom"
+                      align="end"
+                      className="w-[150px] p-2 bg-white shadow-lg rounded-md z-50"
+                    >
+                      <div className="flex flex-col gap-1 text-sm">
+                        <button
+                          onClick={() => console.log("Modify", product)}
+                          className="px-3 py-2 text-left hover:bg-gray-100 rounded"
+                        >
+                          Modify
+                        </button>
+                        <button
+                          onClick={() => setOpenAlert(true)}
+                          className="px-3 py-2 text-left text-red-600 hover:bg-red-50 rounded"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))
+      )}
+
+      {/* Alert Dialog */}
       <AlertDialog open={openAlert} onOpenChange={setOpenAlert}>
         <AlertDialogTrigger></AlertDialogTrigger>
         <AlertDialogContent className="max-w-[90vw] sm:max-w-md rounded-lg">
