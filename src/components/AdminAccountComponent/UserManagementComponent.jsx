@@ -12,6 +12,7 @@ import {
 import Navbar from "../Header/Navbar";
 import { useNavigate } from "react-router-dom";
 import { getAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import Loader from "../Loader";
 
 // const users = [
 //   {
@@ -57,7 +58,7 @@ const UserManagementComponent = () => {
 
   const [filter, setFilter] = useState("all"); // "all", "active", "suspended"
 
-  const { data: usersData } = getAdminUsers();
+  const { data: usersData, isPending } = getAdminUsers();
   const users = usersData?.data?.result || [];
 
   const filteredUsers = useMemo(() => {
@@ -72,227 +73,239 @@ const UserManagementComponent = () => {
       <div className="p-4 md:p-6 space-y-6">
         <h1 className="text-xl md:text-2xl font-bold">User Management</h1>
 
-        <div className="flex flex-wrap gap-2">
-          <Badge
-            onClick={() => setFilter("all")}
-            className={`cursor-pointer ${
-              filter === "all"
-                ? "bg-gray-800 text-white"
-                : "bg-gray-100 text-gray-800"
-            }`}
-          >
-            All Users ({users.length})
-          </Badge>
-          <Badge
-            onClick={() => setFilter("active")}
-            className={`cursor-pointer ${
-              filter === "active"
-                ? "bg-green-700 text-white"
-                : "bg-green-100 text-green-700"
-            }`}
-          >
-            Active ({users.filter((u) => !u.suspended).length})
-          </Badge>
-          <Badge
-            onClick={() => setFilter("suspended")}
-            className={`cursor-pointer ${
-              filter === "suspended"
-                ? "bg-red-600 text-white"
-                : "bg-red-100 text-red-600"
-            }`}
-          >
-            Suspended ({users.filter((u) => u.suspended).length})
-          </Badge>
-        </div>
-
-        <Card>
-          <CardContent className="p-0">
-            {/* Mobile View */}
-            <div className="sm:hidden space-y-2 p-2">
-              {filteredUsers.length === 0 ? (
-                <p className="text-gray-500 text-sm">No users available.</p>
-              ) : (
-                filteredUsers.map((user, index) => (
-                  <Card key={index} className="p-3">
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-semibold">{user.username}</h3>
-                          <p className="text-xs text-gray-500">{user.email}</p>
-                        </div>
-                        <Badge
-                          className={
-                            user.suspended
-                              ? "bg-[#FF3D00] text-white"
-                              : "bg-[#12B64A] text-white"
-                          }
-                        >
-                          {user.suspended ? "Suspended" : "Active"}
-                        </Badge>
-                      </div>
-
-                      <div className="border-t pt-2">
-                        <p className="text-sm text-gray-500">
-                          Total Purchases: {user.totalPurchase || 0}
-                        </p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="text-xs text-gray-500">
-                            Signup:{" "}
-                            {new Date(user.createdAt).toLocaleDateString()}
-                          </p>
-                        </div>
-                        <Popover>
-                          <PopoverTrigger asChild>
-                            <Button variant="outline" size="sm">
-                              Actions
-                            </Button>
-                          </PopoverTrigger>
-                          <PopoverContent
-                            side="bottom"
-                            align="end"
-                            className="w-[150px] p-2 bg-white shadow-md rounded-md z-50"
-                          >
-                            <div className="flex flex-col gap-2 text-sm">
-                              <button
-                                onClick={() =>
-                                  navigate("/admin/user-info", {
-                                    state: { user },
-                                  })
-                                }
-                                className="px-3 py-2 text-left hover:bg-gray-100 rounded"
-                              >
-                                Modify
-                              </button>
-                              <button
-                                onClick={() => console.log("Suspend clicked")}
-                                className="px-3 py-2 text-left text-red-600 hover:bg-red-600 hover:text-white rounded"
-                              >
-                                Suspend
-                              </button>
-                            </div>
-                          </PopoverContent>
-                        </Popover>
-                      </div>
-                    </div>
-                  </Card>
-                ))
-              )}
+        {isPending ? (
+          <Loader />
+        ) : (
+          <>
+            <div className="flex flex-wrap gap-2">
+              <Badge
+                onClick={() => setFilter("all")}
+                className={`cursor-pointer ${
+                  filter === "all"
+                    ? "bg-gray-800 text-white"
+                    : "bg-gray-100 text-gray-800"
+                }`}
+              >
+                All Users ({users.length})
+              </Badge>
+              <Badge
+                onClick={() => setFilter("active")}
+                className={`cursor-pointer ${
+                  filter === "active"
+                    ? "bg-green-700 text-white"
+                    : "bg-green-100 text-green-700"
+                }`}
+              >
+                Active ({users.filter((u) => !u.suspended).length})
+              </Badge>
+              <Badge
+                onClick={() => setFilter("suspended")}
+                className={`cursor-pointer ${
+                  filter === "suspended"
+                    ? "bg-red-600 text-white"
+                    : "bg-red-100 text-red-600"
+                }`}
+              >
+                Suspended ({users.filter((u) => u.suspended).length})
+              </Badge>
             </div>
 
-            {/* Desktop View */}
-            <div className="hidden sm:block overflow-x-auto p-4">
-              <table className="min-w-full text-sm">
-                <thead className="bg-gray-100 text-left">
-                  <tr>
-                    <th className="p-3">User Name & Email</th>
-                    <th className="p-3">Last Purchased</th>
-                    <th className="p-3">Signup Date</th>
-                    <th className="p-3">Total Purchases</th>
-                    <th className="p-3">Status</th>
-                    <th className="p-3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
+            <Card>
+              <CardContent className="p-0">
+                {/* Mobile View */}
+                <div className="sm:hidden space-y-2 p-2">
                   {filteredUsers.length === 0 ? (
-                    <tr>
-                      <td
-                        colSpan={6}
-                        className="p-4 text-sm text-gray-500 text-center"
-                      >
-                        No users available.
-                      </td>
-                    </tr>
+                    <p className="text-gray-500 text-sm">No users available.</p>
                   ) : (
                     filteredUsers.map((user, index) => (
-                      <tr key={index} className="border-b hover:bg-gray-50">
-                        <td className="p-3">
-                          <div className="font-semibold text-gray-900">
-                            {user.username}
-                          </div>
-                          <div className="text-xs text-gray-500">
-                            {user.email}
-                          </div>
-                        </td>
-                        <td className="p-3">
-                          {new Date(user.lastPurchase).toLocaleDateString()}
-                        </td>
-                        <td className="p-3">
-                          {new Date(user.createdAt).toLocaleDateString()}
-                        </td>
-                        <td className="p-3">{user.totalPurchase || 0}</td>
-                        <td className="p-3">
-                          <Badge
-                            className={
-                              user.suspended
-                                ? "bg-[#FF3D00] text-white"
-                                : "bg-[#12B64A] text-white"
-                            }
-                          >
-                            {user.suspended ? "Suspended" : "Active"}
-                          </Badge>
-                        </td>
-                        <td className="p-3">
-                          <Popover>
-                            <PopoverTrigger asChild>
-                              <button className="text-lg font-extrabold text-black hover:text-black">
-                                ...
-                              </button>
-                            </PopoverTrigger>
-                            <PopoverContent
-                              side="bottom"
-                              align="center"
-                              className="w-[150px] p-2 bg-white shadow-md rounded-md z-50"
+                      <Card key={index} className="p-3">
+                        <div className="space-y-2">
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="font-semibold">{user.username}</h3>
+                              <p className="text-xs text-gray-500">
+                                {user.email}
+                              </p>
+                            </div>
+                            <Badge
+                              className={
+                                user.suspended
+                                  ? "bg-[#FF3D00] text-white"
+                                  : "bg-[#12B64A] text-white"
+                              }
                             >
-                              <div className="flex flex-col gap-2 text-sm">
-                                <button
-                                  onClick={() =>
-                                    navigate("/admin/user-info", {
-                                      state: { user },
-                                    })
-                                  }
-                                  className="px-3 py-2 text-left hover:bg-gray-100 rounded"
-                                >
-                                  Modify
-                                </button>
-                                <button
-                                  onClick={() => console.log("Suspend clicked")}
-                                  className="px-3 py-2 text-left text-red-600 hover:bg-red-600 hover:text-white rounded"
-                                >
-                                  Suspend
-                                </button>
-                              </div>
-                            </PopoverContent>
-                          </Popover>
-                        </td>
-                      </tr>
+                              {user.suspended ? "Suspended" : "Active"}
+                            </Badge>
+                          </div>
+
+                          <div className="border-t pt-2">
+                            <p className="text-sm text-gray-500">
+                              Total Purchases: {user.totalPurchase || 0}
+                            </p>
+                          </div>
+
+                          <div className="flex justify-between items-center">
+                            <div>
+                              <p className="text-xs text-gray-500">
+                                Signup:{" "}
+                                {new Date(user.createdAt).toLocaleDateString()}
+                              </p>
+                            </div>
+                            <Popover>
+                              <PopoverTrigger asChild>
+                                <Button variant="outline" size="sm">
+                                  Actions
+                                </Button>
+                              </PopoverTrigger>
+                              <PopoverContent
+                                side="bottom"
+                                align="end"
+                                className="w-[150px] p-2 bg-white shadow-md rounded-md z-50"
+                              >
+                                <div className="flex flex-col gap-2 text-sm">
+                                  <button
+                                    onClick={() =>
+                                      navigate("/admin/user-info", {
+                                        state: { user },
+                                      })
+                                    }
+                                    className="px-3 py-2 text-left hover:bg-gray-100 rounded"
+                                  >
+                                    Modify
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      console.log("Suspend clicked")
+                                    }
+                                    className="px-3 py-2 text-left text-red-600 hover:bg-red-600 hover:text-white rounded"
+                                  >
+                                    Suspend
+                                  </button>
+                                </div>
+                              </PopoverContent>
+                            </Popover>
+                          </div>
+                        </div>
+                      </Card>
                     ))
                   )}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+                </div>
 
-        <div className="flex justify-end gap-2">
-          <Button variant="outline" size="sm">
-            Previous
-          </Button>
-          <Button variant="default" size="sm">
-            1
-          </Button>
-          <Button variant="outline" size="sm">
-            2
-          </Button>
-          <Button variant="outline" size="sm">
-            3
-          </Button>
-          <Button variant="outline" size="sm">
-            Next
-          </Button>
-        </div>
+                {/* Desktop View */}
+                <div className="hidden sm:block overflow-x-auto p-4">
+                  <table className="min-w-full text-sm">
+                    <thead className="bg-gray-100 text-left">
+                      <tr>
+                        <th className="p-3">User Name & Email</th>
+                        <th className="p-3">Last Purchased</th>
+                        <th className="p-3">Signup Date</th>
+                        <th className="p-3">Total Purchases</th>
+                        <th className="p-3">Status</th>
+                        <th className="p-3">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredUsers.length === 0 ? (
+                        <tr>
+                          <td
+                            colSpan={6}
+                            className="p-4 text-sm text-gray-500 text-center"
+                          >
+                            No users available.
+                          </td>
+                        </tr>
+                      ) : (
+                        filteredUsers.map((user, index) => (
+                          <tr key={index} className="border-b hover:bg-gray-50">
+                            <td className="p-3">
+                              <div className="font-semibold text-gray-900">
+                                {user.username}
+                              </div>
+                              <div className="text-xs text-gray-500">
+                                {user.email}
+                              </div>
+                            </td>
+                            <td className="p-3">
+                              {new Date(user.lastPurchase).toLocaleDateString()}
+                            </td>
+                            <td className="p-3">
+                              {new Date(user.createdAt).toLocaleDateString()}
+                            </td>
+                            <td className="p-3">{user.totalPurchase || 0}</td>
+                            <td className="p-3">
+                              <Badge
+                                className={
+                                  user.suspended
+                                    ? "bg-[#FF3D00] text-white"
+                                    : "bg-[#12B64A] text-white"
+                                }
+                              >
+                                {user.suspended ? "Suspended" : "Active"}
+                              </Badge>
+                            </td>
+                            <td className="p-3">
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <button className="text-lg font-extrabold text-black hover:text-black">
+                                    ...
+                                  </button>
+                                </PopoverTrigger>
+                                <PopoverContent
+                                  side="bottom"
+                                  align="center"
+                                  className="w-[150px] p-2 bg-white shadow-md rounded-md z-50"
+                                >
+                                  <div className="flex flex-col gap-2 text-sm">
+                                    <button
+                                      onClick={() =>
+                                        navigate("/admin/user-info", {
+                                          state: { user },
+                                        })
+                                      }
+                                      className="px-3 py-2 text-left hover:bg-gray-100 rounded"
+                                    >
+                                      Modify
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        console.log("Suspend clicked")
+                                      }
+                                      className="px-3 py-2 text-left text-red-600 hover:bg-red-600 hover:text-white rounded"
+                                    >
+                                      Suspend
+                                    </button>
+                                  </div>
+                                </PopoverContent>
+                              </Popover>
+                            </td>
+                          </tr>
+                        ))
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" size="sm">
+                Previous
+              </Button>
+              <Button variant="default" size="sm">
+                1
+              </Button>
+              <Button variant="outline" size="sm">
+                2
+              </Button>
+              <Button variant="outline" size="sm">
+                3
+              </Button>
+              <Button variant="outline" size="sm">
+                Next
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </AdminAccountLayout>
   );
