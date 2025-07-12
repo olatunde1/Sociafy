@@ -5,9 +5,11 @@ import Castine from '../../assets/images/castine.png'
 import WalletIcon from '../../assets/images/wallet-logo.png'
 import FundWallet from '../../assets/images/fund-wallet.png'
 import { Link } from "react-router-dom";
+import FundWalletModal from "./FundWalletModal";
+import { Button } from "@/components/ui/button";
 
 export default function WalletPage() {
-
+  const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 const totalPages = 3; // Adjust this based on how many pages you have
 
@@ -185,14 +187,14 @@ const renderPageNumbers = () => {
           </div>
 
           {/* Fund Wallet Card */}
-          <Link to="/fund-wallet-successful">
+       
           <div className="bg-[#EBE1FB] rounded-2xl shadow flex flex-col items-start text-center  w-full md:w-[180px] ">
-            <img src={FundWallet} alt="fund-wallet" className="mx-12 mt-6 mb-3.5" />
-            <h3 className="text-lg font-semibold text-gray-700 px-10 ">
-              Fund Wallet
-            </h3>
+            <img  onClick={() => setOpen(true)} src={FundWallet} alt="fund-wallet" className="mx-12 mt-12 mb-3.5" />
+             {/* <Button onClick={() => setOpen(true)}>Fund Wallet</Button> */}
+              <FundWalletModal isOpen={open} onClose={() => setOpen(false)} />
           </div>
-          </Link>
+         
+          
           
         </div>
 

@@ -19,9 +19,9 @@ const AdminDashBoard = (dashBoardUser) => {
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4 mt-4 sm:mt-6 md:mt-8">
-        {/* Card 1 */}
-        <Card className="w-full">
-          <CardContent className="p-4 flex justify-between items-center gap-3">
+        {/* Total Revenue Card */}
+        <Card className="w-full h-full">
+          <CardContent className="p-4 flex justify-between items-center gap-4 h-full">
             <div className="flex-1">
               <p className="text-xs sm:text-sm text-gray-500">Total Revenue</p>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">₦759,000</h2>
@@ -30,13 +30,17 @@ const AdminDashBoard = (dashBoardUser) => {
                 <span className="text-xs sm:text-sm text-gray-500">since last month</span>
               </div>
             </div>
-            <img src={TotalRevenue} alt="Revenue" className="w-8 h-8 sm:w-10 sm:h-10" />
+            <img
+              src={TotalRevenue}
+              alt="Revenue"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+            />
           </CardContent>
         </Card>
 
-        {/* Card 2 */}
-        <Card className="w-full">
-          <CardContent className="p-4 flex justify-between items-center gap-3">
+        {/* Accounts Sold Card */}
+        <Card className="w-full h-full">
+          <CardContent className="p-4 flex justify-between items-center gap-4 h-full">
             <div className="flex-1">
               <p className="text-xs sm:text-sm text-gray-500">Accounts Sold</p>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">3,784</h2>
@@ -45,13 +49,17 @@ const AdminDashBoard = (dashBoardUser) => {
                 <span className="text-xs sm:text-sm text-gray-500">since last month</span>
               </div>
             </div>
-            <img src={TotalAccount} alt="Accounts" className="w-8 h-8 sm:w-10 sm:h-10" />
+            <img
+              src={TotalAccount}
+              alt="Accounts"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+            />
           </CardContent>
         </Card>
 
-        {/* Card 3 */}
-        <Card className="w-full">
-          <CardContent className="p-4 flex justify-between items-center gap-3">
+        {/* Total Users Card */}
+        <Card className="w-full h-full">
+          <CardContent className="p-4 flex justify-between items-center gap-4 h-full">
             <div className="flex-1">
               <p className="text-xs sm:text-sm text-gray-500">Total Users</p>
               <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mt-1">807</h2>
@@ -60,20 +68,24 @@ const AdminDashBoard = (dashBoardUser) => {
                 <span className="text-xs sm:text-sm text-gray-500">since last month</span>
               </div>
             </div>
-            <img src={TotalUser} alt="Users" className="w-8 h-8 sm:w-10 sm:h-10" />
+            <img
+              src={TotalUser}
+              alt="Users"
+              className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 object-contain"
+            />
           </CardContent>
         </Card>
       </div>
 
       {/* Tables Section */}
-      <div className="p-4 space-y-6 sm:space-y-8">
-        <div className="overflow-x-auto">
+      
+        <div className="overflow-x-auto mt-10">
           <RecentPurchaseTable data={RecentPurchases} />
         </div>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-10">
           <RecentWalletFundingTable data={RecentWalletFunding} />
         </div>
-      </div>
+    
     </div>
   );
 };

@@ -5,9 +5,11 @@ import WalletBalance from '../../assets/images/wallet-balance.png'
 import TotalOrder from '../../assets/images/total-order.png'
 import TotalDeposit from '../../assets/images/total-deposit.png'
 import SociafyCornerImage from '../../assets/images/socccialffy-corner.png'
+import { Button } from "../ui/button";
+import FundWalletModal from "./FundWalletModal";
 
 const UserDashBoard = () => {
-
+    const [open, setOpen] = useState(false);
      const [sidebarOpen, setSidebarOpen] = useState(false);
       const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
     
@@ -73,9 +75,8 @@ const UserDashBoard = () => {
                 {/* Amount and Button */}
                 <div className="flex items-center justify-between w-full mt-auto bg-black p-[22px] rounded-bl-2xl rounded-br-2xl text-white">
                     <p className="text-2xl font-bold">₦ 179,000</p>
-                    <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white px-4 py-2 rounded-lg whitespace-nowrap">
-                        Fund Wallet
-                    </button>
+                     <Button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white px-4 py-2 rounded-lg whitespace-nowrap" onClick={() => setOpen(true)}>Fund Wallet</Button> 
+                    <FundWalletModal isOpen={open} onClose={() => setOpen(false)} />
                 </div>
 
             </div>

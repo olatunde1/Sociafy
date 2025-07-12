@@ -32,7 +32,7 @@ const RecentPurchaseTable = () => {
       <CardContent className="p-0">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 border-b gap-2">
-          <h2 className="text-lg sm:text-xl font-bold">Recent Purchases</h2>
+          <h2 className="text-lg text-center sm:text-left sm:text-xl font-bold">Recent Purchases</h2>
           <Button
             variant="outline"
             size="sm"

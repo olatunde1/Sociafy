@@ -88,8 +88,16 @@ const UserInfoPage = () => {
           {/* User Details */}
           <Card
   className="relative bg-cover bg-center bg-no-repeat h-[240px] md:h-[280px] text-white rounded-xl shadow-xl overflow-hidden"
-  style={{ backgroundImage: `url(${CardBackground})` }}
->
+  style={{
+              backgroundImage: `url(${CardBackground})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              width: "100%",
+              height: "100%",
+              minHeight: "240px",
+            }}
+  >
   <CardContent
     className="absolute bottom-0 left-0 right-0 p-4 sm:pl-6 h-[160px] text-black bg-white"
   >
