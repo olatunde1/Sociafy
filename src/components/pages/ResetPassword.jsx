@@ -1,29 +1,68 @@
-import { useEffect } from "react";
-import { FaGoogle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import Logo from "../../assets/images/sociafy-login-icon-logo.png";
-import RightImage from "../../assets/images/sociafy-login.png";
-import GoogleLogo from '../../assets/images/google-logo.png'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useChangePassword } from "@/hooks/api/mutation/auth/changePassword";
+import { toast } from "sonner";
 
 export default function ResetPassword() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const navigate = useNavigate();
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { mutate, isPending } = useChangePassword();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+      toast.error("All fields are required.");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      toast.error("New password and confirmation do not match.");
+      return;
+    }
+
+    mutate(
+      {
+        oldPassword: currentPassword,
+        newPassword,
+        confirmPassword,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Password changed successfully!");
+          setCurrentPassword("");
+          setNewPassword("");
+          setConfirmPassword("");
+          navigate("/profile");
+        },
+        onError: (error) => {
+          toast.error(
+            error?.response?.data?.message || "Password change failed"
+          );
+          navigate("/profile");
+        },
+      }
+    );
+  };
+
   return (
     <div className="md:h-[1189px] h-full flex items-center justify-center bg-white px-4 md:px-0">
       <div className="w-full max-w-6xl flex flex-col md:flex-row overflow-hidden h-full">
-        
-        {/* Left Content */}
-        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center bg-[#000] h-full">
-          {/* You can add additional content or styling here if needed */}
-        </div>
+        <div className="w-full md:w-1/2 p-8 opacity-10 flex flex-col justify-center bg-[#000] h-full" />
 
-        {/* Right Content Section */}
         <div className="w-full md:w-1/2 p-8 flex flex-col bg-white h-full">
-          {/* Breadcrumb */}
-          <nav className="flex justify-between items-center text-sm mb-[61px]" aria-label="Breadcrumb">
+          <nav
+            className="flex justify-between items-center text-sm mb-[61px]"
+            aria-label="Breadcrumb"
+          >
             <ol className="list-reset flex items-center">
               <li>
                 <a href="./profile" className="hover:underline">
@@ -33,74 +72,80 @@ export default function ResetPassword() {
               <li>
                 <span className="mx-2 text-gray-500">/</span>
               </li>
-              <li className="text-gray-700 font-semibold">
-                Update Password
-              </li>
+              <li className="text-gray-700 font-semibold">Update Password</li>
             </ol>
             <Link to="/profile">
-                <button className="flex items-center text-gray-600 hover:text-gray-800">
+              <button className="flex items-center text-gray-600 hover:text-gray-800">
                 <FaTimes className="mr-1 rounded-md bg-[#515151] text-gray-800" />
                 <span>Close</span>
-                </button>
+              </button>
             </Link>
-           
           </nav>
 
-          {/* Title */}
           <h1 className="text-[20px] font-bold mb-10">Update your Password</h1>
 
-          {/* Form */}
-          <form className="space-y-6">
-            {/* Current Password */}
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-semibold mb-4" htmlFor="username">
+              <label
+                className="block text-sm font-semibold mb-4"
+                htmlFor="currentPassword"
+              >
                 Current Password
               </label>
               <input
-                type="text"
-                id="username"
+                type="password"
+                id="currentPassword"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="Enter your current password"
                 required
                 className="w-full border border-[#949494] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
               />
             </div>
 
-            {/* New Password Field */}
             <div>
-              <label className="block text-sm font-semibold mb-4" htmlFor="password">
+              <label
+                className="block text-sm font-semibold mb-4"
+                htmlFor="newPassword"
+              >
                 New Password
               </label>
               <input
                 type="password"
-                id="password"
+                id="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Create your password"
                 required
                 className="w-full border border-[#949494] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
               />
             </div>
-            {/* Confirm Password Field */}
+
             <div>
-              <label className="block text-sm font-semibold mb-4" htmlFor="password">
+              <label
+                className="block text-sm font-semibold mb-4"
+                htmlFor="confirmPassword"
+              >
                 Confirm Password
               </label>
               <input
                 type="password"
-                id="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm your password"
                 required
                 className="w-full border border-[#949494] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
               />
             </div>
 
-            {/* Reset Password Button */}
-            <Link to="/profile">
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-8 py-3 mt-[3.75rem] rounded-lg font-semibold hover:bg-purple-700 transform transition-transform duration-300 hover:scale-100"
-              >
-                Reset Password
-              </button>
-            </Link>
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-8 py-3 mt-[3.75rem] rounded-lg font-semibold hover:bg-purple-700 transform transition-transform duration-300 hover:scale-100 disabled:opacity-50"
+            >
+              {isPending ? "Resetting..." : "Reset Password"}
+            </button>
           </form>
         </div>
       </div>
