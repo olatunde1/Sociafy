@@ -55,7 +55,7 @@ const FundWalletModal = ({ isOpen, onClose }) => {
           <div className="flex justify-center">
             <Button
               onClick={handleFund}
-              className="w-full sm:w-[350px] mb-4 py-[17.5px] bg-[#351A60] text-white hover:bg-[#622BB9]"
+              className="w-full sm:w-[350px] mb-4 py-6 bg-[#351A60] text-white hover:bg-[#622BB9]"
             >
               Pay
             </Button>
