@@ -5,6 +5,13 @@ import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  server:{
+    host: "0.0.0.0",
+    fs: {
+      strict: false, // Allow serving files outside of the project root
+      
+    },
+  },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

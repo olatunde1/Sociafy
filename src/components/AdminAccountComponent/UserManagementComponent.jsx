@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import AdminAccountLayout from "../AdminAccount/AdminAccountLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -55,6 +56,32 @@ import Loader from "../Loader";
 
 const UserManagementComponent = () => {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState("All");
+
+  const filteredUsers = users.filter(user => {
+    if (filter === "All") return true;
+    return user.status === filter;
+  });
+
+  const counts = {
+    all: users.length,
+    active: users.filter(user => user.status === "Active").length,
+    suspended: users.filter(user => user.status === "Suspended").length,
+  };
+
+  const getBadgeClass = (type) => {
+    const base = "cursor-pointer transition-all";
+    if (filter === "All" && type === "All") return `${base} bg-gray-800 text-white`;
+    if (filter === "Active" && type === "Active") return `${base} bg-green-700 text-white`;
+    if (filter === "Suspended" && type === "Suspended") return `${base} bg-red-600 text-white`;
+
+    switch (type) {
+      case "All": return `${base} bg-gray-100 text-gray-800`;
+      case "Active": return `${base} bg-green-100 text-green-700`;
+      case "Suspended": return `${base} bg-red-100 text-red-600`;
+      default: return base;
+    }
+  };
 
   const [filter, setFilter] = useState("all"); // "all", "active", "suspended"
 

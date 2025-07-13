@@ -30,7 +30,7 @@ const AdminAccountSidebar = () => {
     { name: "Orders", path: "/admin/orders" },
     { name: "User Management", path: "/admin/users-admin" },
     { name: "Wallet Management", path: "/admin/wallet" },
-    { name: "Report & Analytics", path: "/admin/reports" },
+    { name: "Report & Analytics", path: "" },
     { name: "Log Out", path: "/" },
   ];
 
@@ -54,16 +54,20 @@ const AdminAccountSidebar = () => {
       <button 
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-white shadow-md"
         onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+        aria-label="Toggle sidebar"
       >
         {mobileSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
       </button>
 
       {/* Sidebar */}
-      <aside className={`${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 w-64 bg-white text-[#515151] h-screen p-6 space-y-6 shadow-md transition-transform duration-300 ease-in-out z-40`}>
+      <aside 
+        className={`${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:static inset-y-0 left-0 w-64 bg-white text-[#515151] h-screen p-6 space-y-6 shadow-md transition-transform duration-300 ease-in-out z-40`}
+        aria-label="Admin navigation"
+      >
         {/* Logo - Hidden on mobile, visible on desktop */}
         <h2 className="text-2xl font-bold mb-4 hidden lg:block">
           <Link to="/admin">
-            <img src={AdminLogo} alt="Admin Panel Logo" />
+            <img src={AdminLogo} alt="Admin Panel Logo" className="h-10" />
           </Link>
         </h2>
         
@@ -76,6 +80,7 @@ const AdminAccountSidebar = () => {
                   className={`w-full text-left px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold ${
                     isActive(item.path) ? "text-[#7B36E7] font-bold" : ""
                   }`}
+                  aria-current={isActive(item.path) ? "page" : undefined}
                 >
                   {item.name}
                 </button>
@@ -84,6 +89,7 @@ const AdminAccountSidebar = () => {
                   <button
                     onClick={() => toggleMenu(item.name)}
                     className="w-full flex justify-between items-center px-2 py-2 rounded hover:text-[#7B36E7] hover:font-bold"
+                    aria-expanded={openMenus[item.name] || false}
                   >
                     <span className="flex items-center gap-2">
                       {item.iconSrc && <item.iconSrc />}
@@ -102,6 +108,7 @@ const AdminAccountSidebar = () => {
                                 ? "text-[#7B36E7] font-bold"
                                 : ""
                             }`}
+                            aria-current={isActive(sub.path) ? "page" : undefined}
                           >
                             {sub.name}
                           </button>
@@ -121,6 +128,7 @@ const AdminAccountSidebar = () => {
         <div 
           className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30"
           onClick={() => setMobileSidebarOpen(false)}
+          role="presentation"
         />
       )}
     </>

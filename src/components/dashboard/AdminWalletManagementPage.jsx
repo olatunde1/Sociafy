@@ -48,7 +48,7 @@ const AdminWalletManagementPage = ({ data = RecentWalletFunding }) => {
 
   return (
     <AdminAccountLayout>
-      <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6 md:space-y-8">
+      <div className="">
         <Navbar />
         <h1 className="font-bold text-lg sm:text-xl md:text-2xl">Payment & Wallet Management</h1>
         
