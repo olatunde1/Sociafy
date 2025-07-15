@@ -63,11 +63,11 @@ const UserManagementComponent = () => {
   //   return user.status === filter;
   // });
 
-  const counts = {
-    all: users.length,
-    active: users.filter(user => user.status === "Active").length,
-    suspended: users.filter(user => user.status === "Suspended").length,
-  };
+  // const counts = {
+  //   all: users.length,
+  //   active: users.filter(user => user.status === "Active").length,
+  //   suspended: users.filter(user => user.status === "Suspended").length,
+  // };
 
   const getBadgeClass = (type) => {
     const base = "cursor-pointer transition-all";
