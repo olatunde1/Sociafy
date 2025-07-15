@@ -123,3 +123,25 @@ body{
     @apply bg-background text-foreground;
     }
 }
+
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+.scrollableCSS::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+
+.scrollableCSS::-webkit-scrollbar-thumb {
+  background: darkgrey;
+}
+
+.scrollableCSS::-webkit-scrollbar-thumb:hover {
+  background: #3947CB;
+}

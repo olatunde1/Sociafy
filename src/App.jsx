@@ -34,6 +34,8 @@ import AdminOrdersComponent from "./components/AdminAccountComponent/adminOrders
 import UserManagementComponent from "./components/AdminAccountComponent/UserManagementComponent";
 import AdminWalletManagementPage from "./components/dashboard/AdminWalletManagementPage";
 import UserInfoPage from "./components/dashboard/UserInfoPage";
+import UserAccountLayout from "./components/layout/UserAccountLayout";
+import UserDashBoard from "./components/pages/UserDashboard";
 
 function App() {
   return (
@@ -44,33 +46,12 @@ function App() {
         {/* Add more routes here as needed */}
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/wallet" element={<WalletPage />} />
-        <Route
-          path="/fund-wallet-successful"
-          element={<FundWalletSuccessful />}
-        />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/rules" element={<Rules />} />
-        <Route path="/my-purchased" element={<MyPurchased />} />
-        <Route path="/dashboard" element={<MyPurchaseComponent />} />
-        <Route path="/support" element={<Support />} />
-        <Route path="/accounts" element={<Account />} />
-        <Route
-          path="/accounts/platform/:platformName"
-          element={<PlatformViewMorePage />}
-        />
-        <Route
-          path="/accounts/buy/:platformName/:productName"
-          element={<BuyAccountPage />}
-        />
-        <Route
-          path="/log-purchased-successful"
-          element={<LogPurchasedSuccessful />}
-        />
-        <Route path="/log-details" element={<LogDetails />} />
-        {/* Public route: Admin Login */}
 
+        <Route path="/reset-password" element={<ResetPassword />} />
+
+        {/* <Route path="/dashboard" element={<MyPurchaseComponent />} /> */}
+
+        {/* Public route: Admin Login */}
 
         <Route path="/admin/login" element={<AdminLogin />} />
 
@@ -87,13 +68,7 @@ function App() {
           <Route path="users-admin" element={<UserManagementComponent />} />
           <Route path="wallet" element={<AdminWalletManagementPage />} />
           <Route path="user-info" element={<UserInfoPage />} />
-
         </Route>
-
-
-
-
-
 
         {/* <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminDashboardComponent />} />
@@ -111,7 +86,32 @@ function App() {
         </Route> */}
 
         <Route path="/" element={<AdminProtectedRoute />}>
-          <Route index path="/dashboard" element={<MyPurchaseComponent />} />
+          <Route path="" element={<UserAccountLayout />}>
+            <Route index path="dashboard" element={<UserDashBoard />} />
+            <Route path="accounts" element={<Account />} />
+            <Route path="wallet" element={<WalletPage />} />
+            <Route path="rules" element={<Rules />} />
+            <Route path="my-purchased" element={<MyPurchased />} />
+            <Route
+              path="fund-wallet-successful"
+              element={<FundWalletSuccessful />}
+            />
+            <Route path="profile" element={<Profile />} />
+            <Route path="support" element={<Support />} />
+            <Route
+              path="accounts/platform/:platformName"
+              element={<PlatformViewMorePage />}
+            />
+            <Route
+              path="accounts/buy/:platformName/:productName"
+              element={<BuyAccountPage />}
+            />
+            <Route
+              path="log-purchased-successful"
+              element={<LogPurchasedSuccessful />}
+            />
+            <Route path="log-details" element={<LogDetails />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

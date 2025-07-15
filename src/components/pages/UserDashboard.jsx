@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import {
-  FaWallet,
-  FaShoppingCart,
-  FaMoneyBillWave,
   FaInstagram,
   FaFacebook,
   FaTwitter,
 } from "react-icons/fa";
-import Castine from "../../assets/images/castine.png";
 import WalletBalance from "../../assets/images/wallet-balance.png";
 import TotalOrder from "../../assets/images/total-order.png";
 import TotalDeposit from "../../assets/images/total-deposit.png";
@@ -21,16 +17,7 @@ import { getUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview"
 import { useNavigate } from "react-router-dom";
 
 const UserDashBoard = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
   const navigate = useNavigate();
-
-  const user = {
-    name: "Castine",
-    email: "castiin@sociafy.com",
-    balance: "NGN 179,000",
-    image: Castine,
-  };
 
   const { data: userOverview, isPending } = getUserOverview();
   const { data: paymentHistory, isPending: payPend } = getPayment({
@@ -45,52 +32,17 @@ const UserDashBoard = () => {
 
   const OverviewData = userOverview?.data;
 
-  const menuItems = [
-    { name: "Dashboard", path: "/dashboard" },
-    { name: "Accounts", path: "/accounts" },
-    { name: "My Purchased", path: "/my-purchased" },
-    { name: "Wallet", path: "/wallet" },
-    { name: "Rules", path: "/rules" },
-    { name: "Support", path: "/support" },
-    { name: "My Profile", path: "/profile" },
-    { name: "Sign Out", path: "/" },
-  ];
+ 
 
   return (
-    <div className="p-6 space-y-10 font-custom">
-      <div className="flex items-center justify-between gap-4 mb-8">
-        {/* User Info */}
-        <div className="flex items-center gap-4">
-          {user.image ? (
-            <img
-              src={user.image}
-              alt="User"
-              className="w-14 h-14 rounded-full object-cover"
-            />
-          ) : (
-            <FaUserCircle className="text-gray-400 w-14 h-14" />
-          )}
-          <div>
-            <h2 className="text-xl font-bold">Welcome, {user.name}</h2>
-            <p className="text-sm text-gray-500">{user.email}</p>
-          </div>
-        </div>
-
-        {/* Wallet Balance Summary */}
-        <div className=" px-4 py-2">
-          <span className="text-gray-600 font-medium mr-2">Balance:</span>
-          <span className=" rounded-lg px-4 py-2 font-medium bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white">
-            {user.balance}
-          </span>
-        </div>
-      </div>
-
+    <div className="">
+    
       {isPending || payPend || orderPend ? (
         <Loader />
       ) : (
         <>
           {/* ───────────── Cards Section ───────────── */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 mt-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 ">
             {/* Card 1 - Wallet Balance */}
             {/* Card 1 - Wallet Balance */}
             <div className="bg-white rounded-2xl shadow-md  flex flex-col w-full">
@@ -185,7 +137,7 @@ const UserDashBoard = () => {
           </div>
 
           {/* ───────────── Tables Section ───────────── */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             {/* Payment History Table */}
             <div className="bg-white rounded-2xl shadow-md p-6">
               <div className="flex justify-between items-center mb-4">
