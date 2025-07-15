@@ -9,17 +9,16 @@ import getTopupHistory from "@/hooks/api/queries/user/accounts/getTopUpHistory";
 
 export default function WalletPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 3; // Adjust this based on how many pages you have
+  const totalPages = 3; 
 
   const onPageChange = (page) => {
     if (page > 0 && page <= totalPages) {
       setCurrentPage(page);
-      // Optional: implement filtering for currentPage here
+  
     }
   };
 
   const renderPageNumbers = () => {
-    // Example: just render 3 pages, adjust as needed
     return [1, 2, 3];
   };
 
@@ -45,7 +44,6 @@ export default function WalletPage() {
   ];
 
   const { data: TopUp } = getTopupHistory();
-  // console.log("TopUp Data:", TopUp);
 
   const topUpHistory = [
     {
@@ -207,7 +205,6 @@ export default function WalletPage() {
           </Link>
         </div>
 
-        {/* Top-Up History Table */}
         {/* Top-Up History Table */}
         <div className="bg-white rounded-lg shadow p-6">
           <h3 className="text-lg font-semibold text-gray-700 mb-4">
