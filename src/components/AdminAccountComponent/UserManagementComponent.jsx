@@ -56,7 +56,6 @@ import Loader from "../Loader";
 
 const UserManagementComponent = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState("All");
 
   // const filteredUsers = users.filter(user => {
   //   if (filter === "All") return true;
