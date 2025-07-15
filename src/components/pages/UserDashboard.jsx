@@ -15,6 +15,7 @@ import {
 } from "@/hooks/api/queries/user/dashboard/getHistories";
 import { getUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
 import { useNavigate } from "react-router-dom";
+import FundWalletModal from "./FundWalletModal";
 
 const UserDashBoard = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const UserDashBoard = () => {
   // console.log("orderHistory Data:", orderHistory);
 
   const OverviewData = userOverview?.data;
-
+  const [open, setOpen] = useState(false);
  
 
   return (
@@ -65,7 +66,7 @@ const UserDashBoard = () => {
                 <p className="text-2xl font-bold">
                   ₦ {OverviewData?.walletBalance || "0"}
                 </p>
-                <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white px-4 py-2 rounded-lg whitespace-nowrap">
+                <button  onClick={() => setOpen(true)} className="bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white px-4 py-2 rounded-lg whitespace-nowrap">
                   Fund Wallet
                 </button>
               </div>
@@ -285,6 +286,7 @@ const UserDashBoard = () => {
           </div>
         </>
       )}
+     {open && <FundWalletModal isOpen={open} onClose={() => setOpen(false)} />}
     </div>
   );
 };
