@@ -6,10 +6,7 @@ import { useAuthStore } from "@/store/authStore";
 import { LogOutIcon } from "lucide-react";
 import { toast } from "sonner";
 
-const AccountSideBar = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
-
+const AccountSideBar = (toggleSidebar) => {
   const menuItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Accounts", path: "/accounts" },
@@ -36,15 +33,15 @@ const AccountSideBar = () => {
   return (
     <div>
       {/* Sidebar Toggler */}
-      <div className="md:hidden flex justify-between items-center p-4 bg-white shadow-md">
+      {/* <div className="md:hidden flex justify-between items-center p-4 bg-white shadow-md">
         <img src={Logo} alt="Logo" className="h-8" />
         <button onClick={toggleSidebar} className="text-xl">
           {sidebarOpen ? <FaTimes /> : <FaBars />}
         </button>
-      </div>
+      </div> */}
 
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-md p-6 flex flex-col justify-between">
+      <aside className=" bg-white shadow-md p-6 flex flex-col justify-between h-full">
         <div>
           <Link to="/">
             <img src={Logo} alt="Logo" className="h-10 w-auto mb-18" />
@@ -53,10 +50,11 @@ const AccountSideBar = () => {
           <nav className="space-y-4">
             {menuItems.map((item) => (
               <Link
+                onClick={toggleSidebar}
                 key={item.name}
                 to={item.path}
                 className={`block text-gray-700 hover:text-purple-700 font-medium ${
-                  item.name === "My Profile" ? "mt-[375px]" : ""
+                  item.name === "My Profile" ? "mt-[175px]" : ""
                 }`}
               >
                 {item.name}

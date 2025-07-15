@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 import { useBuyLogs } from "@/hooks/api/mutation/user/useBuyLogs";
 import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEY_Accs } from "@/hooks/api/queries/user/accounts/getAvailableAcc";
 
 const BuyAccountPage = () => {
   const { platformName, productName } = useParams();
@@ -12,18 +14,28 @@ const BuyAccountPage = () => {
   console.log("Received product:", product);
   const navigate = useNavigate();
 
+  const [qty, setQty] = useState("");
+
   const { mutate, isPending } = useBuyLogs();
 
+  const queryClient = useQueryClient();
+
   const handleBuyLog = () => {
+    if (!qty) {
+      toast.warning("Please enter a quanity amount");
+      return;
+    }
+
     mutate(
       {
         name: product?.name,
-        quantity: product?.quantity,
+        quantity: qty ?? "0",
       },
       {
         onSuccess: (response) => {
           toast.success(response?.data?.message || "Paid!");
           //   console.log(response, "response");
+          queryClient.invalidateQueries({ queryKey: [QUERY_KEY_Accs] });
           navigate("/log-purchased-successful", {
             state: { response: response?.data?.data, product },
           });
@@ -40,9 +52,9 @@ const BuyAccountPage = () => {
   //   };
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-transparent">
       {/* Left black background div */}
-      <div className="flex-1 bg-black"></div>
+      <div className="flex-1 bg-transparent"></div>
 
       {/* Right content div */}
       <div className="flex-1 p-6 bg-white">
@@ -94,9 +106,22 @@ const BuyAccountPage = () => {
         </div>
 
         {/* Amount */}
-        <div className="text-lg font-bold text-[#351A60] mb-20">
-          ₦{product?.amount ?? "0"}
+        <div className="text-lg font-bold text-[#351A60] mb-5">
+          ₦{product?.price ?? "0"}
         </div>
+
+        <label className="block text-sm font-medium mb-4" htmlFor="email">
+          Quantity Amount
+        </label>
+        <input
+          name="qty"
+          type="number"
+          id="qty"
+          onChange={(e) => setQty(e.target.value)}
+          placeholder="Enter your the amount of quantity"
+          required
+          className="w-full border border-gray-300 rounded-lg p-3 mb-5 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
+        />
 
         {/* Buy Button */}
         <div className="flex justify-center">
