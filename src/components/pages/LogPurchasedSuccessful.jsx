@@ -12,9 +12,9 @@ const LogPurchasedSuccessful = () => {
   console.log(response, product,  "resp")
 
   return (
-    <div className="flex min-h-screen bg-black">
+    <div className="flex min-h-screen bg-transparent">
       {/* Left black background div */}
-      <div className="flex-1 bg-black hidden md:block"></div>
+      <div className="flex-1 bg-transparent hidden md:block"></div>
 
       {/* Right content div */}
       <div className="flex-1 p-6 bg-white flex flex-col">

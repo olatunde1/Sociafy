@@ -12,12 +12,15 @@ export default function LogDetails() {
   return (
     <div className="min-h-screen flex">
       {/* Left black background div */}
-      <div className="flex-1 bg-black"></div>
+      <div className="flex-1 bg-transparent"></div>
 
       {/* Right details panel */}
-      <div className="flex-1 bg-gray-100 p-8">
+      <div className="flex-1 bg-white p-8">
         <div className="flex justify-between items-center mb-[61px]">
-          <button onClick={() => navigate(-1)} className="text-sm text-gray-600 ">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-sm text-gray-600 "
+          >
             Go Back / Account
           </button>
           <button
@@ -26,14 +29,15 @@ export default function LogDetails() {
           >
             <X className="w-6 h-6 bg-[#E5E5EA] rounded-sm p-1" /> Close
           </button>
-        
         </div>
 
         <div className="rounded-lg  max-w-2xl ">
           <h2 className="text-xl font-bold mb-2">{state.product}</h2>
           <p className="text-sm text-gray-500 mb-9">{state.description}</p>
 
-          <p className="text-2xl font-semibold text-[#515151] mb-4">{(state.price).toLocaleString()}</p>
+          <p className="text-2xl font-semibold text-[#515151] mb-4">
+            {state.price.toLocaleString()}
+          </p>
 
           <div className="flex justify-end mb-6">
             <button
@@ -50,36 +54,49 @@ export default function LogDetails() {
                 alert("Info copied to clipboard!");
               }}
             >
-              Copy Info 
+              Copy Info
             </button>
           </div>
           <div className="bg-[#F2F2F7] border-2 border-dashed border-[#949494] rounded-lg p-6 mb-10 space-y-5">
-                <div className="flex gap-6  justify-stretch">
-                    <strong className="text-sm text-gray-500 w-32">Username:</strong>
-                    <span className="text-base font-medium break-all">{state.username}</span>
-                </div>
+            <div className="flex gap-6  justify-stretch">
+              <strong className="text-sm text-gray-500 w-32">Username:</strong>
+              <span className="text-base font-medium break-all">
+                {state.username}
+              </span>
+            </div>
 
-                <div className="flex gap-6 justify-stretch">
-                    <strong className="text-sm text-gray-500 w-32">Password:</strong>
-                    <span className="text-base font-medium break-all">{state.password}</span>
-                </div>
+            <div className="flex gap-6 justify-stretch">
+              <strong className="text-sm text-gray-500 w-32">Password:</strong>
+              <span className="text-base font-medium break-all">
+                {state.password}
+              </span>
+            </div>
 
-                <div className="flex gap-6 justify-stretch">
-                    <strong className="text-sm text-gray-500 w-32">Email:</strong>
-                    <span className="text-base font-medium break-all">{state.email}</span>
-                </div>
+            <div className="flex gap-6 justify-stretch">
+              <strong className="text-sm text-gray-500 w-32">Email:</strong>
+              <span className="text-base font-medium break-all">
+                {state.email}
+              </span>
+            </div>
 
-                <div className="flex gap-6 justify-stretch">
-                    <strong className="text-sm text-gray-500 w-32">Email Password:</strong>
-                    <span className="text-base font-medium break-all">{state.emailPassword}</span>
-                </div>
+            <div className="flex gap-6 justify-stretch">
+              <strong className="text-sm text-gray-500 w-32">
+                Email Password:
+              </strong>
+              <span className="text-base font-medium break-all">
+                {state.emailPassword}
+              </span>
+            </div>
 
-                <div className="flex gap-6 justify-stretch">
-                    <strong className="text-sm text-gray-500 w-32">Date Created:</strong>
-                    <span className="text-base font-medium break-all">{state.dateCreated}</span>
-                </div>
-        </div>
-
+            <div className="flex gap-6 justify-stretch">
+              <strong className="text-sm text-gray-500 w-32">
+                Date Created:
+              </strong>
+              <span className="text-base font-medium break-all">
+                {state.dateCreated}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
