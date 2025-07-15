@@ -1,10 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import SuccessIcon from '../../assets/images/Success.png';
+import { format } from "date-fns";
 
 const LogPurchasedSuccessful = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { response, product } = location.state || {};
+
+  console.log(response, product,  "resp")
 
   return (
     <div className="flex min-h-screen bg-black">
@@ -36,12 +41,17 @@ const LogPurchasedSuccessful = () => {
 
         {/* Success Message */}
         <div className="flex flex-col items-center text-center mb-6">
-          <img src={SuccessIcon} alt="Success" className="w-[140px] h-[125.74px] mb-20" />
+          <img
+            src={SuccessIcon}
+            alt="Success"
+            className="w-[140px] h-[125.74px] mb-20"
+          />
           <h2 className="text-2xl font-bold text-[#351A60] mb-2">
             Log Purchased
           </h2>
           <p className="text-sm text-gray-700 tracking-wide max-w-[400px]">
-            You have successfully purchased the log, see the log credentials below.
+            You have successfully purchased the log, see the log credentials
+            below.
           </p>
         </div>
 
@@ -56,40 +66,47 @@ const LogPurchasedSuccessful = () => {
         <div className="bg-[#F2F2F7] border-2 border-dashed rounded-lg p-6 mb-10 space-y-5">
           <div className="flex gap-6 justify-stretch">
             <p className="text-sm text-gray-500 w-32">Username:</p>
-            <p className="text-base font-medium break-all">@Caatiin_Sociafy25</p>
+            <p className="text-base font-medium break-all">
+              @{product?.username ?? "nil"}
+            </p>
           </div>
 
           <div className="flex gap-6 justify-stretch">
             <p className="text-sm text-gray-500 w-32">Password:</p>
-            <p className="text-base font-medium break-all">axkLC8wyoA4M</p>
+            <p className="text-base font-medium break-all">
+              {product?.password}
+            </p>
           </div>
 
           <div className="flex gap-6 justify-stretch">
             <p className="text-sm text-gray-500 w-32">E-mail:</p>
-            <p className="text-base font-medium break-all">samplemail@sociafy.com</p>
+            <p className="text-base font-medium break-all">
+              {product?.accountemail}
+            </p>
           </div>
 
           <div className="flex gap-6 justify-stretch">
             <p className="text-sm text-gray-500 w-32">E-mail password:</p>
-            <p className="text-base font-medium break-all">Eb7qvG0fESQ</p>
+            <p className="text-base font-medium break-all">*****</p>
           </div>
 
           <div className="flex gap-6 justify-stretch">
             <p className="text-sm text-gray-500 w-32">Date created:</p>
-            <p className="text-base font-medium">08-06-2004</p>
+            <p className="text-base font-medium">
+              {format(new Date(response?.payment?.createdAt), "MMM, dd, yyyy")}
+            </p>
           </div>
         </div>
 
         {/* Thank You */}
-       
 
         {/* Done Button */}
         <div className="flex justify-center">
-          <button 
-            onClick={() => navigate("/")}
+          <button
+            onClick={() => navigate("/accounts")}
             className="w-[350px] bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
           >
-             Thank you
+            Thank you
           </button>
         </div>
       </div>

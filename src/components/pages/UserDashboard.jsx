@@ -13,12 +13,17 @@ import TotalOrder from "../../assets/images/total-order.png";
 import TotalDeposit from "../../assets/images/total-deposit.png";
 import SociafyCornerImage from "../../assets/images/socccialffy-corner.png";
 import Loader from "../Loader";
-import { getOrders, getPayment } from "@/hooks/api/queries/user/dashboard/getHistories";
+import {
+  getOrders,
+  getPayment,
+} from "@/hooks/api/queries/user/dashboard/getHistories";
 import { getUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
+import { useNavigate } from "react-router-dom";
 
 const UserDashBoard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const navigate = useNavigate();
 
   const user = {
     name: "Castine",
@@ -28,8 +33,12 @@ const UserDashBoard = () => {
   };
 
   const { data: userOverview, isPending } = getUserOverview();
-  const { data: paymentHistory } = getPayment();
-  const { data: orderHistory } = getOrders();
+  const { data: paymentHistory, isPending: payPend } = getPayment({
+    limit: 5,
+  });
+  const { data: orderHistory, isPending: orderPend } = getOrders({
+    limit: 5,
+  });
 
   // console.log("paymentHistory Data:", paymentHistory);
   // console.log("orderHistory Data:", orderHistory);
@@ -76,7 +85,7 @@ const UserDashBoard = () => {
         </div>
       </div>
 
-      {isPending ? (
+      {isPending || payPend || orderPend ? (
         <Loader />
       ) : (
         <>
@@ -181,14 +190,17 @@ const UserDashBoard = () => {
             <div className="bg-white rounded-2xl shadow-md p-6">
               <div className="flex justify-between items-center mb-4">
                 <h4 className="text-lg font-bold">Payment History</h4>
-                <button className="text-[#E94E30] hover:underline text-sm">
+                <button
+                  onClick={() => navigate("/wallet")}
+                  className="text-[#E94E30] hover:underline text-sm"
+                >
                   View All
                 </button>
               </div>
 
-              {/* Responsive Table */}
               <div className="overflow-x-auto">
-                <div className="min-w-[600px] space-y-4  ">
+                <div className="min-w-[600px] space-y-4">
+                  {/* Table Headers */}
                   <div className="grid grid-cols-4 px-2 text-sm text-[#949494] bg-[#EDF2F7] font-semibold border-b border-b-[#EDF2F7] pb-[21px] pt-[21px]">
                     <div>Transaction ID</div>
                     <div>Amount</div>
@@ -196,39 +208,43 @@ const UserDashBoard = () => {
                     <div>Status</div>
                   </div>
 
-                  {/* Example Rows */}
-                  <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7]  items-center">
-                    <div>TRF7894903</div>
-                    <div>₦250</div>
-                    <div>2025-04-27</div>
-                    <div>
-                      <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-600">
-                        Success
-                      </span>
+                  {/* Table Rows */}
+                  {Array.isArray(paymentHistory?.data?.result) &&
+                  paymentHistory.data.result.length > 0 ? (
+                    paymentHistory.data.result.map((txn) => (
+                      <div
+                        key={txn._id}
+                        className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7] items-center"
+                      >
+                        <div className="truncate">{txn.transactionId}</div>
+                        <div>₦{txn.amount.toLocaleString()}</div>
+                        <div>
+                          {new Date(txn.createdAt).toLocaleDateString("en-NG")}
+                        </div>
+                        <div>
+                          {txn.status === "success" && (
+                            <span className="px-3 py-1 text-xs rounded-full bg-green-100 text-green-600">
+                              Success
+                            </span>
+                          )}
+                          {txn.status === "pending" && (
+                            <span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-600">
+                              Pending
+                            </span>
+                          )}
+                          {txn.status === "failed" && (
+                            <span className="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600">
+                              Failed
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-gray-500 text-sm col-span-4">
+                      No payment history found.
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7] items-center">
-                    <div>TRF7894903</div>
-                    <div>₦450</div>
-                    <div>2025-04-25</div>
-                    <div>
-                      <span className="px-3 py-1 text-xs rounded-full bg-yellow-100 text-yellow-600">
-                        Pending
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-4 px-2 text-sm py-3 border-b border-b-[#EDF2F7] items-center">
-                    <div>TRF7894903</div>
-                    <div>₦300</div>
-                    <div>2025-04-24</div>
-                    <div>
-                      <span className="px-3 py-1 text-xs rounded-full bg-red-100 text-red-600">
-                        Failed
-                      </span>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -237,7 +253,10 @@ const UserDashBoard = () => {
             <div className="bg-white rounded-2xl shadow-md p-6">
               <div className="flex justify-between items-center mb-4">
                 <h4 className="text-lg font-bold">Order History</h4>
-                <button className="text-[#E94E30] hover:underline text-sm">
+                <button
+                  onClick={() => navigate("/my-purchased")}
+                  className="text-[#E94E30] hover:underline text-sm"
+                >
                   View All
                 </button>
               </div>
@@ -245,36 +264,69 @@ const UserDashBoard = () => {
               {/* Responsive Table */}
               <div className="overflow-x-auto">
                 <div className="min-w-[600px] space-y-4">
+                  {/* Table Header */}
                   <div className="grid grid-cols-3 px-2 text-sm text-[#949494] bg-[#EDF2F7] font-semibold border-b border-b-[#EDF2F7] pb-[21px] pt-[21px]">
                     <div>Social Media</div>
                     <div>Amount</div>
                     <div>Date</div>
                   </div>
 
-                  {/* Example Rows */}
-                  <div className="grid grid-cols-3 text-sm py-3 px-2 border-b border-b-[#EDF2F7]  items-center">
-                    <div className="flex items-center gap-2">
-                      <FaInstagram className="text-pink-500" /> Instagram
-                    </div>
-                    <div>₦299</div>
-                    <div>2025-04-20</div>
-                  </div>
+                  {/* Table Rows */}
+                  {Array.isArray(orderHistory?.data?.result) &&
+                  orderHistory.data.result.length > 0 ? (
+                    orderHistory.data.result.map((item) => {
+                      const productName = item.product.toLowerCase();
+                      const isFacebook =
+                        productName.includes("facebook") ||
+                        productName.includes("fb");
+                      const isInstagram =
+                        productName.includes("instagram") ||
+                        productName.includes("insta");
+                      const isTwitter =
+                        productName.includes("twitter") ||
+                        productName.includes("tweet");
 
-                  <div className="grid grid-cols-3 text-sm py-3 px-2 border-b border-b-[#EDF2F7] items-center">
-                    <div className="flex items-center gap-2">
-                      <FaFacebook className="text-blue-600" /> Facebook
-                    </div>
-                    <div>₦150</div>
-                    <div>2025-04-18</div>
-                  </div>
+                      const Icon = isFacebook
+                        ? FaFacebook
+                        : isInstagram
+                        ? FaInstagram
+                        : isTwitter
+                        ? FaTwitter
+                        : null;
 
-                  <div className="grid grid-cols-3 text-sm py-3 px-2 border-b border-b-[#EDF2F7] items-center">
-                    <div className="flex items-center gap-2">
-                      <FaTwitter className="text-blue-400" /> Twitter
+                      return (
+                        <div
+                          key={item._id}
+                          className="grid grid-cols-3 text-sm py-3 px-2 border-b border-b-[#EDF2F7] items-center"
+                        >
+                          <div className="flex items-center gap-2 capitalize">
+                            {Icon && (
+                              <Icon
+                                className={
+                                  isFacebook
+                                    ? "text-blue-600"
+                                    : isInstagram
+                                    ? "text-pink-500"
+                                    : "text-blue-400"
+                                }
+                              />
+                            )}
+                            {item.product}
+                          </div>
+                          <div>₦{item.amount.toLocaleString()}</div>
+                          <div>
+                            {new Date(item.createdAt).toLocaleDateString(
+                              "en-NG"
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="text-center text-sm py-4 text-gray-500 col-span-3">
+                      No order history found.
                     </div>
-                    <div>₦120</div>
-                    <div>2025-04-16</div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

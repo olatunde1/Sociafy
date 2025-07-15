@@ -9,19 +9,40 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import wallet from '../../assets/images/wallet.png';
+import wallet from "../../assets/images/wallet.png";
+import { useFundWallet } from "@/hooks/api/mutation/user/useFundWallet";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const FundWalletModal = ({ isOpen, onClose }) => {
   const [amount, setAmount] = useState("");
+  const navigate = useNavigate();
+
+  const { mutate, isPending } = useFundWallet();
 
   const handleFund = () => {
     if (!amount) {
-      alert("Please enter an amount.");
+      toast.warning("Please enter an amount.");
       return;
     }
 
-    console.log("Amount:", amount);
-    onClose();
+    mutate(
+      {
+        amount: parseFloat(amount),
+      },
+      {
+        onSuccess: (response) => {
+          toast.success(response?.data?.data?.message || "Initiated!");
+          console.log(response, "response");
+          window.location.href = response?.data?.data?.authorizationUrl;
+          onClose();
+        },
+        onError: (error) => {
+          toast.error(error?.response?.data?.message || "Payment Failed!");
+          onClose();
+        },
+      }
+    );
   };
 
   return (
@@ -40,7 +61,7 @@ const FundWalletModal = ({ isOpen, onClose }) => {
         </DialogHeader>
 
         <div className="space-y-4 px-4">
-         <Input
+          <Input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
@@ -49,15 +70,14 @@ const FundWalletModal = ({ isOpen, onClose }) => {
                 focus:outline-none focus:ring-0 focus:border-transparent 
                 [&::-webkit-outer-spin-button]:appearance-none 
                 [&::-webkit-inner-spin-button]:appearance-none"
-            />
-
+          />
 
           <div className="flex justify-center">
             <Button
               onClick={handleFund}
               className="w-full sm:w-[350px] mb-4 py-6 bg-[#351A60] text-white hover:bg-[#622BB9]"
             >
-              Pay
+              {isPending ? "Processing..." : "Pay"}
             </Button>
           </div>
         </div>
