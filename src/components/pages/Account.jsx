@@ -9,7 +9,7 @@ import {
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../../assets/images/logo.png";
 import Castine from "../../assets/images/castine.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SupportImage from "../../assets/images/telegram-support.png";
 import getAvailableAccounts from "@/hooks/api/queries/user/accounts/getAvailableAcc";
 import Loader from "../Loader";
@@ -75,7 +75,7 @@ const platforms = [
 const AccountPlatforms = () => {
   const [search, setSearch] = useState("");
   const [selectedPlatform, setSelectedPlatform] = useState("");
-
+  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
@@ -265,7 +265,7 @@ const AccountPlatforms = () => {
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-gray-200">
-                        {platform.products
+                        {platform.products?.slice(0,5)
                           .filter((product) =>
                             product.product
                               .toLowerCase()
@@ -293,15 +293,27 @@ const AccountPlatforms = () => {
                                 </span>
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
-                                <Link
+                                {/* <Link
                                   to={`/accounts/buy/${
                                     platform.name
                                   }/${encodeURIComponent(product.product)}`}
+                                > */}
+                                <button
+                                  onClick={() =>
+                                    navigate(
+                                      `/accounts/buy/${
+                                        platform.name
+                                      }/${encodeURIComponent(product.product)}`,
+                                      {
+                                        state: { product },
+                                      }
+                                    )
+                                  }
+                                  className="bg-[#F2EBFD] hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white font-bold text-[#7B36E7] px-4 py-2 rounded-lg shadow-sm transition-colors"
                                 >
-                                  <button className="bg-[#F2EBFD] hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white font-bold text-[#7B36E7] px-4 py-2 rounded-lg shadow-sm transition-colors">
-                                    Buy Now
-                                  </button>
-                                </Link>
+                                  Buy Now
+                                </button>
+                                {/* </Link> */}
                               </td>
                             </tr>
                           ))}

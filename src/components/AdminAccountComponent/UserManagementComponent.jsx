@@ -82,7 +82,6 @@ const UserManagementComponent = () => {
     }
   };
 
-  const [filter, setFilter] = useState("all"); // "all", "active", "suspended"
 
   const { data: usersData, isPending } = getAdminUsers();
   const users = usersData?.data?.result || [];
