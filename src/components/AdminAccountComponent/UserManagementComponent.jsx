@@ -3,7 +3,7 @@ import AdminAccountLayout from "../AdminAccount/AdminAccountLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 
 import {
   Popover,
@@ -56,12 +56,11 @@ import Loader from "../Loader";
 
 const UserManagementComponent = () => {
   const navigate = useNavigate();
-  const [filter, setFilter] = useState("All");
 
-  const filteredUsers = users.filter(user => {
-    if (filter === "All") return true;
-    return user.status === filter;
-  });
+  // const filteredUsers = users.filter(user => {
+  //   if (filter === "All") return true;
+  //   return user.status === filter;
+  // });
 
   const counts = {
     all: users.length,
