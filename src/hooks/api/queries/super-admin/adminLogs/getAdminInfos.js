@@ -5,6 +5,8 @@ export const QUERY_KEY_ALLORDERS = "getALLOrders";
 export const QUERY_KEY_Overview = "getOverview";
 export const QUERY_KEY_Users = "getUsers";
 export const QUERY_KEY_SingleUser = "getSingleUser";
+export const QUERY_KEY_SingleOrder = "getSingleOrder";
+export const QUERY_KEY_SingleWallet = "getSingleWallet";
 
 const GetOrders = async (params = {}) => {
   const response = await axiosInstance.get(`/admin/orders`, {
@@ -32,6 +34,24 @@ const GetSingleUser = async (id, params = {}) => {
   const response = await axiosInstance.get(`/admin/users/${id}`, {
     params,
   });
+
+  return response.data;
+};
+
+const GetSingleUserOrders = async (id, params = {}) => {
+  const response = await axiosInstance.get(`/admin/users/order/history/${id}`, {
+    params,
+  });
+
+  return response.data;
+};
+const GetSingleUserWallet = async (id, params = {}) => {
+  const response = await axiosInstance.get(
+    `/admin/users/wallet/history/${id}`,
+    {
+      params,
+    }
+  );
 
   return response.data;
 };
@@ -64,5 +84,26 @@ const getAdminSingleUser = (id, params) => {
     staleTime: 100,
   });
 };
+const getAdminSingleUserOrders = (id, params) => {
+  return useQuery({
+    queryKey: [QUERY_KEY_SingleOrder, id, params],
+    queryFn: () => GetSingleUserOrders(id, params),
+    staleTime: 100,
+  });
+};
+const getAdminSingleUserWallet = (id, params) => {
+  return useQuery({
+    queryKey: [QUERY_KEY_SingleWallet, id, params],
+    queryFn: () => GetSingleUserWallet(id, params),
+    staleTime: 100,
+  });
+};
 
-export { getAdminOrders, getAdminOverview, getAdminUsers, getAdminSingleUser };
+export {
+  getAdminOrders,
+  getAdminOverview,
+  getAdminUsers,
+  getAdminSingleUser,
+  getAdminSingleUserOrders,
+  getAdminSingleUserWallet,
+};
