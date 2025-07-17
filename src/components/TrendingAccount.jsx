@@ -1,5 +1,6 @@
 import React from "react";
 import IconBuy from "../assets/images/bag.png";
+import getWebLogs from "@/hooks/api/queries/getWebLogs";
 
 const products = [
   {
@@ -21,6 +22,9 @@ const products = [
 ];
 
 const ProductTable = () => {
+
+  const { data, isPending } = getWebLogs();
+
   return (
     <div className=" mx-auto px-4 w-full max-w-[1200px] py-12 bg-white rounded-lg mt-20">
       <h1 className="text-center font-extrabold text-3xl md:text-4xl mb-4">
