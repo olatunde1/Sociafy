@@ -61,8 +61,9 @@ const UserInfoPage = () => {
   }, [user, navigate]);
 
   const { data: singleUser } = getAdminSingleUser(user?._id);
+  const [walletPage, setWalletPage] = useState(1);
   const { data: singleWallet, isPending: walletPend } =
-    getAdminSingleUserWallet(user?._id);
+    getAdminSingleUserWallet(user?._id, { page: walletPage });
   const [orderPage, setOrderPage] = useState(1);
   const { data: singleOrder, isPending: orderPend } = getAdminSingleUserOrders(
     user?._id,
@@ -75,14 +76,9 @@ const UserInfoPage = () => {
   const pagedInfo = singleOrder?.data?.pagedInfo;
   const totalOrderPages = pagedInfo?.totalPages || 1;
 
-  // Pagination state for fundings
-  const [fundingPage, setFundingPage] = useState(1);
-  const fundingsPerPage = 2;
-  const totalFundingPages = Math.ceil(fundings.length / fundingsPerPage);
-  const paginatedFundings = fundings.slice(
-    (fundingPage - 1) * fundingsPerPage,
-    fundingPage * fundingsPerPage
-  );
+  const walletFundings = singleWallet?.data?.result || [];
+  const walletPagedInfo = singleWallet?.data?.pagedInfo;
+  const totalWalletPages = walletPagedInfo?.totalPages || 1;
 
   const renderPagination = (currentPage, totalPages, onPageChange) => (
     <div className="flex justify-end gap-2 mt-4">
@@ -90,7 +86,7 @@ const UserInfoPage = () => {
         variant="outline"
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
+        disabled={currentPage === 1 || orderPend}
       >
         Previous
       </Button>
@@ -248,42 +244,57 @@ const UserInfoPage = () => {
         <Card className="shadow-xl mt-10">
           <CardContent className="p-4 overflow-x-auto">
             <h2 className="font-semibold mb-4">Wallet Funding History</h2>
-            <table className="min-w-full text-sm">
-              <thead className="bg-gray-100 text-gray-700">
-                <tr>
-                  <th className="p-3 text-left">Transaction ID</th>
-                  <th className="p-3 text-left">Amount</th>
-                  <th className="p-3 text-left">Date & Time</th>
-                  <th className="p-3 text-left">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedFundings.map((item, i) => (
-                  <tr key={i} className="border-b hover:bg-gray-50">
-                    <td className="p-3">{item.id}</td>
-                    <td className="p-3">₦{item.amount.toLocaleString()}</td>
-                    <td className="p-3">
-                      <div>{item.date}</div>
-                      <div className="text-xs text-gray-500">{item.time}</div>
-                    </td>
-                    <td className="p-3">
-                      <Badge
-                        className={
-                          item.status === "Success"
-                            ? "bg-[#12B64A] text-white"
-                            : item.status === "Pending"
-                            ? "bg-[#FFC107] text-white"
-                            : "bg-[#FF3D00] text-white"
-                        }
-                      >
-                        {item.status}
-                      </Badge>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {renderPagination(fundingPage, totalFundingPages, setFundingPage)}
+            {walletPend ? (
+              <p>Loading wallet funding history...</p>
+            ) : walletFundings.length === 0 ? (
+              <p className="text-gray-500">
+                No wallet funding history available.
+              </p>
+            ) : (
+              <>
+                <table className="min-w-full text-sm">
+                  <thead className="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th className="p-3 text-left">Transaction ID</th>
+                      <th className="p-3 text-left">Amount</th>
+                      <th className="p-3 text-left">Date & Time</th>
+                      <th className="p-3 text-left">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {walletFundings.map((item) => (
+                      <tr key={item._id} className="border-b hover:bg-gray-50">
+                        <td className="p-3">{item.transactionId}</td>
+                        <td className="p-3">₦{item.amount.toLocaleString()}</td>
+                        <td className="p-3">
+                          <div>
+                            {format(new Date(item.createdAt), "MMM dd, yyyy")}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {format(new Date(item.createdAt), "hh:mm a")}
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <Badge
+                            className={
+                              item.status === "success"
+                                ? "bg-[#12B64A] text-white"
+                                : item.status === "pending"
+                                ? "bg-[#FFC107] text-white"
+                                : "bg-[#FF3D00] text-white"
+                            }
+                          >
+                            {item.status.charAt(0).toUpperCase() +
+                              item.status.slice(1)}
+                          </Badge>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {renderPagination(walletPage, totalWalletPages, setWalletPage)}
+              </>
+            )}
           </CardContent>
         </Card>
       </div>
