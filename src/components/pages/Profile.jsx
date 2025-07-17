@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { getUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
 import Loader from "../Loader";
 import Castine from "../../assets/images/castine.png";
+import { format } from "date-fns";
 
 export default function Profile() {
   const { data: profile, isPending } = getUserProfile();
@@ -38,7 +39,10 @@ export default function Profile() {
                   <p className="text-sm text-gray-600">
                     Email: {userData.email}
                   </p>
-                  <p className="text-sm text-gray-500 mt-1">Joined: nil</p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Joined: 
+                    {format(new Date(userData.createdDate), "MMM dd, yyyy")}
+                  </p>
                 </div>
               </div>
             </div>
