@@ -8,39 +8,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UserWalletImage from "../../assets/images/userwalletimage.png";
 import CardBackground from "../../assets/images/profile-background.png";
 import walletIcon from "../../assets/images/Total revenue.png";
-import { getAdminSingleUser } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import {
+  getAdminSingleUser,
+  getAdminSingleUserOrders,
+  getAdminSingleUserWallet,
+} from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import { format } from "date-fns";
-
-const orders = [
-  {
-    product: "USA 🇺🇸 Standard IG",
-    amount: 30000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    info: "5-8yrs with posts | 1000 followers",
-  },
-  {
-    product: "USA 🇺🇸 Standard FB",
-    amount: 24000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    info: "8yrs | 100+ friends",
-  },
-  {
-    product: "USA 🇺🇸 Tiktok",
-    amount: 16000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    info: "1-2yrs | Partially Filled",
-  },
-  {
-    product: "USA 🇺🇸 Snapchat",
-    amount: 25000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    info: "2 - 5 months",
-  },
-];
 
 const fundings = [
   {
@@ -78,7 +51,7 @@ const UserInfoPage = () => {
   const navigate = useNavigate();
   const user = location.state?.user;
 
-  console.log(user, "info");
+  // console.log(user, "info");
 
   // Redirect if user data is missing
   React.useEffect(() => {
@@ -88,17 +61,19 @@ const UserInfoPage = () => {
   }, [user, navigate]);
 
   const { data: singleUser } = getAdminSingleUser(user?._id);
-
-  // console.log(singleUser, "singleUser");
-
-  // Pagination state for orders
+  const { data: singleWallet, isPending: walletPend } =
+    getAdminSingleUserWallet(user?._id);
   const [orderPage, setOrderPage] = useState(1);
-  const ordersPerPage = 2;
-  const totalOrderPages = Math.ceil(orders.length / ordersPerPage);
-  const paginatedOrders = orders.slice(
-    (orderPage - 1) * ordersPerPage,
-    orderPage * ordersPerPage
+  const { data: singleOrder, isPending: orderPend } = getAdminSingleUserOrders(
+    user?._id,
+    {
+      page: orderPage,
+    }
   );
+
+  const orders = singleOrder?.data?.result || [];
+  const pagedInfo = singleOrder?.data?.pagedInfo;
+  const totalOrderPages = pagedInfo?.totalPages || 1;
 
   // Pagination state for fundings
   const [fundingPage, setFundingPage] = useState(1);
@@ -221,39 +196,51 @@ const UserInfoPage = () => {
         <Card className="shadow-xl mt-8">
           <CardContent className="overflow-x-auto p-4">
             <h2 className="font-semibold mb-4">
-              Order History ({orders.length})
+              Order History ({pagedInfo?.total || 0})
             </h2>
-            <table className="min-w-full text-sm">
-              <thead className="bg-gray-100 text-gray-700">
-                <tr>
-                  <th className="p-3 text-left">Product</th>
-                  <th className="p-3 text-left">Amount</th>
-                  <th className="p-3 text-left">Date & Time</th>
-                  <th className="p-3 text-left">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {paginatedOrders.map((order, i) => (
-                  <tr key={i} className="border-b hover:bg-gray-50">
-                    <td className="p-3">
-                      <div>{order.product}</div>
-                      <div className="text-xs text-gray-500">{order.info}</div>
-                    </td>
-                    <td className="p-3">₦{order.amount.toLocaleString()}</td>
-                    <td className="p-3">
-                      <div>{order.date}</div>
-                      <div className="text-xs text-gray-500">{order.time}</div>
-                    </td>
-                    <td className="p-3">
-                      <Button size="sm" variant="outline">
-                        View Info
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {renderPagination(orderPage, totalOrderPages, setOrderPage)}
+
+            {orderPend ? (
+              <p>Loading order history...</p>
+            ) : orders.length === 0 ? (
+              <p className="text-gray-500">No order history available.</p>
+            ) : (
+              <>
+                <table className="min-w-full text-sm">
+                  <thead className="bg-gray-100 text-gray-700">
+                    <tr>
+                      <th className="p-3 text-left">Product</th>
+                      <th className="p-3 text-left">Amount</th>
+                      <th className="p-3 text-left">Date & Time</th>
+                      <th className="p-3 text-left">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order._id} className="border-b hover:bg-gray-50">
+                        <td className="p-3">{order.product}</td>
+                        <td className="p-3">
+                          ₦{order.amount.toLocaleString()}
+                        </td>
+                        <td className="p-3">
+                          <div>
+                            {format(new Date(order.createdAt), "MMM dd, yyyy")}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {format(new Date(order.createdAt), "hh:mm a")}
+                          </div>
+                        </td>
+                        <td className="p-3">
+                          <Button size="sm" variant="outline">
+                            View Info
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {renderPagination(orderPage, totalOrderPages, setOrderPage)}
+              </>
+            )}
           </CardContent>
         </Card>
 
