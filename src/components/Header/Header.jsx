@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import Logo from '../../assets/logo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <div className="container mx-auto mt-9 mb-9">
-            <header className="flex justify-between items-center p-2 text-gray-800 relative">
-                <div className="logo">
+            <header className="flex justify-evenly items-center p-2 text-gray-800 relative">
+              <Link to="/">
+                  <div className="logo">
                     <img src={Logo} alt="Logo" className="logo-image w-full" />
                 </div>
+              </Link>
                 
                 {/* Mobile Toggle Button */}
                 <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-2xl focus:outline-none">
