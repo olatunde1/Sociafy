@@ -110,7 +110,9 @@ function App() {
               path="log-purchased-successful"
               element={<LogPurchasedSuccessful />}
             />
-            <Route path="log-details" element={<LogDetails />} />
+            <Route path="/admin/log-details" element={<LogDetails />} />
+
+
           </Route>
         </Route>
       </Routes>

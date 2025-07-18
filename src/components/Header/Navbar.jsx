@@ -1,8 +1,10 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import Castine from "../../assets/images/castine.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ dashBoardUser }) => {
+    const navigate = useNavigate();
   const user = {
     name: "Castine",
     email: "castiin@sociafy.com",
@@ -52,8 +54,12 @@ const Navbar = ({ dashBoardUser }) => {
       </div>
 
       {/* Wallet Balance Summary or CTA - Hidden on mobile */}
+      {/* Wallet Balance Summary or CTA - Hidden on mobile */}
       <div className="hidden md:block px-4 py-2">
-        <span className="rounded-lg px-8 py-4 font-medium bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white">
+        <span
+          onClick={() => navigate("/admin/add-logs")}
+          className="rounded-lg px-8 py-4 font-medium bg-gradient-to-r from-[#622BB9] to-[#351A60] cursor-pointer text-white"
+        >
           {user.add}
         </span>
       </div>

@@ -31,7 +31,7 @@ const AdminAccountSidebar = () => {
     { name: "User Management", path: "/admin/users-admin" },
     { name: "Wallet Management", path: "/admin/wallet" },
     { name: "Report & Analytics", path: "" },
-    { name: "Log Out", path: "/" },
+    { name: "Log Out", path: "/admin/login" },
   ];
 
   const handleNavigate = (item) => {
