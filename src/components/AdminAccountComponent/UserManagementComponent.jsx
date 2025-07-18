@@ -15,60 +15,10 @@ import { useNavigate } from "react-router-dom";
 import { getAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import Loader from "../Loader";
 
-// const users = [
-//   {
-//     name: "Francis Castiin",
-//     email: "castiin@sociafy.com",
-//     platform: "USA 🇺🇸 Standard IG",
-//     signup: "Feb 24, 2025",
-//     purchases: 26,
-//     status: "Active",
-//     info: "5-8yrs with posts | 1000 followers",
-//   },
-//   {
-//     name: "Kathryn Murphy",
-//     email: "tanya.hill@example.com",
-//     platform: "USA 🇺🇸 Standard FB",
-//     signup: "Feb 24, 2025",
-//     purchases: 14,
-//     status: "Active",
-//     info: "8yrs | 100+ friends",
-//   },
-//   {
-//     name: "Bessie Cooper",
-//     email: "curtis.weaver@example.com",
-//     platform: "USA 🇺🇸 Tiktok",
-//     signup: "Feb 24, 2025",
-//     purchases: 25,
-//     status: "Active",
-//     info: "1-2yrs | Partially Filled",
-//   },
-//   {
-//     name: "Theresa Webb",
-//     email: "willie.jennings@example.com",
-//     platform: "USA 🇺🇸 Snapchat",
-//     signup: "Feb 24, 2025",
-//     purchases: 18,
-//     status: "Suspended",
-//     info: "2 - 5 months",
-//   },
-// ];
-
 const UserManagementComponent = () => {
   const navigate = useNavigate();
   
   const [filter, setFilter] = useState("All");
-
-  // const filteredUsers = users.filter(user => {
-  //   if (filter === "All") return true;
-  //   return user.status === filter;
-  // });
-
-  // const counts = {
-  //   all: users.length,
-  //   active: users.filter(user => user.status === "Active").length,
-  //   suspended: users.filter(user => user.status === "Suspended").length,
-  // };
 
   const getBadgeClass = (type) => {
     const base = "cursor-pointer transition-all";

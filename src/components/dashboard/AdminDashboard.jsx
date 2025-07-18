@@ -114,7 +114,7 @@ const AdminDashBoard = (dashBoardUser) => {
           {/* Tables Section */}
           <div className="p-4 space-y-6 sm:space-y-8">
             <div className="overflow-x-auto">
-              <RecentPurchaseTable data={RecentPurchases} />
+              <RecentPurchaseTable data={RecentPurchases} title="Recent Purchase" />
             </div>
             <div className="overflow-x-auto">
               <RecentWalletFundingTable data={RecentWalletFunding} />
