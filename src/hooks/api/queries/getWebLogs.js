@@ -4,7 +4,7 @@ import axiosInstance from "@/hooks/axiosInstace";
 export const QUERY_KEY_ALLWEBLOGS = "getALLWebLogs";
 
 const GetWebLogs = async (params = {}) => {
-  const response = await axiosInstance.get(`/users/logs`, {
+  const response = await axiosInstance.get(`/user/logs`, {
     params,
   });
 
