@@ -31,7 +31,8 @@ const ProductTable = () => {
   // console.log(userLog);
 
   return (
-    <div className=" mx-auto px-4 w-full max-w-[1200px] py-12 bg-white rounded-lg mt-20">
+    <div className=" mx-auto px-4 w-full justify-center sm:w-[1200px] py-12 bg-white mt-20"
+    >
       <h1 className="text-center font-extrabold text-3xl md:text-4xl mb-4">
         Trending <span className="text-[#7B36E7]">Accounts</span>
       </h1>
@@ -43,8 +44,8 @@ const ProductTable = () => {
         <Loader />
       ) : (
         <>
-          <div className="hidden md:block overflow-x-auto">
-            <table className="w-full">
+          <div className="hidden md:block sm:overflow-x-hidden  sm:w-[1200px]">
+            <table className="w-full sm:ml-20">
               <thead>
                 <tr className="bg-[#FAFAFB] text-left border-b border-[#EDF2F7]">
                   <th className="p-4 text-[#949494] font-semibold">Product</th>
@@ -81,7 +82,7 @@ const ProductTable = () => {
                         </span>
                       </td>
                       <td className="p-4">
-                        <Link to={"/admin/login"}>
+                        <Link to={"/login"}>
                           <button className="flex items-center gap-2 bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 rounded font-bold text-sm hover:scale-105 transition-transform">
                             <img src={IconBuy} alt="Buy" className="w-5 h-5" />
                             Buy
@@ -130,7 +131,7 @@ const ProductTable = () => {
                     </span>
                   </div>
 
-                  <Link to={"/admin/login"}>
+                  <Link to="/login">
                     <button className="w-full flex justify-center items-center gap-2 bg-[#F2EBFD] text-[#7B36E7] px-4 py-2 rounded font-bold hover:scale-105 transition-transform">
                       <img src={IconBuy} alt="Buy" className="w-5 h-5" />
                       Buy
@@ -147,8 +148,8 @@ const ProductTable = () => {
 
       {/* CTA Button */}
       <div className="text-center mt-12">
-        <Link to={"/admin/login"}>
-          <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
+        <Link to="/login">
+          <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white sm:px-30 py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
             View More
           </button>
         </Link>

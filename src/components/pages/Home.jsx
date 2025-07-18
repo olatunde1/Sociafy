@@ -8,6 +8,7 @@ import FAQSection from '../Faq'
 import Footer from '../layout/Footer'
 
 const Home = () => {
+  
   return <>
     <Header />
     <Hero />
