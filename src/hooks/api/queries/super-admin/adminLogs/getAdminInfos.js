@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/hooks/axiosInstace";
 
 export const QUERY_KEY_ALLORDERS = "getALLOrders";
+export const QUERY_KEY_ME = "getMe";
 export const QUERY_KEY_ALLSINGLEORDERS = "getALLSINGLEOrders";
 export const QUERY_KEY_Overview = "getOverview";
 export const QUERY_KEY_Users = "getUsers";
@@ -9,6 +10,13 @@ export const QUERY_KEY_SingleUser = "getSingleUser";
 export const QUERY_KEY_SingleOrder = "getSingleOrder";
 export const QUERY_KEY_SingleWallet = "getSingleWallet";
 
+const GetAdminProfile= async (params = {}) => {
+  const response = await axiosInstance.get(`/admin/me`, {
+    params,
+  });
+
+  return response.data;
+};
 const GetOrders = async (params = {}) => {
   const response = await axiosInstance.get(`/admin/orders`, {
     params,
@@ -65,6 +73,13 @@ const GetSingleUserWallet = async (id, params = {}) => {
   return response.data;
 };
 
+const getAdminProfileMe = (params) => {
+  return useQuery({
+    queryKey: [QUERY_KEY_ME, params],
+    queryFn: () => GetAdminProfile(params),
+    staleTime: 10,
+  });
+};
 const getAdminOrders = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ALLORDERS, params],
@@ -116,6 +131,7 @@ const getAdminSingleUserWallet = (id, params) => {
 };
 
 export {
+  getAdminProfileMe,
   getAdminOrders,
   getSingleAdminOrders,
   getAdminOverview,
