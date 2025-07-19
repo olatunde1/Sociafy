@@ -55,8 +55,6 @@ function App() {
 
         <Route path="/admin/login" element={<AdminLogin />} />
 
-        <Route path="/logs/:category" element={<LogDetailsPageComponent />} />
-        <Route path="/logs/all" element={<AllLogsViewComponent />} />
 
         <Route path="/admin" element={<SuperAdminProtectedRoute />}>
           <Route index element={<AdminDashboardComponent />} />
@@ -68,6 +66,8 @@ function App() {
           <Route path="users-admin" element={<UserManagementComponent />} />
           <Route path="wallet" element={<AdminWalletManagementPage />} />
           <Route path="user-info" element={<UserInfoPage />} />
+        {/* <Route path="logs/:category" element={<LogDetailsPageComponent />} /> */}
+        <Route path="logs/all" element={<AllLogsViewComponent />} />
         </Route>
 
         {/* <Route path="/admin/login" element={<AdminLogin />} />
@@ -110,7 +110,7 @@ function App() {
               path="log-purchased-successful"
               element={<LogPurchasedSuccessful />}
             />
-            <Route path="/admin/log-details" element={<LogDetails />} />
+            {/* <Route path="/admin/log-details" element={<LogDetails />} /> */}
 
 
           </Route>
