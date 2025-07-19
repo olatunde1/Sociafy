@@ -19,12 +19,13 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
     };
   };
 
+  console.log(funding, "funding");
   const { date, time } = formatDate(funding.createdAt);
 
   const handleCopy = () => {
     const details = `
-    User Name: ${funding.userName || 'Unknown User'}
-    Email: ${funding.userEmail || 'N/A'}
+    User Name: ${funding?.userId?.username || "Unknown User"}
+    Email: ${funding.userId?.email || "N/A"}
     Transaction ID: ${funding.transactionId}
     Amount: ₦${funding.amount.toLocaleString()}
     Date & Time: ${date}, ${time}
@@ -43,13 +44,13 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
         >
           Go Back
         </div>
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={onClose}
           className="hover:bg-gray-100 transition-colors duration-200"
         >
-          <X className="w-5 h-5" /> 
+          <X className="w-5 h-5" />
         </Button>
       </div>
 
@@ -75,41 +76,63 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
             <div className="space-y-4 text-sm">
               <div className="grid grid-cols-[150px_1fr] gap-4">
                 <span className="font-medium text-muted-foreground">Name:</span>
-                <span className="font-bold">{funding.userName || 'Unknown User'}</span>
+                <span className="font-bold">
+                  {funding?.userId?.username || "Unknown User"}
+                </span>
               </div>
               <div className="grid grid-cols-[150px_1fr] gap-4">
-                <span className="font-medium text-muted-foreground">User's Email:</span>
-                <span className="font-bold">{funding.userEmail || 'N/A'}</span>
+                <span className="font-medium text-muted-foreground">
+                  User's Email:
+                </span>
+                <span className="font-bold">{funding?.userId?.email || "N/A"}</span>
               </div>
             </div>
           </div>
 
           {/* Transaction Info */}
-         <div className="grid gap-y-4 text-sm">
-              <h2 className="text-[16px] font-bold  mt-10 mb-10">Transaction Information</h2>
-        <div className="grid grid-cols-[150px_1fr] gap-4">
-            <span className="font-medium text-muted-foreground">Transaction ID :</span>
-            <span className="font-bold">{funding.transactionId}</span>
-        </div>
-        <div className="grid grid-cols-[150px_1fr] gap-4">
-            <span className="font-medium text-muted-foreground">Amount :</span>
-            <span className="font-bold">₦{funding.amount.toLocaleString()}</span>
-        </div>
-        <div className="grid grid-cols-[150px_1fr] gap-4">
-            <span className="font-medium text-muted-foreground">Date & Time :</span>
-            <span className="font-bold"> {date}, {time}</span>
-        </div>
-        </div>
-
+          <div className="grid gap-y-4 text-sm">
+            <h2 className="text-[16px] font-bold  mt-10 mb-10">
+              Transaction Information
+            </h2>
+            <div className="grid grid-cols-[150px_1fr] gap-4">
+              <span className="font-medium text-muted-foreground">
+                Transaction ID :
+              </span>
+              <span className="font-bold">{funding.transactionId}</span>
+            </div>
+            <div className="grid grid-cols-[150px_1fr] gap-4">
+              <span className="font-medium text-muted-foreground">
+                Amount :
+              </span>
+              <span className="font-bold">
+                ₦{funding.amount.toLocaleString()}
+              </span>
+            </div>
+            <div className="grid grid-cols-[150px_1fr] gap-4">
+              <span className="font-medium text-muted-foreground">
+                Date & Time :
+              </span>
+              <span className="font-bold">
+                {" "}
+                {date}, {time}
+              </span>
+            </div>
+          </div>
 
           {/* Payment Status */}
           <div className=" grid grid-cols-[150px_1fr] gap-4">
-            <h2 className="text-sm font-semibold text-muted-foreground">Payment Status :</h2>
-            <div className={`text-sm font-bold ${
-              funding.status.toLowerCase() === 'success' ? 'text-green-600' :
-              funding.status.toLowerCase() === 'pending' ? 'text-yellow-600' :
-              'text-red-600'
-            }`}>
+            <h2 className="text-sm font-semibold text-muted-foreground">
+              Payment Status :
+            </h2>
+            <div
+              className={`text-sm font-bold ${
+                funding.status.toLowerCase() === "success"
+                  ? "text-green-600"
+                  : funding.status.toLowerCase() === "pending"
+                  ? "text-yellow-600"
+                  : "text-red-600"
+              }`}
+            >
               {funding.status}
             </div>
           </div>
@@ -117,9 +140,7 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
       </Card>
 
       {/* Share Receipt Button - Full width */}
-      <Button 
-        className="w-full mt-10 text-sm bg-white font-bold border border-[#7B36E7] bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
-      >
+      <Button className="w-full mt-10 text-sm bg-white font-bold border border-[#7B36E7] bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
         Share Receipt
       </Button>
     </div>
