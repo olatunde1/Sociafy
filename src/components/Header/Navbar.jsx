@@ -2,17 +2,22 @@ import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import Castine from "../../assets/images/castine.png";
 import { useNavigate } from "react-router-dom";
+import { getAdminProfileMe } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 
 const Navbar = ({ dashBoardUser }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const { data: Me, isPending } = getAdminProfileMe();
+
+  const userData = Me?.data;
   const user = {
-    name: "Castine",
-    email: "castiin@sociafy.com",
+    name: userData?.name ?? "",
+    email: userData?.email ?? "",
     balance: "NGN 179,000",
     add: "Add New Log",
     image: Castine,
   };
-  
+
   return (
     <div className="flex items-center justify-between gap-4 mb-8">
       {/* Desktop User Info (Left Side) */}

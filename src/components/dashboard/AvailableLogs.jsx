@@ -203,7 +203,7 @@ const AvailableLogs = (dashBoardUser) => {
                     <button
                       onClick={() =>
                         navigate(
-                          `/logs/${log.name
+                          `/admin/logs/${log.name
                             .toLowerCase()
                             .replace(/\s+/g, "-")}`,
                           {
