@@ -149,7 +149,7 @@ const ProductTable = () => {
       {/* CTA Button */}
       <div className="text-center mt-12">
         <Link to="/login">
-          <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white sm:px-30 py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
+          <button className="bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-20 sm:px-30 py-3 rounded-lg shadow-md hover:scale-105 transition-transform">
             View More
           </button>
         </Link>
