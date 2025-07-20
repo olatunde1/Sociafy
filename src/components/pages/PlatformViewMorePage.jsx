@@ -191,9 +191,12 @@ const PlatformViewMorePage = () => {
           <p className="text-gray-600 mb-4">
             Our support team is available 24/7 to assist you with any questions.
           </p>
-          <button className="bg-white text-purple-700 px-6 py-2 rounded-lg shadow-sm border border-purple-200 hover:bg-purple-50 transition-colors font-medium">
+          <Link to="http://T.me/castiin">
+             <button className="bg-white text-purple-700 px-6 py-2 rounded-lg shadow-sm border border-purple-200 hover:bg-purple-50 transition-colors font-medium">
             Contact Support
           </button>
+          </Link>
+         
         </div>
         <img
           src={SupportImage}

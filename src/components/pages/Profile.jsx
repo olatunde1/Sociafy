@@ -1,13 +1,14 @@
+import { useState } from "react";
 import UpdatePassword from "../../assets/images/update-password.png";
-import { Link } from "react-router-dom";
 import { getUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
 import Loader from "../Loader";
 import Castine from "../../assets/images/castine.png";
 import { format } from "date-fns";
+import ResetPassword from "./ResetPassword"; // Make sure path is correct
 
 export default function Profile() {
   const { data: profile, isPending } = getUserProfile();
-  console.log("Profile Data:", profile);
+  const [showReset, setShowReset] = useState(false); // modal state
 
   const userData = profile?.data;
 
@@ -19,14 +20,13 @@ export default function Profile() {
   };
 
   return (
-    <main className="mt-5">
+    <main className="mt-5 relative">
       {isPending ? (
         <Loader />
       ) : (
         <>
           {/* user profile */}
           <div className="grid gap-8 space-y-8 md:flex md:space-y-0">
-            {/* First Div: Flex layout for profile */}
             <div className="flex items-center justify-center bg-white p-6 rounded-lg shadow w-full md:w-[35.75rem] h-full md:h-[31.25rem]">
               <div className="grid place-items-center gap-6">
                 <img
@@ -40,7 +40,7 @@ export default function Profile() {
                     Email: {userData.email}
                   </p>
                   <p className="text-sm text-gray-500 mt-1">
-                    Joined: 
+                    Joined:{" "}
                     {format(new Date(userData.createdDate), "MMM dd, yyyy")}
                   </p>
                 </div>
@@ -48,7 +48,6 @@ export default function Profile() {
             </div>
 
             <div className="grid gap-8">
-              {/* Second Div: Grid for total spent */}
               <div className="items-center text-center justify-center grid bg-white p-18 rounded-lg shadow w-full md:w-[35.75rem] h-full md:h-[14.375rem]">
                 <span className="text-[26px] font-bold text-gray-800">
                   Total Spent
@@ -58,7 +57,6 @@ export default function Profile() {
                 </span>
               </div>
 
-              {/* Third Div: Grid for total purchased */}
               <div className="items-center text-center justify-center grid bg-white p-18 rounded-lg shadow md:w-[35.75rem] h-full md:h-[14.375rem]">
                 <span className="text-[26px] font-bold text-gray-800">
                   Total Purchased
@@ -68,18 +66,21 @@ export default function Profile() {
                 </span>
               </div>
             </div>
-
-            {/* Update Password Button can be placed here if needed */}
           </div>
 
           <div>
-            <Link to="/reset-password">
-              <button className="px-10 py-4 flex items-center text-[24px] font-semibold bg-[#F2EBFD] text-[#1B1B1B] rounded-2xl hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white gap-6 mt-[60px]">
-                <img src={UpdatePassword} alt="" />
-                Update Password
-              </button>
-            </Link>
+            <button
+              onClick={() => setShowReset(true)}
+              className="px-10 py-4 flex items-center text-[24px] font-semibold bg-[#F2EBFD] text-[#1B1B1B] rounded-2xl hover:bg-gradient-to-r from-[#622BB9] to-[#351A60] hover:text-white gap-6 mt-[60px]"
+            >
+              <img src={UpdatePassword} alt="" />
+              Update Password
+            </button>
           </div>
+
+          {showReset && (
+            <ResetPassword onClose={() => setShowReset(false)} />
+          )}
         </>
       )}
     </main>

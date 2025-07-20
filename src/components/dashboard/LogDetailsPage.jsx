@@ -97,10 +97,16 @@ const LogDetailsPage = () => {
             {/* Table Headers */}
             <div className="hidden sm:grid sm:grid-cols-5 gap-4 bg-[#EDF2F7] font-semibold text-sm text-gray-500 py-3 px-4 border-b">
               <p>Product</p>
+              <p>Age</p>
+              <p>Friends</p>
+              <p>Amount</p>
+              <p>Action</p>
+
+              {/* <p>Product</p>
               <p>Price</p>
               <p>2 FA</p>
               <p>UserName</p>
-              <p>Action</p>
+              <p>Action</p> */}
             </div>
 
             {/* Product Rows */}

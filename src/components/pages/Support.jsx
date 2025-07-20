@@ -12,7 +12,8 @@ export default function Support() {
 
       {/* Rules Section */}
       <div className="grid gap-8 space-y-8 md:flex md:space-y-0">
-        <div className="flex mt-16 bg-white p-6 rounded-lg shadow w-full md:w-[578px]">
+        <Link to="http://T.me/castiin">
+             <div className="flex mt-16 bg-white p-6 rounded-lg shadow w-full md:w-[578px]">
           <div>
             <div className="flex items-center gap-4">
               <img src={SupportImage} alt="" />
@@ -25,6 +26,8 @@ export default function Support() {
             </div>
           </div>
         </div>
+        </Link>
+       
       </div>
     </main>
   );

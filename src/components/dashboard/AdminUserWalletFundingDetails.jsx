@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Copy, X } from "lucide-react";
+import { X } from "lucide-react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
+  const receiptRef = useRef();
+
   const formatDate = (isoDate) => {
     const dateObj = new Date(isoDate);
     return {
@@ -15,24 +19,34 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
       time: dateObj.toLocaleTimeString("en-GB", {
         hour: "2-digit",
         minute: "2-digit",
-      })
+      }),
     };
   };
 
-  console.log(funding, "funding");
   const { date, time } = formatDate(funding.createdAt);
 
-  const handleCopy = () => {
-    const details = `
-    User Name: ${funding?.userId?.username || "Unknown User"}
-    Email: ${funding.userId?.email || "N/A"}
-    Transaction ID: ${funding.transactionId}
-    Amount: ₦${funding.amount.toLocaleString()}
-    Date & Time: ${date}, ${time}
-    Status: ${funding.status}
-        `;
-        navigator.clipboard.writeText(details);
-    };
+  const handleDownloadPDF = async () => {
+    const cardElement = receiptRef.current;
+
+    try {
+      const canvas = await html2canvas(cardElement, {
+        scale: 2,
+        useCORS: true,
+      });
+      const imgData = canvas.toDataURL("image/png");
+
+      const pdf = new jsPDF({
+        orientation: "portrait",
+        unit: "px",
+        format: [canvas.width, canvas.height],
+      });
+
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
+      pdf.save(`wallet-receipt-${funding.transactionId || "receipt"}.pdf`);
+    } catch (error) {
+      console.error("PDF generation failed:", error);
+    }
+  };
 
   return (
     <div className="p-4 sm:w-[640px] space-y-4 w-full mx-auto">
@@ -54,25 +68,14 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
         </Button>
       </div>
 
-      {/* Copy Info */}
-      <div className="flex justify-end mt-10">
-        <Button
-          variant="outline"
-          size="sm"
-          className="flex items-center gap-1 text-xs hover:bg-gray-50 transition-colors duration-200"
-          onClick={handleCopy}
-        >
-          <Copy className="w-3 h-3" />
-          Copy Info
-        </Button>
-      </div>
-
-      {/* Card Info - Full width on mobile */}
-      <Card className="border rounded-lg p-4 space-y-4 transition-shadow duration-200 hover:shadow-md">
+      {/* Card Info - PDF Section */}
+      <Card
+        ref={receiptRef}
+        className="border rounded-lg p-4 space-y-4 transition-shadow duration-200 hover:shadow-md mt-10 bg-white text-black"
+      >
         <CardContent className="p-0 space-y-4">
-          {/* User Info */}
           <div className="space-y-2">
-            <h2 className="text-[16px] font-bold mb-8 ">User Information</h2>
+            <h2 className="text-[16px] font-bold mb-8">User Information</h2>
             <div className="space-y-4 text-sm">
               <div className="grid grid-cols-[150px_1fr] gap-4">
                 <span className="font-medium text-muted-foreground">Name:</span>
@@ -89,41 +92,24 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
             </div>
           </div>
 
-          {/* Transaction Info */}
           <div className="grid gap-y-4 text-sm">
-            <h2 className="text-[16px] font-bold  mt-10 mb-10">
-              Transaction Information
-            </h2>
+            <h2 className="text-[16px] font-bold mt-10 mb-10">Transaction Information</h2>
             <div className="grid grid-cols-[150px_1fr] gap-4">
-              <span className="font-medium text-muted-foreground">
-                Transaction ID :
-              </span>
+              <span className="font-medium text-muted-foreground">Transaction ID :</span>
               <span className="font-bold">{funding.transactionId}</span>
             </div>
             <div className="grid grid-cols-[150px_1fr] gap-4">
-              <span className="font-medium text-muted-foreground">
-                Amount :
-              </span>
-              <span className="font-bold">
-                ₦{funding.amount.toLocaleString()}
-              </span>
+              <span className="font-medium text-muted-foreground">Amount :</span>
+              <span className="font-bold">₦{funding.amount.toLocaleString()}</span>
             </div>
             <div className="grid grid-cols-[150px_1fr] gap-4">
-              <span className="font-medium text-muted-foreground">
-                Date & Time :
-              </span>
-              <span className="font-bold">
-                {" "}
-                {date}, {time}
-              </span>
+              <span className="font-medium text-muted-foreground">Date & Time :</span>
+              <span className="font-bold">{date}, {time}</span>
             </div>
           </div>
 
-          {/* Payment Status */}
-          <div className=" grid grid-cols-[150px_1fr] gap-4">
-            <h2 className="text-sm font-semibold text-muted-foreground">
-              Payment Status :
-            </h2>
+          <div className="grid grid-cols-[150px_1fr] gap-4">
+            <h2 className="text-sm font-semibold text-muted-foreground">Payment Status :</h2>
             <div
               className={`text-sm font-bold ${
                 funding.status.toLowerCase() === "success"
@@ -139,8 +125,11 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
         </CardContent>
       </Card>
 
-      {/* Share Receipt Button - Full width */}
-      <Button className="w-full mt-10 text-sm bg-white font-bold border border-[#7B36E7] bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105">
+      {/* Share Receipt Button */}
+      <Button
+        onClick={handleDownloadPDF}
+        className="w-full mt-10 text-sm bg-white font-bold border border-[#7B36E7] bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-10 py-2 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105"
+      >
         Share Receipt
       </Button>
     </div>

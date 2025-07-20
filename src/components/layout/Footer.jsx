@@ -22,11 +22,14 @@ export default function Footer() {
 
         {/* Right - Icons */}
         <div className="flex space-x-4 text-[#7B36E7] text-xl">
-          <a href="#" aria-label="Telegram" className="hover:text-purple-700 transition">
-            <img src={Telegram} alt="" />
-          </a>
+            <Link to="http://T.me/castiin">
+              <a href="#" aria-label="Telegram" className="hover:text-purple-700 transition">
+                <img src={Telegram} alt="" />
+              </a>
+            </Link>
+        
           <a href="#" aria-label="WhatsApp" className="hover:text-purple-700 transition">
-          <img src={Whatsapp} alt="" />
+           <img src={Whatsapp} alt="" />
           </a>
         </div>
         
