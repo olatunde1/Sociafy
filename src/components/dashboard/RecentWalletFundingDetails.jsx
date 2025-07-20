@@ -67,19 +67,19 @@ const RecentWalletFundingDetails = ({ isOpen, onClose, funding }) => {
       >
         {/* Header */}
         <div className="flex items-center gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleClose}
-              className="text-sm text-gray-600 mt-6 hover:text-black"
-            >
-              <ArrowLeft className="w-4 h-4 mr-1" /> Back
-            </Button>
-           
-          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleClose}
+            className="text-sm text-gray-600 mt-6 hover:text-black"
+          >
+            <ArrowLeft className="w-4 h-4 mr-1" /> Back
+          </Button>
+        </div>
         <div className="flex items-center justify-between p-4 bg-white sticky top-0">
-          
-           <h1 className="text-lg font-bold text-[#515151]">Wallet Funding Details</h1>
+          <h1 className="text-lg font-bold text-[#515151]">
+            Wallet Funding Details
+          </h1>
           <Button
             variant="ghost"
             size="sm"
@@ -93,66 +93,73 @@ const RecentWalletFundingDetails = ({ isOpen, onClose, funding }) => {
         {/* Content */}
         <div className="p-4 space-y-4 overflow-y-auto h-full pb-20 ">
           <Card className="bg-[#F2F2F7]">
-  <CardContent className="p-4 space-y-4">
-    {/* Status aligned right */}
-    <div className="flex justify-between items-center">
-      <h2 className="text-base font-medium text-[#515151]">Funding Status</h2>
-      <Badge
-        className={
-          funding.status === "success"
-            ? "bg-[#12B64A] text-sm text-white"
-            : funding.status === "pending"
-            ? "bg-[#FFC107] text-white"
-            : "bg-[#FF3D00] text-white"
-        }
-      >
-        {funding.status}
-      </Badge>
-    </div>
+            <CardContent className="p-4 space-y-4">
+              {/* Status aligned right */}
+              <div className="flex justify-between items-center">
+                <h2 className="text-base font-medium text-[#515151]">
+                  Funding Status
+                </h2>
+                <Badge
+                  className={
+                    funding.status === "success"
+                      ? "bg-[#12B64A] text-sm text-white"
+                      : funding.status === "pending"
+                      ? "bg-[#FFC107] text-white"
+                      : "bg-[#FF3D00] text-white"
+                  }
+                >
+                  {funding.status}
+                </Badge>
+              </div>
 
-    {/* Uniformly spaced rows */}
-    <div className="flex justify-between">
-      <p className="text-sm text-gray-500">User ID:</p>
-      <p className="text-base font-medium text-right">{funding.userId}</p>
-    </div>
+              {/* Uniformly spaced rows */}
+              <div className="flex justify-between">
+                <p className="text-sm text-gray-500">User ID:</p>
+                <p className="text-base font-medium text-right">
+                  {funding?.userId?._id || "Unknown User"}
+                </p>
+              </div>
 
-    <div className="flex justify-between">
-      <p className="text-sm text-gray-500">Transaction ID:</p>
-      <p className="text-base font-semibold text-right text-[#515151]">
-        #{funding.transactionId}
-      </p>
-    </div>
+              <div className="flex justify-between">
+                <p className="text-sm text-gray-500">Transaction ID:</p>
+                <p className="text-base font-semibold text-right text-[#515151]">
+                  #{funding.transactionId}
+                </p>
+              </div>
 
-    <div className="flex justify-between">
-      <p className="text-sm text-gray-500">Amount:</p>
-      <p className="text-xl font-semibold text-right text-[#515151]">
-        ₦{funding.amount.toLocaleString()}
-      </p>
-    </div>
+              <div className="flex justify-between">
+                <p className="text-sm text-gray-500">Amount:</p>
+                <p className="text-xl font-semibold text-right text-[#515151]">
+                  ₦{funding.amount.toLocaleString()}
+                </p>
+              </div>
 
-    <div className="flex justify-between">
-      <p className="text-sm text-gray-500">Date & Time:</p>
-      <p className="text-base font-medium text-right">{formatDate(funding.createdAt)}</p>
-    </div>
+              <div className="flex justify-between">
+                <p className="text-sm text-gray-500">Date & Time:</p>
+                <p className="text-base font-medium text-right">
+                  {formatDate(funding.createdAt)}
+                </p>
+              </div>
 
-    {funding.paymentMethod && (
-      <div className="flex justify-between">
-        <p className="text-sm text-gray-500">Payment Method:</p>
-        <p className="text-base font-medium text-right">{funding.paymentMethod}</p>
-      </div>
-    )}
+              {funding.paymentMethod && (
+                <div className="flex justify-between">
+                  <p className="text-sm text-gray-500">Payment Method:</p>
+                  <p className="text-base font-medium text-right">
+                    {funding.paymentMethod}
+                  </p>
+                </div>
+              )}
 
-    {funding.metadata && (
-      <div>
-        <p className="text-sm text-gray-500 mb-1">Additional Info:</p>
-        <pre className="text-xs bg-gray-100 p-2 rounded whitespace-pre-wrap">
-          {JSON.stringify(funding.metadata, null, 2)}
-        </pre>
-      </div>
-    )}
-  </CardContent>
-</Card>
-
+              {funding.metadata && (
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Additional Info:</p>
+                  <pre className="text-xs bg-gray-100 p-2 rounded whitespace-pre-wrap">
+                    {JSON.stringify(funding.metadata, null, 2)}
+                  </pre>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </div>
     </>
