@@ -101,12 +101,15 @@ const LogDetailsPage = () => {
               <p>Friends</p>
               <p>Amount</p>
               <p>Action</p>
+<<<<<<< HEAD
 
               {/* <p>Product</p>
               <p>Price</p>
               <p>2 FA</p>
               <p>UserName</p>
               <p>Action</p> */}
+=======
+>>>>>>> 23649e57617486ea2ea8e1c2c85f7b66f63ec7e1
             </div>
 
             {/* Product Rows */}
@@ -116,9 +119,9 @@ const LogDetailsPage = () => {
                 className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-4 items-center text-sm py-3 px-2 sm:px-4 border-b"
               >
                 <p className="font-medium truncate">{product.name}</p>
+                <p className="font-medium truncate">{product.age}</p>
+                <p className="font-medium truncate">{product.friends}</p>
                 <p className="font-medium">₦{product.price.toLocaleString()}</p>
-                <p className="font-medium truncate">{product.twoFa}</p>
-                <p className="font-medium truncate">{product.username}</p>
                 <div className="flex justify-end sm:justify-start">
                   <Popover>
                     <PopoverTrigger asChild>

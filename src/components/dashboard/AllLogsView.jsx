@@ -37,10 +37,10 @@ const AllLogsView = () => {
       {/* Table header - responsive columns */}
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-4 text-gray-500 font-semibold text-xs sm:text-sm border-b py-3 px-2 sm:px-4 bg-[#EDF2F7]">
         <p className="truncate">Product</p>
-        <p className="text-center sm:text-left">Price</p>
-        <p className="hidden sm:block">Username</p>
+        <p className="text-center sm:text-left">Age</p>
+        <p className="hidden sm:block">Friends</p>
+        <p className="hidden sm:block">Amount</p>
         <p className="hidden sm:block">Sub Category</p>
-        <p className="hidden sm:block">2 FA</p>
         <p className="text-right sm:text-left">Action</p>
       </div>
 
@@ -51,10 +51,10 @@ const AllLogsView = () => {
           className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-4 items-center text-xs sm:text-sm py-3 px-2 sm:px-4 border-b hover:bg-gray-50 transition-colors"
         >
           <p className="truncate font-medium">{log.name}</p>
+          <p className="hidden sm:block">{log.age}</p>
+          <p className="hidden sm:block font-medium">{log.friends}</p>
           <p className="text-center sm:text-left">{log.price}</p>
-          <p className="hidden sm:block">{log.username}</p>
           <p className="hidden sm:block font-medium">{log.subcategory}</p>
-          <p className="hidden sm:block font-medium">{log.twoFa}</p>
           <div className="flex justify-end sm:justify-start">
             <Button
                 variant="outline"
