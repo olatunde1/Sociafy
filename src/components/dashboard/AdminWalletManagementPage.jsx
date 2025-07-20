@@ -283,10 +283,10 @@ const AdminWalletManagementPage = () => {
                           </td>
                           <td className="px-2 py-2 sm:px-3 sm:py-3">
                             <div className="font-semibold text-gray-900 truncate max-w-[120px] sm:max-w-none">
-                              {funding.userId?.username || "Unknown User"}
+                              {funding.userName || 'Unknown User'}
                             </div>
                             <div className="text-gray-500 text-xs truncate max-w-[120px] sm:max-w-none">
-                              ID: {funding?.userId?._id}
+                              ID: {funding.userId}
                             </div>
                           </td>
                           <td className="px-2 py-2 sm:px-3 sm:py-3">

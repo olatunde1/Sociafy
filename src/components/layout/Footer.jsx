@@ -2,6 +2,7 @@ import { FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import SociafyLogo from '../../assets/images/logo.png'; // replace with your actual logo path
 import Telegram from '../../assets/images/telegram-icon.png'
 import Whatsapp from '../../assets/images/whatssap-icon.png'
+import { Link } from "react-router-dom";
 
 
 

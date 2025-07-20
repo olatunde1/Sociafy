@@ -101,15 +101,6 @@ const LogDetailsPage = () => {
               <p>Friends</p>
               <p>Amount</p>
               <p>Action</p>
-<<<<<<< HEAD
-
-              {/* <p>Product</p>
-              <p>Price</p>
-              <p>2 FA</p>
-              <p>UserName</p>
-              <p>Action</p> */}
-=======
->>>>>>> 23649e57617486ea2ea8e1c2c85f7b66f63ec7e1
             </div>
 
             {/* Product Rows */}
