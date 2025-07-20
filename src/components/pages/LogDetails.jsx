@@ -7,6 +7,9 @@ export default function LogDetails() {
 
   if (!state) return <div className="p-8">No data available.</div>;
 
+  const stateData = state?.log ? state.log : state;
+
+  console.log(stateData, "log details state");
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-end bg-black/30 backdrop-blur-sm">
       {/* Slide-in panel */}
@@ -20,7 +23,8 @@ export default function LogDetails() {
             Go Back / Account
           </button>
           <button
-            onClick={() => navigate("/my-purchased")}
+            // onClick={() => navigate("/my-purchased")}
+            onClick={() => navigate(-1)}
             className="text-gray-700 hover:text-red-600 flex items-center gap-2"
           >
             <X className="w-6 h-6 bg-[#E5E5EA] rounded-sm p-1" /> Close
@@ -29,11 +33,11 @@ export default function LogDetails() {
 
         {/* Content */}
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl font-bold mb-2">{state.product}</h2>
-          <p className="text-sm text-gray-500 mb-6">{state.description}</p>
+          <h2 className="text-xl font-bold mb-2">{stateData.product}</h2>
+          <p className="text-sm text-gray-500 mb-6">{stateData.description}</p>
 
           <p className="text-2xl font-semibold text-[#515151] mb-4">
-            {state.price?.toLocaleString?.() || "N/A"}
+            {stateData.price?.toLocaleString?.() || "N/A"}
           </p>
 
           <div className="flex justify-end mb-6">
@@ -41,11 +45,11 @@ export default function LogDetails() {
               className="text-sm font-semibold text-[#7B36E7]"
               onClick={() => {
                 const allInfo = `
-Username: ${state.username}
-Password: ${state.password}
-Email: ${state.email}
-Email Password: ${state.emailPassword}
-Date Created: ${state.dateCreated}
+Username: ${stateData.username}
+Password: ${stateData.password}
+Email: ${stateData.email}
+Email Password: ${stateData.emailPassword}
+Date Created: ${stateData.dateCreated}
                 `;
                 navigator.clipboard.writeText(allInfo);
                 alert("Info copied to clipboard!");
@@ -57,11 +61,11 @@ Date Created: ${state.dateCreated}
 
           <div className="bg-[#F2F2F7] border-2 border-dashed border-[#949494] rounded-lg p-6 mb-10 space-y-5">
             {[
-              { label: "Username", value: state.username },
-              { label: "Password", value: state.password },
-              { label: "Email", value: state.email },
-              { label: "Email Password", value: state.emailPassword },
-              { label: "Date Created", value: state.dateCreated },
+              { label: "Username", value: stateData.username },
+              { label: "Password", value: "*****" },
+              { label: "Email", value: stateData.accountemail },
+              { label: "Email Password", value: "****" },
+              { label: "Date Created", value: stateData.createdAt?.split("T")[0] },
             ].map(({ label, value }) => (
               <div key={label} className="flex gap-6 justify-stretch">
                 <strong className="text-sm text-gray-500 w-32">{label}:</strong>

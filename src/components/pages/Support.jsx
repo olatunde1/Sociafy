@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../../assets/images/logo.png";
-import Castine from "../../assets/images/castine.png";
 import { Link } from "react-router-dom";
 import SupportImage from "../../assets/images/telegram-support.png";
 
