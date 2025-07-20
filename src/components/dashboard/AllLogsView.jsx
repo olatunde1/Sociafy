@@ -23,7 +23,7 @@ const AllLogsView = () => {
           onClick={() => navigate(-1)}
           className="text-sm text-gray-600 hover:text-[#351A60] flex items-center"
         >
-          <span className="mr-1">←</span> Go Back
+          Go Back
         </button>
         <span className="mx-2 text-gray-400">/</span>
         <span className="text-sm text-[#351A60] font-semibold">
