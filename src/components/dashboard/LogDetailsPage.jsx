@@ -97,9 +97,9 @@ const LogDetailsPage = () => {
             {/* Table Headers */}
             <div className="hidden sm:grid sm:grid-cols-5 gap-4 bg-[#EDF2F7] font-semibold text-sm text-gray-500 py-3 px-4 border-b">
               <p>Product</p>
-              <p>Price</p>
-              <p>2 FA</p>
-              <p>UserName</p>
+              <p>Age</p>
+              <p>Friends</p>
+              <p>Amount</p>
               <p>Action</p>
             </div>
 
@@ -110,9 +110,9 @@ const LogDetailsPage = () => {
                 className="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-4 items-center text-sm py-3 px-2 sm:px-4 border-b"
               >
                 <p className="font-medium truncate">{product.name}</p>
+                <p className="font-medium truncate">{product.age}</p>
+                <p className="font-medium truncate">{product.friends}</p>
                 <p className="font-medium">₦{product.price.toLocaleString()}</p>
-                <p className="font-medium truncate">{product.twoFa}</p>
-                <p className="font-medium truncate">{product.username}</p>
                 <div className="flex justify-end sm:justify-start">
                   <Popover>
                     <PopoverTrigger asChild>
