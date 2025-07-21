@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Copy, X } from "lucide-react";
-
-import { useRef } from "react";
+import { X } from "lucide-react";
+import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import domtoimage from "dom-to-image";
-import jsPDF from "jspdf";
+
 
 const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
   const receiptRef = useRef(null);
@@ -93,7 +92,7 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
       </div>
 
       {/* Copy Info */}
-      <div className="flex justify-end mt-10">
+      {/* <div className="flex justify-end mt-10">
         <Button
           variant="outline"
           size="sm"
@@ -103,7 +102,7 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
           <Copy className="w-3 h-3" />
           Copy Info
         </Button>
-      </div>
+      </div> */}
 
       {/* RECEIPT CARD */}
       <div

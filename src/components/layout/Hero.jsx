@@ -79,7 +79,7 @@ const Hero = () => {
                         Get access to aged and high-engagement accounts on Instagram, Facebook, TikTok, and more.
                     </p>
                     <Link to="/login">
-                     <button className="mt-4 sm:mt-6 md:mt-10 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-6 sm:px-8 md:px-12 py-2 sm:py-3 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 text-sm sm:text-base">
+                     <button className="mt-4 sm:mt-6 md:mt-10 bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-20 sm:px-8 md:px-12 py-3 sm:py-3 rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 text-sm sm:text-base">
                         Browse Accounts
                     </button>
                     </Link>

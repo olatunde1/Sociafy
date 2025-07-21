@@ -36,6 +36,7 @@ import AdminWalletManagementPage from "./components/dashboard/AdminWalletManagem
 import UserInfoPage from "./components/dashboard/UserInfoPage";
 import UserAccountLayout from "./components/layout/UserAccountLayout";
 import UserDashBoard from "./components/pages/UserDashboard";
+import ForgetPassword from "./components/pages/ForgetPassword";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
         {/* Add more routes here as needed */}
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
 
         <Route path="/reset-password" element={<ResetPassword />} />
 
