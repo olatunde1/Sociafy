@@ -24,15 +24,15 @@ import {
 } from "@/hooks/api/mutation/superAdmin/category/AddCategory";
 import Loader from "../Loader";
 
-const logCategories = [
-  { name: "Facebook", image: FacebookAdmin, count: 2134 },
-  { name: "Instagram", image: InstagramAdmin, count: 2134 },
-  { name: "TikTok", image: TikTokAdmin, count: 2134 },
-  { name: "Snapchat", image: SnapchatAdmin, count: 2134 },
-  { name: "Twitter", image: TwitterAdmin, count: 2134 },
-  { name: "PIA VPN", image: PIA_VPNAdmin, count: 2134 },
-  { name: "Google Voice", image: Google_VoiceAdmin, count: 2134 },
-];
+// const logCategories = [
+//   { name: "Facebook", image: FacebookAdmin, count: 2134 },
+//   { name: "Instagram", image: InstagramAdmin, count: 2134 },
+//   { name: "TikTok", image: TikTokAdmin, count: 2134 },
+//   { name: "Snapchat", image: SnapchatAdmin, count: 2134 },
+//   { name: "Twitter", image: TwitterAdmin, count: 2134 },
+//   { name: "PIA VPN", image: PIA_VPNAdmin, count: 2134 },
+//   { name: "Google Voice", image: Google_VoiceAdmin, count: 2134 },
+// ];
 
 const AvailableLogs = (dashBoardUser) => {
   const navigate = useNavigate();

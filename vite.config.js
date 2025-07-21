@@ -1,21 +1,22 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-// https://vite.dev/config/
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 export default defineConfig({
-  server:{
-    host: "0.0.0.0",
-    fs: {
-      strict: false, // Allow serving files outside of the project root
-      
-    },
+ server: {
+    host: "localhost",    
+    port: 5173,           
+    open: true,            
   },
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"), // <-- add alias here
+      "@": resolve(__dirname, "src"),
     },
   },
 });

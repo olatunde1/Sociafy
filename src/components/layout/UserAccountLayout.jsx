@@ -4,12 +4,12 @@ import AccountSideBar from "../UserAccount/AccountSideBar";
 
 import Castine from "../../assets/images/castine.png";
 import { MenuIcon } from "lucide-react";
-import { getUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
+import { useUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
 
 const UserAccountLayout = () => {
   const { isSidebarOpen, toggleSidebar, closeSidebar } = useSidebarStore();
   
-  const { data: profile, isPending } = getUserProfile();
+  const { data: profile } = useUserProfile();
    const userData = profile?.data;
 
   const user = {

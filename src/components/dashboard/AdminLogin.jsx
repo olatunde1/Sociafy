@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AdminLogo from "../../assets/images/admin-logo.png";
 import BackgroundImage from "../../assets/images/background-image.png";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +19,8 @@ const Loginschema = yup.object().shape({
 });
 
 const AdminLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   // const handleSubmit = (e) => {

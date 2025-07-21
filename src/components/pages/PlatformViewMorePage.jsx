@@ -39,7 +39,7 @@ const PlatformViewMorePage = () => {
   const platformDetails = accData?.data?.result || [];
   const pagedInfo = accData?.data?.pagedInfo;
 
-  const products = platformDetails;
+  // const products = platformDetails;
   const filteredProducts = search
     ? platformDetails.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())

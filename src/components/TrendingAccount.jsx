@@ -4,24 +4,24 @@ import getWebLogs from "@/hooks/api/queries/getWebLogs";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 
-const products = [
-  {
-    name: "USA 🇺🇸 Standard IG",
-    title: "5-8yrs with posts | 1000 followers",
-    icon: "📸",
-    price: 30000,
-    quantity: 231,
-  },
-  { name: "Handbag Facebook", icon: "📘", price: 30000, quantity: 231 },
-  { name: "Smartwatch Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
-  { name: "Sunglasses Instagram", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Hoodie Facebook", icon: "📘", price: 30000, quantity: 231 },
-  { name: "Earrings Instagram", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Phone Case Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
-  { name: "Perfume Facebook", icon: "📘", price: 30000, quantity: 231 },
-  { name: "Laptop Bag Instagram", icon: "📸", price: 30000, quantity: 231 },
-  { name: "Bracelet Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
-];
+// const products = [
+//   {
+//     name: "USA 🇺🇸 Standard IG",
+//     title: "5-8yrs with posts | 1000 followers",
+//     icon: "📸",
+//     price: 30000,
+//     quantity: 231,
+//   },
+//   { name: "Handbag Facebook", icon: "📘", price: 30000, quantity: 231 },
+//   { name: "Smartwatch Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
+//   { name: "Sunglasses Instagram", icon: "📸", price: 30000, quantity: 231 },
+//   { name: "Hoodie Facebook", icon: "📘", price: 30000, quantity: 231 },
+//   { name: "Earrings Instagram", icon: "📸", price: 30000, quantity: 231 },
+//   { name: "Phone Case Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
+//   { name: "Perfume Facebook", icon: "📘", price: 30000, quantity: 231 },
+//   { name: "Laptop Bag Instagram", icon: "📸", price: 30000, quantity: 231 },
+//   { name: "Bracelet Twitter/X", icon: "🐦", price: 30000, quantity: 231 },
+// ];
 
 const ProductTable = () => {
   const { data, isPending } = getWebLogs();

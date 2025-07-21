@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import Navbar from "../Header/Navbar";
-import getAdminLogs from "@/hooks/api/queries/super-admin/adminLogs/getAdminLogs";
+import getAdminLogs from "@/hooks/api/queries/super-admin/adminLogs/GetAdminLogs";
 import Loader from "../Loader";
 
 const LogDetailsPage = () => {

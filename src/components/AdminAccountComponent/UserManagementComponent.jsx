@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import Navbar from "../Header/Navbar";
 import { useNavigate } from "react-router-dom";
-import { getAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import Loader from "../Loader";
 
 const UserManagementComponent = () => {
@@ -20,22 +20,22 @@ const UserManagementComponent = () => {
   
   const [filter, setFilter] = useState("All");
 
-  const getBadgeClass = (type) => {
-    const base = "cursor-pointer transition-all";
-    if (filter === "All" && type === "All") return `${base} bg-gray-800 text-white`;
-    if (filter === "Active" && type === "Active") return `${base} bg-green-700 text-white`;
-    if (filter === "Suspended" && type === "Suspended") return `${base} bg-red-600 text-white`;
+  // const getBadgeClass = (type) => {
+  //   const base = "cursor-pointer transition-all";
+  //   if (filter === "All" && type === "All") return `${base} bg-gray-800 text-white`;
+  //   if (filter === "Active" && type === "Active") return `${base} bg-green-700 text-white`;
+  //   if (filter === "Suspended" && type === "Suspended") return `${base} bg-red-600 text-white`;
 
-    switch (type) {
-      case "All": return `${base} bg-gray-100 text-gray-800`;
-      case "Active": return `${base} bg-green-100 text-green-700`;
-      case "Suspended": return `${base} bg-red-100 text-red-600`;
-      default: return base;
-    }
-  };
+  //   switch (type) {
+  //     case "All": return `${base} bg-gray-100 text-gray-800`;
+  //     case "Active": return `${base} bg-green-100 text-green-700`;
+  //     case "Suspended": return `${base} bg-red-100 text-red-600`;
+  //     default: return base;
+  //   }
+  // };
 
 
-  const { data: usersData, isPending } = getAdminUsers();
+  const { data: usersData, isPending } = useAdminUsers();
   const users = usersData?.data?.result || [];
 
   const filteredUsers = useMemo(() => {

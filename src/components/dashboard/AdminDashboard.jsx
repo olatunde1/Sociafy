@@ -11,10 +11,10 @@ import Navbar from "../Header/Navbar";
 import { RecentPurchases } from "../dashboard/data";
 import { RecentWalletFunding } from "../dashboard/data";
 import Loader from "../Loader";
-import { getAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 
 const AdminDashBoard = (dashBoardUser) => {
-  const { data: overview, isPending } = getAdminOverview();
+  const { data: overview, isPending } = useAdminOverview();
   console.log(overview, "overview");
 
   const overviewData = overview?.data ?? {}

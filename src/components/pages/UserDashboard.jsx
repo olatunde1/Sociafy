@@ -10,21 +10,21 @@ import TotalDeposit from "../../assets/images/total-deposit.png";
 import SociafyCornerImage from "../../assets/images/socccialffy-corner.png";
 import Loader from "../Loader";
 import {
-  getOrders,
-  getPayment,
+  useOrders,
+  usePayment,
 } from "@/hooks/api/queries/user/dashboard/getHistories";
-import { getUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
+import { useUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
 import { useNavigate } from "react-router-dom";
 import FundWalletModal from "./FundWalletModal";
 
 const UserDashBoard = () => {
   const navigate = useNavigate();
 
-  const { data: userOverview, isPending } = getUserOverview();
-  const { data: paymentHistory, isPending: payPend } = getPayment({
+  const { data: userOverview, isPending } = useUserOverview();
+  const { data: paymentHistory, isPending: payPend } = usePayment({
     limit: 5,
   });
-  const { data: orderHistory, isPending: orderPend } = getOrders({
+  const { data: orderHistory, isPending: orderPend } = useOrders({
     limit: 5,
   });
 

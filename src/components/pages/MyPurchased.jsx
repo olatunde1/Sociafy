@@ -1,47 +1,47 @@
 
 import {  useNavigate } from "react-router-dom";
-import { getOrders } from "@/hooks/api/queries/user/dashboard/getHistories";
+import { useOrders } from "@/hooks/api/queries/user/dashboard/getHistories";
 import Loader from "../Loader";
 
 export default function MyPurchased() {
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    // Clear session logic here
-    localStorage.clear();
-    sessionStorage.clear();
-    navigate("/");
-  };
+  // const handleSignOut = () => {
+  //   // Clear session logic here
+  //   localStorage.clear();
+  //   sessionStorage.clear();
+  //   navigate("/");
+  // };
 
-  const { data: orderHistory, isPending } = getOrders();
+  const { data: orderHistory, isPending } = useOrders();
 
   // Function to generate random dates
-  const generateRandomDate = () => {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = months[Math.floor(Math.random() * 12)];
-    const day = Math.floor(Math.random() * 28) + 1;
-    const year = 2025;
-    const hour = Math.floor(Math.random() * 12) + 1;
-    const minute = Math.floor(Math.random() * 60);
-    const ampm = Math.random() > 0.5 ? "am" : "pm";
+  // const generateRandomDate = () => {
+  //   const months = [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ];
+  //   const month = months[Math.floor(Math.random() * 12)];
+  //   const day = Math.floor(Math.random() * 28) + 1;
+  //   const year = 2025;
+  //   const hour = Math.floor(Math.random() * 12) + 1;
+  //   const minute = Math.floor(Math.random() * 60);
+  //   const ampm = Math.random() > 0.5 ? "am" : "pm";
 
-    return `${month} ${day}, ${year}\n${hour
-      .toString()
-      .padStart(2, "0")}:${minute.toString().padStart(2, "0")}${ampm}`;
-  };
+  //   return `${month} ${day}, ${year}\n${hour
+  //     .toString()
+  //     .padStart(2, "0")}:${minute.toString().padStart(2, "0")}${ampm}`;
+  // };
   const orders = orderHistory?.data?.result || [];
 
   return (

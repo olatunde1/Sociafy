@@ -1,14 +1,14 @@
 import React from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { getSingleAdminOrders } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import  {useSingleAdminOrders}  from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import Loader from "../Loader";
 import { toast } from "sonner";
 
 const AdminViewOrder = ({ onClose, orderData }) => {
   if (!orderData) return null;
 
-  const { data, isPending } = getSingleAdminOrders(orderData.id);
+  const { data, isPending } = useSingleAdminOrders(orderData.id);
 
   const order = data?.data;
 
@@ -16,17 +16,17 @@ const AdminViewOrder = ({ onClose, orderData }) => {
     if (!order) return;
 
     const info = `
-Order ID: ${order._id}
-Product: ${order.product || order.socialLogId?.name}
-Amount: ₦${order.amount?.toLocaleString()}
-Date: ${new Date(order.createdAt).toLocaleString()}
-Status: ${order.status}
-Buyer's Name: ${order.userId?.username}
-Email: ${order.userId?.email || "Not provided"}
-Username: ${order.socialLogId?.username || "Not provided"}
-Password: Not provided
-Date Created: ${new Date(order.createdAt).toLocaleString()}
-    `.trim();
+    Order ID: ${order._id}
+    Product: ${order.product || order.socialLogId?.name}
+    Amount: ₦${order.amount?.toLocaleString()}
+    Date: ${new Date(order.createdAt).toLocaleString()}
+    Status: ${order.status}
+    Buyer's Name: ${order.userId?.username}
+    Email: ${order.userId?.email || "Not provided"}
+    Username: ${order.socialLogId?.username || "Not provided"}
+    Password: Not provided
+    Date Created: ${new Date(order.createdAt).toLocaleString()}
+        `.trim();
 
     navigator.clipboard.writeText(info).then(() => {
       toast.success("Order information copied to clipboard");

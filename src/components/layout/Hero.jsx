@@ -1,72 +1,71 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React from 'react';
 import HeroImage from '../../assets/images/hero-image.png';
 import { Link } from "react-router-dom";
 
 
 const Hero = () => {
     
-  const containerRef = useRef(null);
-  const [scrollY, setScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState({});
+  // const containerRef = useRef(null);
+  // const [scrollY, setScrollY] = useState(0);
+  // const [isVisible, setIsVisible] = useState({});
 
-  useLayoutEffect(() => {
-    let ticking = false;
+  // useLayoutEffect(() => {
+  //   let ticking = false;
 
     // Smooth scroll implementation
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY);
+    // const handleScroll = () => {
+    //   if (!ticking) {
+    //     requestAnimationFrame(() => {
+    //       setScrollY(window.scrollY);
           
-          // Check visibility of elements
-          const elements = document.querySelectorAll('.fade-in');
-          const newVisibility = {};
+    //       // Check visibility of elements
+    //       const elements = document.querySelectorAll('.fade-in');
+    //       const newVisibility = {};
           
-          elements.forEach((element, index) => {
-            const rect = element.getBoundingClientRect();
-            const isElementVisible = rect.top < window.innerHeight * 0.85;
-            newVisibility[index] = isElementVisible;
-          });
+    //       elements.forEach((element, index) => {
+    //         const rect = element.getBoundingClientRect();
+    //         const isElementVisible = rect.top < window.innerHeight * 0.85;
+    //         newVisibility[index] = isElementVisible;
+    //       });
           
-          setIsVisible(prev => ({ ...prev, ...newVisibility }));
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+    //       setIsVisible(prev => ({ ...prev, ...newVisibility }));
+    //       ticking = false;
+    //     });
+    //     ticking = true;
+    //   }
+    // };
 
     // Add smooth scroll CSS
-    document.documentElement.style.scrollBehavior = 'smooth';
+  //   document.documentElement.style.scrollBehavior = 'smooth';
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Initial check
+  //   window.addEventListener('scroll', handleScroll, { passive: true });
+  //   handleScroll(); // Initial check
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      document.documentElement.style.scrollBehavior = '';
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //     document.documentElement.style.scrollBehavior = '';
+  //   };
+  // }, []);
 
   // Parallax transform calculation
-  const getParallaxTransform = (speed = 0.5) => {
-    return `translateY(${scrollY * speed}px)`;
-  };
+  // const getParallaxTransform = (speed = 0.5) => {
+  //   return `translateY(${scrollY * speed}px)`;
+  // };
 
   // Fade in animation class
-  const getFadeInClass = (index, delay = 0) => {
-    const visible = isVisible[index];
-    return `transition-all duration-1000 ease-out ${delay > 0 ? `delay-${delay}` : ''} ${
-      visible 
-        ? 'opacity-100 translate-y-0' 
-        : 'opacity-0 translate-y-12'
-    }`;
-  };
+  // const getFadeInClass = (index, delay = 0) => {
+  //   const visible = isVisible[index];
+  //   return `transition-all duration-1000 ease-out ${delay > 0 ? `delay-${delay}` : ''} ${
+  //     visible 
+  //       ? 'opacity-100 translate-y-0' 
+  //       : 'opacity-0 translate-y-12'
+  //   }`;
+  // };
 
     return (
-        <section ref={containerRef} className="bg-[#F2EBFD] py-8 sm:py-12 md:py-16 w-full overflow-hidden"
+        <section className="bg-[#F2EBFD] py-8 sm:py-12 md:py-16 w-full overflow-hidden"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col-reverse md:flex-row items-center gap-6 sm:gap-10 md:gap-20"
-            style={{ transform: getParallaxTransform(0.3) }}
             >
                 
                 {/* Left Content */}

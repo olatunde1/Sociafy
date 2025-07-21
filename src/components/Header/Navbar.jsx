@@ -2,12 +2,12 @@ import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import Castine from "../../assets/images/castine.png";
 import { useNavigate } from "react-router-dom";
-import { getAdminProfileMe } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminProfileMe } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 
-const Navbar = ({ dashBoardUser }) => {
+const Navbar = () => {
   const navigate = useNavigate();
 
-  const { data: Me, isPending } = getAdminProfileMe();
+  const { data: Me } = useAdminProfileMe();
 
   const userData = Me?.data;
   const user = {
