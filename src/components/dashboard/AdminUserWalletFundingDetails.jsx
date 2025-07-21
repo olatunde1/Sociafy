@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { X } from "lucide-react";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import domtoimage from "dom-to-image";
 
 
@@ -27,17 +26,17 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
 
   const { date, time } = formatDate(funding.createdAt);
 
-  const handleCopy = () => {
-    const details = `
-    User Name: ${funding?.userId?.username || "Unknown User"}
-    Email: ${funding.userId?.email || "N/A"}
-    Transaction ID: ${funding.transactionId}
-    Amount: ₦${funding.amount.toLocaleString()}
-    Date & Time: ${date}, ${time}
-    Status: ${funding.status}
-        `;
-    navigator.clipboard.writeText(details);
-  };
+  // const handleCopy = () => {
+  //   const details = `
+  //   User Name: ${funding?.userId?.username || "Unknown User"}
+  //   Email: ${funding.userId?.email || "N/A"}
+  //   Transaction ID: ${funding.transactionId}
+  //   Amount: ₦${funding.amount.toLocaleString()}
+  //   Date & Time: ${date}, ${time}
+  //   Status: ${funding.status}
+  //       `;
+  //   navigator.clipboard.writeText(details);
+  // };
 
   const handleDownloadPDF = async () => {
     const node = receiptRef.current;
@@ -55,7 +54,7 @@ const AdminUserWalletFundingDetails = ({ funding, onClose }) => {
 
       img.onload = function () {
         const pageWidth = pdf.internal.pageSize.getWidth();
-        const pageHeight = pdf.internal.pageSize.getHeight();
+        // const pageHeight = pdf.internal.pageSize.getHeight();
 
         const margin = 20; // <-- Add padding around content
         const imgWidth = pageWidth - margin * 2;

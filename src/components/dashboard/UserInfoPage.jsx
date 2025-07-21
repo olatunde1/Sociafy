@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,42 +9,41 @@ import UserWalletImage from "../../assets/images/userwalletimage.png";
 import CardBackground from "../../assets/images/profile-background.png";
 import walletIcon from "../../assets/images/Total revenue.png";
 import {
-  getAdminSingleUser,
-  getAdminSingleUserOrders,
-  getAdminSingleUserWallet,
+  useAdminSingleUserOrders,
+  useAdminSingleUserWallet,
 } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import { format } from "date-fns";
 
-const fundings = [
-  {
-    id: "TRF7894903",
-    amount: 30000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    status: "Success",
-  },
-  {
-    id: "TRF7894903",
-    amount: 24000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    status: "Pending",
-  },
-  {
-    id: "TRF7894903",
-    amount: 16000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    status: "Success",
-  },
-  {
-    id: "TRF7894903",
-    amount: 25000,
-    date: "Feb 24, 2025",
-    time: "05:23pm",
-    status: "Failed",
-  },
-];
+// const fundings = [
+//   {
+//     id: "TRF7894903",
+//     amount: 30000,
+//     date: "Feb 24, 2025",
+//     time: "05:23pm",
+//     status: "Success",
+//   },
+//   {
+//     id: "TRF7894903",
+//     amount: 24000,
+//     date: "Feb 24, 2025",
+//     time: "05:23pm",
+//     status: "Pending",
+//   },
+//   {
+//     id: "TRF7894903",
+//     amount: 16000,
+//     date: "Feb 24, 2025",
+//     time: "05:23pm",
+//     status: "Success",
+//   },
+//   {
+//     id: "TRF7894903",
+//     amount: 25000,
+//     date: "Feb 24, 2025",
+//     time: "05:23pm",
+//     status: "Failed",
+//   },
+// ];
 
 const UserInfoPage = () => {
   const location = useLocation();
@@ -60,12 +59,12 @@ const UserInfoPage = () => {
     }
   }, [user, navigate]);
 
-  const { data: singleUser } = getAdminSingleUser(user?._id);
+  // const { data: singleUser } = getAdminSingleUser(user?._id);
   const [walletPage, setWalletPage] = useState(1);
   const { data: singleWallet, isPending: walletPend } =
-    getAdminSingleUserWallet(user?._id, { page: walletPage });
+    useAdminSingleUserWallet(user?._id, { page: walletPage });
   const [orderPage, setOrderPage] = useState(1);
-  const { data: singleOrder, isPending: orderPend } = getAdminSingleUserOrders(
+  const { data: singleOrder, isPending: orderPend } = useAdminSingleUserOrders(
     user?._id,
     {
       page: orderPage,

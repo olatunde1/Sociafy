@@ -38,7 +38,7 @@ const steps = [
 
 export default function GetStarted() {
    const containerRef = useRef(null);
-    const [scrollY, setScrollY] = useState(0);
+    // const [scrollY, setScrollY] = useState(0);
     const [isVisible, setIsVisible] = useState({});
   
     useLayoutEffect(() => {
@@ -48,7 +48,7 @@ export default function GetStarted() {
       const handleScroll = () => {
         if (!ticking) {
           requestAnimationFrame(() => {
-            setScrollY(window.scrollY);
+            // setScrollY(window.scrollY);
             
             // Check visibility of elements
             const elements = document.querySelectorAll('.fade-in');
@@ -80,9 +80,9 @@ export default function GetStarted() {
     }, []);
   
     // Parallax transform calculation
-    const getParallaxTransform = (speed = 0.5) => {
-      return `translateY(${scrollY * speed}px)`;
-    };
+    // const getParallaxTransform = (speed = 0.5) => {
+    //   return `translateY(${scrollY * speed}px)`;
+    // };
   
     // Fade in animation class
     const getFadeInClass = (index, delay = 0) => {

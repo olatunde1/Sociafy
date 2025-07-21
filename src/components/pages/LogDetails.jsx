@@ -6,6 +6,8 @@ import { Eye, EyeOff } from "lucide-react";
 export default function LogDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showEmailPassword, setShowEmailPassword] = useState(false);
 
   if (!state) return <div className="p-8">No data available.</div>;
 
@@ -14,8 +16,7 @@ export default function LogDetails() {
   console.log(stateData, "log details state");
   // State to toggle password visibility
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showEmailPassword, setShowEmailPassword] = useState(false);
+  
 
   // Helper to render password field with toggle
   const renderPasswordField = (label, value, showState, setShowState) => (

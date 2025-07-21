@@ -1,22 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/hooks/axiosInstace";
 
+// Unique query key for caching and refetching
 export const QUERY_KEY_ALLWEBLOGS = "getALLWebLogs";
 
-const GetWebLogs = async (params = {}) => {
+// API request function
+const fetchWebLogs = async (params = {}) => {
   const response = await axiosInstance.get(`/user/logs`, {
     params,
   });
-
   return response.data;
 };
 
-const getWebLogs = (params) => {
+// ✅ Custom hook using `use` prefix
+const useWebLogs = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ALLWEBLOGS, params],
-    queryFn: () => GetWebLogs(params),
-    staleTime: 10,
+    queryFn: () => fetchWebLogs(params),
+    staleTime: 10 * 1000, // 10 seconds
   });
 };
 
-export default getWebLogs;
+export default useWebLogs;

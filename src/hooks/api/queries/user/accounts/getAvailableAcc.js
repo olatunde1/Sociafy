@@ -12,7 +12,7 @@ const getAccounts = async (params = {}) => {
   return response.data;
 };
 
-const getAvailableAccounts = (params) => {
+const useAvailableAccounts = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_Accs, params],
     queryFn: () => getAccounts(params),
@@ -20,4 +20,4 @@ const getAvailableAccounts = (params) => {
   });
 };
 
-export default getAvailableAccounts;
+export default useAvailableAccounts;

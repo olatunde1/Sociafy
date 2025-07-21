@@ -11,7 +11,7 @@ const AdminFunding  = async (params = {}) => {
   return response.data;
 };
 
-const getAdminFunding = (params) => {
+const useAdminFunding = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ADMINFUNDING, params],
     queryFn: () => AdminFunding(params),
@@ -19,4 +19,4 @@ const getAdminFunding = (params) => {
   });
 };
 
-export default getAdminFunding;
+export default useAdminFunding;

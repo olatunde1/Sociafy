@@ -19,14 +19,14 @@ const getProfile = async (params = {}) => {
   return response.data;
 };
 
-const getUserOverview = (params) => {
+const useUserOverview = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_USEROVERVIEW, params],
     queryFn: () => getOverview(params),
     staleTime: 10,
   });
 };
-const getUserProfile = (params) => {
+const useUserProfile = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_USERPROFILE, params],
     queryFn: () => getProfile(params),
@@ -34,4 +34,4 @@ const getUserProfile = (params) => {
   });
 };
 
-export { getUserOverview, getUserProfile };
+export { useUserOverview, useUserProfile };

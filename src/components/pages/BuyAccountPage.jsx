@@ -7,7 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { QUERY_KEY_Accs } from "@/hooks/api/queries/user/accounts/getAvailableAcc";
 
 const BuyAccountPage = () => {
-  const { platformName, productName } = useParams();
+  const { productName } = useParams();
 
   const location = useLocation();
   const { product } = location.state || {};
@@ -42,7 +42,7 @@ const BuyAccountPage = () => {
         },
         onError: (error) => {
           toast.error(error?.response?.data?.message || "Log Failed!");
-          onClose();
+          console.error("Error buying log:", error);
         },
       }
     );

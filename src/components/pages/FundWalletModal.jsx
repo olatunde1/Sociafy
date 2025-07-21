@@ -12,11 +12,11 @@ import { Button } from "@/components/ui/button";
 import wallet from "../../assets/images/wallet.png";
 import { useFundWallet } from "@/hooks/api/mutation/user/useFundWallet";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const FundWalletModal = ({ isOpen, onClose }) => {
   const [amount, setAmount] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const { mutate, isPending } = useFundWallet();
 

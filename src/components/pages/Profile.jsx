@@ -1,13 +1,13 @@
 import { useState } from "react";
 import UpdatePassword from "../../assets/images/update-password.png";
-import { getUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
+import { useUserProfile } from "@/hooks/api/queries/user/dashboard/getOverview";
 import Loader from "../Loader";
 import Castine from "../../assets/images/castine.png";
 import { format } from "date-fns";
 import ResetPassword from "./ResetPassword"; // Make sure path is correct
 
 export default function Profile() {
-  const { data: profile, isPending } = getUserProfile();
+  const { data: profile, isPending } = useUserProfile();
   const [showReset, setShowReset] = useState(false); // modal state
 
   const userData = profile?.data;

@@ -20,14 +20,14 @@ const getOrdersHistory = async (params = {}) => {
   return response.data;
 };
 
-const getPayment = (params) => {
+const usePayment = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_PAYMENTHIST, params],
     queryFn: () => getPaymentHistory(params),
     staleTime: 10,
   });
 };
-const getOrders = (params) => {
+const useOrders = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ORDERHIST, params],
     queryFn: () => getOrdersHistory(params),
@@ -35,4 +35,4 @@ const getOrders = (params) => {
   });
 };
 
-export { getPayment, getOrders };
+export { usePayment, useOrders };

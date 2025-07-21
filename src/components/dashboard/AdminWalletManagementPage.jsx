@@ -16,13 +16,13 @@ import {
 import AdminAccountLayout from "../AdminAccount/AdminAccountLayout";
 import Navbar from "../Header/Navbar";
 import walletIcon from "../../assets/images/Total revenue.png";
-import getAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/getAdminFunding";
-import { getAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import useAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/getAdminFunding";
+import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
 import Loader from "../Loader";
 import AdminUserWalletFundingDetails from "./AdminUserWalletFundingDetails";
 
 const AdminWalletManagementPage = () => {
-  const { data: overview, isPending } = getAdminOverview();
+  const { data: overview, isPending } = useAdminOverview();
   const [page, setPage] = useState(1);
   const [selectedFunding, setSelectedFunding] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -57,7 +57,7 @@ const AdminWalletManagementPage = () => {
     originalSpending: item.spending,
   }));
 
-  const { data: recentFund, isPending: fundPend } = getAdminFunding({
+  const { data: recentFund, isPending: fundPend } = useAdminFunding({
     page: page,
     limit: 10,
   });
@@ -244,10 +244,24 @@ const AdminWalletManagementPage = () => {
                   Filter by status
                 </Button>
                 {showFilter && (
-                  <div className="absolute z-10 mt-2 w-36 rounded-md border bg-white shadow-md text-sm">
-                    {/* ... (keep your existing filter options) */}
-                  </div>
-                )}
+  <div className="absolute z-10 mt-2 w-36 rounded-md border bg-white shadow-md text-sm">
+    {["all", "success", "pending", "failed"].map((status) => (
+      <button
+        key={status}
+        onClick={() => {
+          setStatusFilter(status);
+          setShowFilter(false);
+        }}
+        className={`w-full text-left px-4 py-2 hover:bg-gray-100 ${
+          statusFilter === status ? "bg-gray-100 font-medium" : ""
+        }`}
+      >
+        {status.charAt(0).toUpperCase() + status.slice(1)}
+      </button>
+    ))}
+  </div>
+)}
+
               </div>
             </div>
 

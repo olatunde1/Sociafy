@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import getAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/getAdminFunding";
+import getAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/GetAdminFunding";
 import RecentWalletFundingDetails from "./RecentWalletFundingDetails";
 
 const RecentWalletFundingTable = () => {

@@ -11,7 +11,7 @@ const GetLogs = async (params = {}) => {
   return response.data;
 };
 
-const getAdminLogs = (params) => {
+const useAdminLogs = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ALLLOGS, params],
     queryFn: () => GetLogs(params),
@@ -19,4 +19,4 @@ const getAdminLogs = (params) => {
   });
 };
 
-export default getAdminLogs;
+export default useAdminLogs;

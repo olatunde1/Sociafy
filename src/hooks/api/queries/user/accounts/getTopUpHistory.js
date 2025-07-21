@@ -11,7 +11,7 @@ const getTopup = async (params = {}) => {
   return response.data;
 };
 
-const getTopupHistory = (params) => {
+const useTopupHistory = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_topup, params],
     queryFn: () => getTopup(params),
@@ -19,4 +19,4 @@ const getTopupHistory = (params) => {
   });
 };
 
-export default getTopupHistory;
+export default useTopupHistory;

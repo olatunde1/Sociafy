@@ -2,13 +2,13 @@ import { useState } from "react";
 import WalletIcon from "../../assets/images/wallet-logo.png";
 import FundWallet from "../../assets/images/fund-wallet.png";
 import FundWalletModal from "./FundWalletModal";
-import { getUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
-import { getPayment } from "@/hooks/api/queries/user/dashboard/getHistories";
+import { useUserOverview } from "@/hooks/api/queries/user/dashboard/getOverview";
+import { usePayment } from "@/hooks/api/queries/user/dashboard/getHistories";
 import Loader from "../Loader";
 
 export default function WalletPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  // const [sidebarOpen, setSidebarOpen] = useState(false);
   const itemsPerPage = 7;
 
   const onPageChange = (page) => {
@@ -25,10 +25,10 @@ export default function WalletPage() {
     return pages;
   };
 
-  const { data: userOverview, isPending } = getUserOverview();
+  const { data: userOverview, isPending } = useUserOverview();
   const OverviewData = userOverview?.data;
 
-  const { data: paymentHistory, isPending: payPend } = getPayment();
+  const { data: paymentHistory } = usePayment();
   const paymentData = paymentHistory?.data?.result || [];
 
   const paginatedTopUps = paymentData.slice(

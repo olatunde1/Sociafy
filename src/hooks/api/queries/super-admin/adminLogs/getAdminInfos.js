@@ -73,56 +73,56 @@ const GetSingleUserWallet = async (id, params = {}) => {
   return response.data;
 };
 
-const getAdminProfileMe = (params) => {
+const useAdminProfileMe = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ME, params],
     queryFn: () => GetAdminProfile(params),
     staleTime: 10,
   });
 };
-const getAdminOrders = (params) => {
+const useAdminOrders = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ALLORDERS, params],
     queryFn: () => GetOrders(params),
     staleTime: 10,
   });
 };
-const getSingleAdminOrders = (id, params) => {
+const useSingleAdminOrders = (id, params) => {
   return useQuery({
     queryKey: [QUERY_KEY_ALLSINGLEORDERS, id, params],
     queryFn: () => GetSingleOrder(id, params),
     staleTime: 10,
   });
 };
-const getAdminOverview = (params) => {
+const useAdminOverview = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_Overview, params],
     queryFn: () => GetOverview(params),
     staleTime: 100,
   });
 };
-const getAdminUsers = (params) => {
+const useAdminUsers = (params) => {
   return useQuery({
     queryKey: [QUERY_KEY_Users, params],
     queryFn: () => GetUsers(params),
     staleTime: 100,
   });
 };
-const getAdminSingleUser = (id, params) => {
+const useAdminSingleUser = (id, params) => {
   return useQuery({
     queryKey: [QUERY_KEY_SingleUser, id, params],
     queryFn: () => GetSingleUser(id, params),
     staleTime: 100,
   });
 };
-const getAdminSingleUserOrders = (id, params) => {
+const useAdminSingleUserOrders = (id, params) => {
   return useQuery({
     queryKey: [QUERY_KEY_SingleOrder, id, params],
     queryFn: () => GetSingleUserOrders(id, params),
     staleTime: 100,
   });
 };
-const getAdminSingleUserWallet = (id, params) => {
+const useAdminSingleUserWallet = (id, params) => {
   return useQuery({
     queryKey: [QUERY_KEY_SingleWallet, id, params],
     queryFn: () => GetSingleUserWallet(id, params),
@@ -131,12 +131,12 @@ const getAdminSingleUserWallet = (id, params) => {
 };
 
 export {
-  getAdminProfileMe,
-  getAdminOrders,
-  getSingleAdminOrders,
-  getAdminOverview,
-  getAdminUsers,
-  getAdminSingleUser,
-  getAdminSingleUserOrders,
-  getAdminSingleUserWallet,
+  useAdminProfileMe,
+  useAdminOrders,
+  useSingleAdminOrders,
+  useAdminOverview,
+  useAdminUsers,
+  useAdminSingleUser,
+  useAdminSingleUserOrders,
+  useAdminSingleUserWallet,
 };
