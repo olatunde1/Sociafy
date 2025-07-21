@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useChangePassword } from "@/hooks/api/mutation/auth/changePassword";
 import { toast } from "sonner";
 
-export default function ResetPassword() {
+export default function CreateNewPassword() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -73,7 +73,7 @@ export default function ResetPassword() {
                 <li>
                   <span className="mx-2 text-gray-500">/</span>
                 </li>
-                <li className="text-gray-700 font-semibold">Update Password</li>
+                <li className="text-gray-700 font-semibold">Create New Password</li>
               </ol>
               <Link to="./profile">
                 <button className="flex items-center text-gray-600 hover:text-gray-800">
@@ -83,7 +83,10 @@ export default function ResetPassword() {
               </Link>
             </nav>
 
-            <h1 className="text-[20px] font-bold mb-10">Update your Password</h1>
+            <h1 className="text-[20px] font-bold mb-10">New Password</h1>
+            <p className="text-gray-600 mb-6">
+              Kindly create your new password.
+            </p>
 
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -116,7 +119,7 @@ export default function ResetPassword() {
                   id="newPassword"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Create your password"
+                  placeholder="Enter your new password"
                   required
                   className="w-full border border-[#949494] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
                 />
@@ -127,14 +130,14 @@ export default function ResetPassword() {
                   className="block text-sm font-semibold mb-4"
                   htmlFor="confirmPassword"
                 >
-                  Confirm Password
+                  Confirm New Password
                 </label>
                 <input
                   type="password"
                   id="confirmPassword"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm your password"
+                  placeholder="Confirm your new password"
                   required
                   className="w-full border border-[#949494] rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#7B36E7]"
                 />
@@ -145,7 +148,14 @@ export default function ResetPassword() {
                 disabled={isPending}
                 className="w-full bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-8 py-3 mt-[3.75rem] rounded-lg font-semibold hover:bg-purple-700 transform transition-transform duration-300 hover:scale-100 disabled:opacity-50"
               >
-                {isPending ? "Resetting..." : "Reset Password"}
+                {isPending ? "Submitting..." : "Submit"}
+              </button>
+               <button
+                type="submit"
+                disabled={isPending}
+                className="w-full bg-gradient-to-r from-[#622BB9] to-[#351A60] text-white px-8 py-3 mt-[3.75rem] rounded-lg font-semibold hover:bg-purple-700 transform transition-transform duration-300 hover:scale-100 disabled:opacity-50"
+              >
+                {"Go back to Home Page"}
               </button>
             </form>
           </div>

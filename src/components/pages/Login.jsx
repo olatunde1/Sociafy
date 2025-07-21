@@ -83,7 +83,7 @@ export default function LoginPage() {
           </Link>
 
           {/* Title */}
-          <h1 className="text-3xl font-bold mb-4">Login</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mb-4">Login</h1>
 
           {/* Description */}
           <p className="text-gray-600 mb-6">
@@ -139,12 +139,15 @@ export default function LoginPage() {
 
             {/* Forgot Password */}
             <div className="text-right">
-              <a
+              <Link to="/forget-password">
+                  <a
                 href="#"
                 className="text-sm font-medium text-[#7B36E7] hover:underline"
               >
                 Forgot Password?
               </a>
+              </Link>
+            
             </div>
 
             {/* Login Button */}
