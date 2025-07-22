@@ -16,8 +16,8 @@ import {
 import AdminAccountLayout from "../AdminAccount/AdminAccountLayout";
 import Navbar from "../Header/Navbar";
 import walletIcon from "../../assets/images/Total revenue.png";
-import useAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/getAdminFunding";
-import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import useAdminFunding from "@/hooks/api/queries/super-admin/adminLogs/GetAdminFunding";
+import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 import Loader from "../Loader";
 import AdminUserWalletFundingDetails from "./AdminUserWalletFundingDetails";
 

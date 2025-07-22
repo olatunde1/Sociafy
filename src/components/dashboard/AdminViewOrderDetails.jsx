@@ -1,14 +1,14 @@
 import React from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import  {useSingleAdminOrders}  from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import  {useSingleAdminOrders}  from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 import Loader from "../Loader";
 import { toast } from "sonner";
 
 const AdminViewOrder = ({ onClose, orderData }) => {
-  if (!orderData) return null;
+  const { data, isPending } = useSingleAdminOrders(orderData?.id);
 
-  const { data, isPending } = useSingleAdminOrders(orderData.id);
+  if (!orderData) return null;
 
   const order = data?.data;
 

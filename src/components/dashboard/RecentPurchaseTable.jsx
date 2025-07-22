@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
-import { useAdminOrders } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminOrders } from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 import Loader from "../Loader";
 import AdminViewOrder from "./AdminViewOrderDetails"; // Import the AdminViewOrder component
 

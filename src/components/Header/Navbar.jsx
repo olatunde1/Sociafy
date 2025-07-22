@@ -2,7 +2,7 @@ import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import Castine from "../../assets/images/castine.png";
 import { useNavigate } from "react-router-dom";
-import { useAdminProfileMe } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminProfileMe } from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 
 const Navbar = () => {
   const navigate = useNavigate();

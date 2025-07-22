@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/popover";
 import Navbar from "../Header/Navbar";
 import { useNavigate } from "react-router-dom";
-import { useAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminUsers } from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 import Loader from "../Loader";
 
 const UserManagementComponent = () => {

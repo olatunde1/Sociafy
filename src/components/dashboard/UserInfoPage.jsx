@@ -11,7 +11,7 @@ import walletIcon from "../../assets/images/Total revenue.png";
 import {
   useAdminSingleUserOrders,
   useAdminSingleUserWallet,
-} from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+} from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 import { format } from "date-fns";
 
 // const fundings = [

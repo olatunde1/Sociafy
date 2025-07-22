@@ -11,7 +11,7 @@ import Navbar from "../Header/Navbar";
 import { RecentPurchases } from "../dashboard/data";
 import { RecentWalletFunding } from "../dashboard/data";
 import Loader from "../Loader";
-import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/getAdminInfos";
+import { useAdminOverview } from "@/hooks/api/queries/super-admin/adminLogs/GetAdminInfos";
 
 const AdminDashBoard = (dashBoardUser) => {
   const { data: overview, isPending } = useAdminOverview();
