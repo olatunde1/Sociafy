@@ -36,7 +36,10 @@ const UserManagementComponent = () => {
 
 
   const { data: usersData, isPending } = useAdminUsers();
-  const users = usersData?.data?.result || [];
+  // const users = usersData?.data?.result || [];
+  const users = useMemo(() => {
+    return usersData?.data?.result || [];
+  }, [usersData]);
 
   const filteredUsers = useMemo(() => {
     if (filter === "active") return users.filter((user) => !user.suspended);
