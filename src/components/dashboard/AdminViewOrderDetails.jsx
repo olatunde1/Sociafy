@@ -6,11 +6,11 @@ import Loader from "../Loader";
 import { toast } from "sonner";
 
 const AdminViewOrder = ({ onClose, orderData }) => {
-  if (!orderData) return null;
-
+  
   const { data, isPending } = useSingleAdminOrders(orderData.id);
-
+  
   const order = data?.data;
+  if (!orderData) return null;
 
   const copyOrderInfo = () => {
     if (!order) return;
